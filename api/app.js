@@ -7,6 +7,15 @@ var logger = require('morgan');
 var cors = require("cors");
 const fileUpload = require('express-fileupload');
 
+// require all the routes
+var eventsRouter = require('./endpoints/events');
+var weeklongRouter = require('./endpoints/weeklong');
+var lockinRouter = require('./endpoints/lockin');
+var userRouter = require('./endpoints/user');
+var codeRouter = require('./endpoints/code');
+var validateRouter = require('./endpoints/validate');
+var supplyDropRouter = require('./endpoints/supplydrop');
+
 var app = express();
 
 // view engine setup
@@ -26,6 +35,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // do routing here
+app.use('/api', eventsRouter);
+app.use('/api', weeklongRouter);
+app.use('/api', lockinRouter);
+app.use('/api', userRouter);
+app.use('/api', codeRouter);
+app.use('/api', validateRouter);
+app.use('/api', supplyDropRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
