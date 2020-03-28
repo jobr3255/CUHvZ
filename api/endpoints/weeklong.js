@@ -7,6 +7,9 @@ router.get("/weeklong/:id", function(req, res, next) {
 router.get("/weeklong/:id/players", function(req, res, next) {
 });
 
+router.get("/weeklong/:id/details", function(req, res, next) {
+});
+
 router.get("/weeklong/:id/:playerid", function(req, res, next) {
 });
 

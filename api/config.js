@@ -1,8 +1,8 @@
 const CONFIG = {
   host: 'localhost',
-  user: 'testUser',
+  user: 'hvz',
   password: 'password',
-  database: 'testDB'
+  database: 'CUHvZ'
 }
 
 module.exports = CONFIG;
