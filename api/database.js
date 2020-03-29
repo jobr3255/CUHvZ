@@ -36,7 +36,7 @@ Database.query = function (queryText, res=null) {
   })
 };
 
-Database.queryFetchSingle = function (queryText, res=null) {
+Database.queryFetch = function (queryText, res=null) {
   connection.query(queryText, function (err, data, fields) {
     if (err) {
       console.log(err);
@@ -50,6 +50,23 @@ Database.queryFetchSingle = function (queryText, res=null) {
       res.status(200).json(data[0]);
     }
     return data[0];
+  })
+};
+
+Database.queryFetchAll = function (queryText, res=null) {
+  connection.query(queryText, function (err, data, fields) {
+    if (err) {
+      console.log(err);
+      logger.error(err);
+      if(res){
+        res.status(400).send(err);
+      }
+      return false;
+    }
+    if(res){
+      res.status(200).json(data[0]);
+    }
+    return data;
   })
 };
 
