@@ -8,7 +8,8 @@
     "react-dom": "^16.11.0",
     "react-helmet": "^5.2.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "webpack-dev-server": "^3.10.3"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.6.3",
@@ -25,5 +26,17 @@
   "presets": [
     "@babel/preset-env",
     "@babel/preset-react"
-  ]
+  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

@@ -23,4 +23,3 @@ export default class Home extends Component {
     );
   }
 }
-// <p className="App-intro">{this.state.apiResponse}</p>
