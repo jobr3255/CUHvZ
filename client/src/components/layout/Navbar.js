@@ -3,14 +3,12 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 import Routes from './Routes.js';
+import './Navbar.css';
 
 export default class Navbar extends Component {
   render() {
     return(
       <div>
-        <Helmet>
-            <title>CU HvZ</title>
-        </Helmet>
         <Router>
           <nav>
             <ul>

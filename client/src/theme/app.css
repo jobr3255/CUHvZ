@@ -1,0 +1,7 @@
+.ion-page{
+  overflow: auto;
+}
+
+ion-content{
+  --ion-background-color: translucent;
+}
