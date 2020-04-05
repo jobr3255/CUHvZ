@@ -7,9 +7,6 @@ interface FormProps {
 export default class Form extends React.Component<FormProps> {
   constructor(props: any) {
     super(props);
-    this.state = {
-      callback: props.onSubmit
-    }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
