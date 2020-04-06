@@ -2,11 +2,11 @@ import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 import { Helmet } from "react-helmet";
 
-interface SignUpProps {
+interface SignUpPageProps {
 }
 
-class SignUp extends React.Component<SignUpProps> {
-  constructor (props: SignUpProps){
+class SignUpPage extends React.Component<SignUpPageProps> {
+  constructor (props: SignUpPageProps){
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -55,4 +55,4 @@ class SignUp extends React.Component<SignUpProps> {
   }
 }
 
-export default withIonLifeCycle(SignUp);
+export default withIonLifeCycle(SignUpPage);

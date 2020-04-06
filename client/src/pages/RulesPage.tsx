@@ -1,7 +1,7 @@
 import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 
-class Rules extends React.Component {
+class RulesPage extends React.Component {
   render() {
     return(
     	<div className="container">
@@ -162,4 +162,4 @@ class Rules extends React.Component {
   }
 }
 
-export default withIonLifeCycle(Rules);
+export default withIonLifeCycle(RulesPage);

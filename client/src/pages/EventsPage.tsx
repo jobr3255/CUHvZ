@@ -2,12 +2,12 @@ import { withIonLifeCycle } from '@ionic/react';
 import React from "react";
 import EventsController from "../controllers/EventsController"
 
-interface EventsState {
+interface EventsPageState {
   weeklongs: any,
   lockins: any
 }
 
-class Events extends React.Component<any, EventsState> {
+class EventsPage extends React.Component<any, EventsPageState> {
 
   constructor(props: any) {
     super(props);
@@ -71,4 +71,4 @@ class Events extends React.Component<any, EventsState> {
   }
 }
 
-export default withIonLifeCycle(Events);
+export default withIonLifeCycle(EventsPage);

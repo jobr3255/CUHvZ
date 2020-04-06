@@ -4,12 +4,14 @@ import {
   Route
 } from "react-router-dom";
 
-import Home from '../../pages/Home';
-import Rules from '../../pages/Rules';
-import Events from '../../pages/Events';
-import SignUp from '../../pages/SignUp';
-import Login from '../../pages/Login';
-import Profile from '../../pages/Profile';
+import HomePage from '../../pages/HomePage';
+import RulesPage from '../../pages/RulesPage';
+import EventsPage from '../../pages/EventsPage';
+import SignUpPage from '../../pages/SignUpPage';
+import LoginPage from '../../pages/LoginPage';
+import ProfilePage from '../../pages/ProfilePage';
+import LockinPage from '../../pages/LockinPage';
+import WeeklongPage from '../../pages/WeeklongPage';
 
 import NotFound from '../errors/NotFound';
 
@@ -17,13 +19,16 @@ export default class Routes extends React.Component {
   render() {
     return(
       <Switch>
-        <Route path="/" exact     component={Home}/>
+        <Route path="/" exact     component={HomePage}/>
 
-        <Route path="/rules"      component={Rules}/>
-        <Route path="/events"     component={Events}/>
-        <Route path="/signup"     component={SignUp}/>
-        <Route path="/login"      component={Login}/>
-        <Route path="/profile"    component={Profile}/>
+        <Route path="/rules"      component={RulesPage}/>
+        <Route path="/events"     component={EventsPage}/>
+        <Route path="/signup"     component={SignUpPage}/>
+        <Route path="/login"      component={LoginPage}/>
+        <Route path="/profile"    component={ProfilePage}/>
+
+        <Route path="/lockin/:id"       component={LockinPage}/>
+        <Route path="/weeklong/:id"     component={WeeklongPage}/>
 
         <Route                    component={NotFound} />
       </Switch>

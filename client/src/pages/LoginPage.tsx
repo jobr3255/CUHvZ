@@ -2,7 +2,7 @@ import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 import Form from "../components/Form/Form";
 
-class Login extends React.Component {
+class LoginPage extends React.Component {
   constructor(props: any) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,4 +33,4 @@ class Login extends React.Component {
   }
 }
 
-export default withIonLifeCycle(Login);
+export default withIonLifeCycle(LoginPage);

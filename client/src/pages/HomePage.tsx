@@ -1,7 +1,7 @@
 import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 
-class Home extends React.Component {
+class HomePage extends React.Component {
 
   render() {
     return (
@@ -22,4 +22,4 @@ class Home extends React.Component {
   }
 }
 
-export default withIonLifeCycle(Home);
+export default withIonLifeCycle(HomePage);

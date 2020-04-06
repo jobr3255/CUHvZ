@@ -2,12 +2,12 @@ import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 import { Helmet } from "react-helmet";
 
-class Profile extends React.Component {
+class WeeklongPage extends React.Component {
   render() {
     return (
       <div className="App signup lightslide">
         <Helmet>
-            <title>Profile</title>
+            <title>Weeklong</title>
         </Helmet>
         <div className="container">
 
@@ -17,4 +17,4 @@ class Profile extends React.Component {
   }
 }
 
-export default withIonLifeCycle(Profile);
+export default withIonLifeCycle(WeeklongPage);
