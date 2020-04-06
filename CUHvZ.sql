@@ -2047,7 +2047,7 @@ CREATE TABLE IF NOT EXISTS `CUHvZ`.`weeklong_players` (
   `poisoned` INT NOT NULL DEFAULT 0,
   `points` INT NOT NULL DEFAULT 0,
   `kills` INT NOT NULL DEFAULT 0,
-  `starve_date` TIMESTAMP NULL,
+  `starve_date` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `weeklong_idx` (`weeklong_id` ASC),
   UNIQUE INDEX `weeklong_player_code` (`player_code` ASC, `weeklong_id` ASC),
@@ -2507,7 +2507,7 @@ CREATE TABLE IF NOT EXISTS `CUHvZ`.`tokens` (
   `user_id` INT NOT NULL,
   `token` VARCHAR(45) NULL,
   `type` VARCHAR(45) NOT NULL,
-  `experation` TIMESTAMP NULL,
+  `experation` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `user_idx` (`user_id` ASC),
   CONSTRAINT `fk_token_user_id`
@@ -2528,7 +2528,8 @@ CREATE TABLE IF NOT EXISTS `CUHvZ`.`activity` (
   `user1_id` INT NOT NULL,
   `user2_id` INT NULL,
   `action` VARCHAR(45) NOT NULL,
-  `desciption` VARCHAR(255) NULL,
+  `description` VARCHAR(255) NULL,
+  `time_logged` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `weeklong_idx` (`weeklong_id` ASC),
   INDEX `user1_idx` (`user1_id` ASC),
@@ -2549,6 +2550,10 @@ CREATE TABLE IF NOT EXISTS `CUHvZ`.`activity` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+insert into activity (weeklong_id,user1_id,user2_id,`action`,description, time_logged) VALUES
+(1,106,NULL,"starved","died of starvation", "2018-09-26 11:14:00"),
+(1,90,132,"zombified","ate", "2018-09-24 10:16:00");
 
 
 -- -----------------------------------------------------
@@ -2848,6 +2853,16 @@ CREATE DEFINER = CURRENT_USER TRIGGER `CUHvZ`.`users_AFTER_INSERT` AFTER INSERT 
 BEGIN
 INSERT INTO user_details (id, join_date) VALUES (NEW.id, DATE_ADD(NOW(), INTERVAL (select offset from time_offset where id=1) HOUR));
 INSERT INTO subscriptions (id) VALUES (NEW.id);
+END$$
+
+USE `CUHvZ`$$
+DROP TRIGGER IF EXISTS `CUHvZ`.`activity_AFTER_INSERT` $$
+USE `CUHvZ`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `CUHvZ`.`activity_AFTER_INSERT` AFTER INSERT ON `activity` FOR EACH ROW
+BEGIN
+IF (NEW.time_logged IS NULL) THEN
+	UPDATE activity set time_logged=(DATE_ADD(NOW(), INTERVAL (select offset from time_offset where id=1) HOUR)) where id=NEW.id;
+END IF;
 END$$
 
 DELIMITER ;

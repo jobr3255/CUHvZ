@@ -64,7 +64,7 @@ Database.queryFetchAll = function (queryText, res=null) {
       return false;
     }
     if(res){
-      res.status(200).json(data[0]);
+      res.status(200).json(data);
     }
     return data;
   })
