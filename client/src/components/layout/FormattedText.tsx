@@ -38,8 +38,10 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
     var imgDel = "IMAGE(\\[.*\\]){1}";
     // formats IMAGE[link][size %] into an image
     var imgSizeDel = "IMAGE(\\[.*\\]){2}";
+    // formats [LINE] into an hr tag
+    var lineDel = "\\[LINE\\]";
 
-    var re = new RegExp(`(${brDel})|(${boldDel})|(${imgDel})|(${imgSizeDel})|(${linkDel})|(${linkTabDil})`,"gm");
+    var re = new RegExp(`(${brDel})|(${boldDel})|(${imgDel})|(${imgSizeDel})|(${linkDel})|(${linkTabDil})|(${lineDel})`,"gm");
     var match;
     var lastMatchedIndex = 0;
     var keyIndex = 0;
@@ -84,6 +86,11 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
           // formats IMAGE[link] into an image
           var imageLink = matchString.substring(6, matchString.length - 1);
           formattedText.push(<img key={keyIndex++} src={imageLink} style={{width: "100%"}}/>);
+
+        }else if(matchString.match(lineDel)){
+
+          // formats [LINE] into an hr tag
+          formattedText.push(<hr key={keyIndex++}/>);
 
         }else{
 
