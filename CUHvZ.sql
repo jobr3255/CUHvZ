@@ -2795,7 +2795,6 @@ Next 15-30 minutes is dedicated to clean up and next round setup
 The rest of the time is dedicated to cleaning up
 
 
-
 Parking:
 IMAGE[/images/where-to-park.png]");
 
