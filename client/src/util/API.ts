@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default class API {
-  static get(url: string) {
+  static async get(url: string) {
     return new Promise(function(resolve, reject) {
       axios({
         method: 'GET',
@@ -16,7 +16,7 @@ export default class API {
     });
   }
 
-  static post(url: string, data: JSON) {
+  static async post(url: string, data: JSON) {
     return new Promise(function(resolve, reject) {
       axios({
         method: 'POST',

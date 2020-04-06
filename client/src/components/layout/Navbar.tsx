@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
-import { Helmet } from "react-helmet";
 
-import Routes from './Routes.js';
+import Routes from './Routes';
 import './Navbar.css';
 
-export default class Navbar extends Component {
+export default class Navbar extends React.Component {
   render() {
     return(
       <div>

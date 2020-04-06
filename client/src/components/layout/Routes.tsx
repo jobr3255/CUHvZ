@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Switch,
   Route
@@ -13,7 +13,7 @@ import Profile from '../../pages/Profile';
 
 import NotFound from '../errors/NotFound';
 
-export default class Routes extends Component {
+export default class Routes extends React.Component {
   render() {
     return(
       <Switch>

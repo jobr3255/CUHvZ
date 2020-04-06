@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import { IonApp } from '@ionic/react';
 
-import Navbar from './components/layout/Navbar.js';
-import Footer from './components/layout/Footer.js';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
 
 /* Core CSS required for Ionic components to work properly */
 // import '@ionic/react/css/core.css';

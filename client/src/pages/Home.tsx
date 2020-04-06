@@ -1,7 +1,7 @@
 import { withIonLifeCycle } from '@ionic/react';
-import React, { Component } from 'react';
+import React from 'react';
 
-class Home extends Component {
+class Home extends React.Component {
 
   render() {
     return (

@@ -1,16 +1,13 @@
 import { withIonLifeCycle } from '@ionic/react';
-import React, {Component} from "react";
-// import EventsController from "../controllers/EventsController.js"
-// import EventListing from "../components/events/EventListing.js"
-
-import axios from 'axios';
+import React from "react";
+import EventsController from "../controllers/EventsController"
 
 interface EventsState {
-  weeklongs: Array<any>,
-  lockins: Array<any>
+  weeklongs: any,
+  lockins: any
 }
 
-class Events extends Component<EventsState> {
+class Events extends React.Component<any, EventsState> {
 
   constructor(props: any) {
     super(props);
@@ -20,33 +17,15 @@ class Events extends Component<EventsState> {
      };
   }
 
-  /*
-    Fires when entering this page
-  */
-  ionViewWillEnter() {
-    // console.log("ionViewWillEnter fired");
-    // axios.get(`/api/weeklongs`)
-    //   .then(res => {
-    //     console.log(res);
-    //   })
+  async componentDidMount() {
+    var eventsController = new EventsController();
+    var weeklongs = await eventsController.getWeeklongListings();
+    var lockins = await eventsController.getLockinListings();
+    this.setState({
+      weeklongs: weeklongs,
+      lockins: lockins
+    });
   }
-
-  // async componentDidMount() {
-  //   let eventsController = new EventsController();
-  //   var weeklongListings = await eventsController.getWeeklongListings();
-  //   // console.log(weeklongs);
-  //   // var weeklongListings = [];
-  //   // for (var weeklong of weeklongs) {
-  //   //   weeklongListings.push(<EventListing key={weeklong["id"]} title={weeklong["title"]} />);
-  //   // }
-  //   this.setState({
-  //     weeklongs: weeklongListings
-  //   });
-  //   // this.setState({
-  //   //   weeklongs: eventsController.getWeeklongListings(),
-  //   //   lockins: eventsController.getLockinListings()
-  //   // });
-  // }
 
   render() {
     return (
@@ -62,6 +41,7 @@ class Events extends Component<EventsState> {
             </div>
             <hr/>
             <div>
+              {this.state.weeklongs}
             </div>
             <h1 className='white' ><strong>Lock-Ins</strong></h1>
 						<div>
@@ -82,6 +62,9 @@ class Events extends Component<EventsState> {
 							<a href='/images/ec-maps/printable-single-sheet.pdf' target='_blank'> Full map (single page)</a>
 						</div>
 						<hr/>
+            <div>
+              {this.state.lockins}
+            </div>
           </div>
         </div>
     );

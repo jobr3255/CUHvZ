@@ -2,8 +2,8 @@
 export default class Weeklong {
   private id: number;
   private title: string;
-  private startDate: Date;
-  private endDate: Date;
+  private startDate: string;
+  private endDate: string;
   private state: number;
   private waiver: string;
   private stunTimer: number;
@@ -12,11 +12,11 @@ export default class Weeklong {
   // private activity: Array<Player>;
   private static activeGame: Weeklong;
 
-  constructor(data: any){
+  constructor(data: any) {
     this.id = data["id"];
     this.title = data["title"];
-    this.startDate = new Date(data["start_date"]);
-    this.endDate = new Date(data["end_date"]);
+    this.startDate = data["start_date"];
+    this.endDate = data["end_date"];
     this.state = data["state"];
     this.waiver = data["waiver"];
     this.stunTimer = data["stun_timer"];
@@ -24,56 +24,75 @@ export default class Weeklong {
     // this.players = new Array<Player>();
     // this.activity = new Array<Activity>();
   }
-  //
-  // getID(){
-  //   return this.id;
-  // }
-  //
-  // getTitle(){
-  //   return this.title;
-  // }
-  //
-  // getStartDate(){
-  //   return this.startDate;
-  // }
-  //
-  // getEndDate(){
-  //   return this.endDate;
-  // }
-  //
-  // getWaiver(){
-  //   return this.waiver;
-  // }
-  //
-  // getState(){
-  //   return this.state;
-  // }
-  //
-  // // getStunTimer()
-  // // getDetails()
-  // // getPlayers()
-  // // getActivity()
-  // // getActiveWeeklong()
-  // setTitle(title){
-  //   this.title = title;
-  // }
-  //
-  // setStartDate(date){
-  //   this.startDate = date;
-  // }
-  //
-  // setEndDate(date){
-  //   this.endDate = date;
-  // }
-  //
-  // setWaiver(waiver){
-  //   this.waiver = waiver;
-  // }
-  // setStunTimer(time)
+
+  /***************
+      GETTERS
+   ***************/
+
+  getID(): number {
+    return this.id;
+  }
+
+  getTitle(): string {
+    return this.title;
+  }
+
+  getStartDate(): string {
+    return this.startDate;
+  }
+
+  getEndDate(): string {
+    return this.endDate;
+  }
+
+  getWaiver(): string {
+    return this.waiver;
+  }
+
+  getState(): number {
+    return this.state;
+  }
+
+  getStunTimer(): number {
+    return this.stunTimer;
+  }
+  // getDetails()
+  // getPlayers()
+  // getActivity()
+  static getActiveWeeklong(): Weeklong{
+    return Weeklong.activeGame;
+  }
+
+  /***************
+      SETTERS
+   ***************/
+
+  setTitle(title: string) {
+    this.title = title;
+  }
+
+  setStartDate(date: string) {
+    this.startDate = date;
+  }
+
+  setEndDate(date: string) {
+    this.endDate = date;
+  }
+
+  setWaiver(waiver: string) {
+    this.waiver = waiver;
+  }
+  setStunTimer(time: number) {
+    this.stunTimer = time;
+  }
+
   // setDetails(details)
   // setPlayers(players[])
   // addPlayer(player)
   // setActivity(activity[])
   // addActivity(activity)
-  // setActiveWeeklong()
+
+  setActiveWeeklong(){
+    Weeklong.activeGame = this;
+  }
 }

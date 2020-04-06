@@ -1,7 +1,7 @@
 import { withIonLifeCycle } from '@ionic/react';
-import React, { Component } from 'react';
+import React from 'react';
 
-class Rules extends Component {
+class Rules extends React.Component {
   render() {
     return(
     	<div className="container">
@@ -77,7 +77,7 @@ class Rules extends Component {
 
     			<h2><strong>Lock-in</strong></h2>
     			<div>
-    				<iframe src="https://onedrive.live.com/embed?cid=22F6EE2CC3A51664&amp;resid=22f6ee2cc3a51664%212687&amp;authkey=ABuXzNzoCWPOKNQ&amp;em=2&amp;wdAr=1.7777777777777777" width="610px" height="367px" frameBorder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> presentation, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe>
+    				<iframe title="HvZ rules" src="https://onedrive.live.com/embed?cid=22F6EE2CC3A51664&amp;resid=22f6ee2cc3a51664%212687&amp;authkey=ABuXzNzoCWPOKNQ&amp;em=2&amp;wdAr=1.7777777777777777" width="610px" height="367px" frameBorder="0">This is an embedded <a target="_blank" href="https://office.com" rel="noopener noreferrer">Microsoft Office</a> presentation, powered by <a target="_blank" rel="noopener noreferrer" href="https://office.com/webapps">Office</a>.</iframe>
     			</div>
 
     			<div>

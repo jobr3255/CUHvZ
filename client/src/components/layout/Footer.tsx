@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Footer extends Component {
+export default class Footer extends React.Component {
   render() {
     return(
       <div className="section footer">
@@ -15,15 +15,15 @@ export default class Footer extends Component {
           </span>
           <span className="footer-box">
             Follow us <br/>
-            <a className="button button-primary" href="http://www.facebook.com/HvZatCU/" target="_blank">Facebook</a>
+            <a className="button button-primary" href="http://www.facebook.com/HvZatCU/" target="_blank" rel="noopener noreferrer">Facebook</a>
           </span>
           <span className="footer-box">
             Join our team! <br/>
-            <a className="button button-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSeCbxWdl3ozaa_9fqwBj_W7CT-RRn2lHCZfvQvCITCujijF7g/viewform?usp=sf_link" target="_blank">Apply here!</a>
+            <a className="button button-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSeCbxWdl3ozaa_9fqwBj_W7CT-RRn2lHCZfvQvCITCujijF7g/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">Apply here!</a>
           </span>
           <span className="footer-box">
             Enjoy our events? <br/>
-            <a className="button button-primary" href="https://www.eventbrite.com/e/cu-hvz-2018-spring-donations-tickets-60673535177" target="_blank">Donate!</a>
+            <a className="button button-primary" href="https://www.eventbrite.com/e/cu-hvz-2018-spring-donations-tickets-60673535177" target="_blank" rel="noopener noreferrer">Donate!</a>
           </span>
         </div>
       </div>

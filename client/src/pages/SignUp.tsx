@@ -1,7 +1,6 @@
 import { withIonLifeCycle } from '@ionic/react';
-import React, { useState, FormEvent } from 'react';
+import React from 'react';
 import { Helmet } from "react-helmet";
-import axios from 'axios';
 
 interface SignUpProps {
 }
@@ -25,14 +24,14 @@ class SignUp extends React.Component<SignUpProps> {
 
   handleSubmit(event: any) {
     event.preventDefault();
-    const data = JSON.stringify(this.getFormData(event));
-    const url = 'http://localhost:9000/testpost';
-    const options = {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      data,
-      url,
-    };
+    // const data = JSON.stringify(this.getFormData(event));
+    // const url = 'http://localhost:9000/testpost';
+    // const options = {
+    //   method: 'POST',
+    //   headers: { 'content-type': 'application/json' },
+    //   data,
+    //   url,
+    // };
     // axios(options)
     // .then(function (response) {
     //   console.log(response);

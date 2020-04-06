@@ -1,5 +1,5 @@
 import { withIonLifeCycle } from '@ionic/react';
-import React, { useState, FormEvent, ChangeEvent } from 'react';
+import React from 'react';
 import Form from "../components/Form/Form";
 
 class Login extends React.Component {

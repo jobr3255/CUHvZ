@@ -1,8 +1,8 @@
 import { withIonLifeCycle } from '@ionic/react';
-import React, { Component } from 'react';
+import React from 'react';
 import { Helmet } from "react-helmet";
 
-class Profile extends Component {
+class Profile extends React.Component {
   render() {
     return (
       <div className="App signup lightslide">
