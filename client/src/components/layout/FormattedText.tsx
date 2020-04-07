@@ -24,29 +24,38 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
     });
   }
 
-  formatData(data: string) {
-    var formattedText = new Array();
-    // formats <br> tags where there are line breaks
-    var brDel = "^\n";
-    // formats BOLD[content] into an strong tag
-    var boldDel = "BOLD\\[.*\\]";
-    // formats LINK[name][link] into an html link
-    var linkDel = "LINK(\\[.*\\]){2}";
-    // formats LINK_NEW_TAB[name][link] into an html link
-    var linkTabDil = "LINK_NEW_TAB(\\[.*\\]){2}";
-    // formats IMAGE[link] into an image
-    var imgDel = "IMAGE(\\[.*\\]){1}";
-    // formats IMAGE[link][size %] into an image
-    var imgSizeDel = "IMAGE(\\[.*\\]){2}";
-    // formats [LINE] into an hr tag
-    var lineDel = "\\[LINE\\]";
 
-    var re = new RegExp(`(${brDel})|(${boldDel})|(${imgDel})|(${imgSizeDel})|(${linkDel})|(${linkTabDil})|(${lineDel})`,"gm");
-    var match;
+  // BOLD[content]
+  // LINK[name][link]
+  // LINK_NEW_TAB[name][link]
+  // IMAGE[link]
+  // IMAGE[link][size %]
+  // [LINE]
+  formatData(data: string) {
+    var formattedText = [];
+    // formats <br> tags where there are line breaks
+    var brDel = "(^\n)";
+    // formats BOLD[content] into an strong tag
+    var boldDel = "(BOLD\\[.*\\])";
+    // formats LINK[name][link] into an html link
+    var linkDel = "(LINK\\[.*?().*?\\]\\[.*?().*?\\])";
+    // formats LINK_NEW_TAB[name][link] into an html link
+    var linkTabDil = "(LINK_NEW_TAB\\[.*?().*?\\]\\[.*?().*?\\])";
+    // formats IMAGE[link] into an image
+    var imgDel = "(IMAGE(\\[.*\\]){1})";
+    // formats IMAGE[link][size %] into an image
+    var imgSizeDel = "(IMAGE\\[.*?().*?\\]\\[.*?().*?\\])";
+    // formats [LINE] into an hr tag
+    var lineDel = "(\\[LINE\\])";
+
+    var re = new RegExp(`${brDel}|${boldDel}|${imgSizeDel}|${imgDel}|${linkDel}|${linkTabDil}|${lineDel}`,"gm");
+    var match, link, linkText, imageLink;
     var lastMatchedIndex = 0;
     var keyIndex = 0;
     while ((match = re.exec(data)) != null) {
-        formattedText.push(<span key={keyIndex++}>{data.substring(lastMatchedIndex, match.index)}</span>);
+        var tmpTxt = data.substring(lastMatchedIndex, match.index);
+        if(tmpTxt.trim())
+          formattedText.push(<span key={keyIndex++}>{tmpTxt}</span>);
         var matchString = match.splice(0)[0];
         if(matchString.match(brDel)){
 
@@ -62,30 +71,31 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
         }else if(matchString.match(linkDel)){
 
           // formats LINK[name][link] into an html link
-          var linkText = matchString.substring(5, matchString.indexOf("]["));
-          var link = matchString.substring(matchString.indexOf("][") + 2, matchString.length - 1);
+          linkText = matchString.substring(5, matchString.indexOf("]["));
+          link = matchString.substring(matchString.indexOf("][") + 2, matchString.length - 1);
           formattedText.push(<a key={keyIndex++} href={link}>{linkText}</a>);
 
         }else if(matchString.match(linkTabDil)){
 
           // formats LINK_NEW_TAB[name][link] into an html link
-          var linkText = matchString.substring(13, matchString.indexOf("]["));
-          var link = matchString.substring(matchString.indexOf("][") + 2, matchString.length - 1);
+          linkText = matchString.substring(13, matchString.indexOf("]["));
+          link = matchString.substring(matchString.indexOf("][") + 2, matchString.length - 1);
           formattedText.push(<a key={keyIndex++} href={link} target="_blank"  rel="noopener noreferrer">{linkText}</a>);
 
         }else if(matchString.match(imgSizeDel)){
-
+          console.log(matchString);
           // formats IMAGE[link][size %] into an image
-          var imageLink = matchString.substring(6, matchString.indexOf("]["));
-          var imageSize = matchString.substring(matchString.indexOf("][") + 2, matchString.length - 1);
-          console.log(imageSize);
-          formattedText.push(<img key={keyIndex++} src={imageLink} style={{width: `${imageSize}%`}}/>);
+          imageLink = matchString.substring(6, matchString.indexOf("]["));
+          var splitIndex = matchString.indexOf("][") + 2;
+          var imageSize = matchString.substring(splitIndex, matchString.indexOf("]",splitIndex));
+          console.log("link: "+imageLink+" size: "+imageSize);
+          formattedText.push(<img key={keyIndex++} src={imageLink} style={{width: `${imageSize}%`}} alt={imageLink}/>);
 
         }else if(matchString.match(imgDel)){
 
           // formats IMAGE[link] into an image
-          var imageLink = matchString.substring(6, matchString.length - 1);
-          formattedText.push(<img key={keyIndex++} src={imageLink} style={{width: "100%"}}/>);
+          imageLink = matchString.substring(6, matchString.length - 1);
+          formattedText.push(<img key={keyIndex++} src={imageLink} style={{width: "100%"}} alt={imageLink}/>);
 
         }else if(matchString.match(lineDel)){
 
@@ -102,6 +112,10 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
     }
     formattedText.push(<span key={keyIndex++}>{data.substring(lastMatchedIndex, data.length)}</span>);
     return formattedText;
+  }
+
+  formatLink(){
+
   }
 
   render() {

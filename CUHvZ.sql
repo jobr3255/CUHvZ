@@ -1656,7 +1656,7 @@ Details/Rules:
 - Yellow bandana must be worn around your leg to identify you as a player of the game.
 - The green bandana is worn on your head for zombies and around arm for humans.
 - Poisoned supply drops will reduce effectiveness of the next 3 supply drops used. After 3 unpoisoned supply drops have been collected the poison is cured.
-IMAGE_SIZE[/images/human.jpg][45]IMAGE_SIZE[/images/zombie.jpg][45]
+IMAGE[/images/human.jpg][45]IMAGE[/images/zombie.jpg][45]
 
 Suppy Drop Locations:
 IMAGE[/images/signs-fall19.png]", monday =
@@ -1786,7 +1786,8 @@ BOLD[Details/Rules:]
 - Yellow bandana must be worn around your leg to identify you as a player of the game.
 - The green bandana is worn on your head for zombies and around your arm for humans.
 - Poisoned supply drops will reduce effectiveness of the next 3 supply drops used. After 3 unpoisoned supply drops have been collected the poison is cured.
-IMAGE_SIZE[/images/human.jpg][45]IMAGE_SIZE[/images/zombie.jpg][45]
+IMAGE[/images/human.jpg][45]IMAGE[/images/zombie.jpg][45]
+
 
 Suppy Drop Locations:
 IMAGE[/images/signs-fall19.png]',monday =
