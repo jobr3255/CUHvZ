@@ -8,10 +8,6 @@ export interface EventDateProps {
 
 export default class EventDate extends React.Component<EventDateProps, any> {
 
-  constructor(props: EventDateProps) {
-    super(props);
-  }
-
   private addOrdinal(num: any): string {
     num += "";
     var lastNum = num.substring(num.length-1, num.length);

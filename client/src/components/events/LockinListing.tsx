@@ -12,7 +12,7 @@ export default class LockinListing extends EventListing<LockinListingProps> {
     var lockin = this.props.lockin;
     var pageLink = "/lockin/" + lockin.getID();
     var activeLinks = null;
-    if(lockin.getState() == 2){
+    if(lockin.getState() === 2){
       var eventbriteLink = null;
       if(lockin.getEventbrite()){
         eventbriteLink = <>| <a href={lockin.getEventbrite()} target="_blank" rel="noopener noreferrer">Tickets</a></>;
@@ -23,11 +23,14 @@ export default class LockinListing extends EventListing<LockinListingProps> {
       }
       activeLinks = <>{eventbriteLink} {blasterEventbriteLink}</>;
     }
+    var titleLink = <a className="title-link" href={pageLink}>{lockin.getTitle()}</a>;
+    var title;
+    if(this.props.titleSize){
+      title = this.getTitle(titleLink, this.props.titleSize);
+    }
     return (
       <div className="white">
-        <h4 style={{margin: 0}}>
-          <a className="title-link" href={pageLink}>{lockin.getTitle()}</a>
-        </h4>
+        {title}
         <p>
           <EventDate
             type="lockin"
