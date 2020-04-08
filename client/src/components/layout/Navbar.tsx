@@ -5,6 +5,15 @@ import Routes from './Routes';
 import './Navbar.css';
 
 export default class Navbar extends React.Component {
+
+  UNSAFE_componentWillMount() {
+    var prevPage = sessionStorage.getItem('currentPage');
+    var currentPage = window.location.href;
+    sessionStorage.setItem("currentPage", currentPage);
+    if(prevPage)
+      sessionStorage.setItem("prevPage", prevPage);
+  }
+
   render() {
     return(
       <div>

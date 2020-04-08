@@ -31,6 +31,7 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
   // IMAGE[link]
   // IMAGE[link][size %]
   // [LINE]
+  // [SUPPLY_DROPS]
   formatData(data: string) {
     var formattedText = [];
     // formats <br> tags where there are line breaks
@@ -47,8 +48,10 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
     var imgSizeDel = "(IMAGE\\[.*?().*?\\]\\[.*?().*?\\])";
     // formats [LINE] into an hr tag
     var lineDel = "(\\[LINE\\])";
+    // formats [SUPPLY_DROPS] into a header
+    var supplyDel = "(\\[SUPPLY_DROPS\\])";
 
-    var re = new RegExp(`${brDel}|${boldDel}|${imgSizeDel}|${imgDel}|${linkDel}|${linkTabDil}|${lineDel}`,"gm");
+    var re = new RegExp(`${brDel}|${boldDel}|${imgSizeDel}|${imgDel}|${linkDel}|${linkTabDil}|${lineDel}|${supplyDel}`,"gm");
     var match, link, linkText, imageLink;
     var lastMatchedIndex = 0;
     var keyIndex = 0;
@@ -83,12 +86,10 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
           formattedText.push(<a key={keyIndex++} href={link} target="_blank"  rel="noopener noreferrer">{linkText}</a>);
 
         }else if(matchString.match(imgSizeDel)){
-          console.log(matchString);
+
           // formats IMAGE[link][size %] into an image
           imageLink = matchString.substring(6, matchString.indexOf("]["));
-          var splitIndex = matchString.indexOf("][") + 2;
-          var imageSize = matchString.substring(splitIndex, matchString.indexOf("]",splitIndex));
-          console.log("link: "+imageLink+" size: "+imageSize);
+          var imageSize = matchString.substring(matchString.indexOf("][") + 2, matchString.indexOf("]"));
           formattedText.push(<img key={keyIndex++} src={imageLink} style={{width: `${imageSize}%`}} alt={imageLink}/>);
 
         }else if(matchString.match(imgDel)){
@@ -101,6 +102,11 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
 
           // formats [LINE] into an hr tag
           formattedText.push(<hr key={keyIndex++}/>);
+
+        }else if(matchString.match(supplyDel)){
+
+          // formats [SUPPLY_DROPS] into a header
+          formattedText.push(<h5 key={keyIndex++} style={{margin: 0}}>Supply Drops</h5>);
 
         }else{
 

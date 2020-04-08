@@ -27,6 +27,8 @@ export default class LockinListing extends EventListing<LockinListingProps> {
     var title;
     if(this.props.titleSize){
       title = this.getTitle(titleLink, this.props.titleSize);
+    }else{
+      title = this.getTitle(titleLink, 4);
     }
     return (
       <div className="white">

@@ -15,9 +15,9 @@ router.get("/weeklong/:id/players", function(req: any, res: any) {
   database.queryFetchAll(query, res);
 });
 
-router.get("/weeklong/:id/details", function(req: any, res: any) {
+router.get("/weeklong/:id/missions", function(req: any, res: any) {
   var id = req.params.id;
-  var query = `select * from weeklongs A join weeklong_missions B on A.id=B.weeklong_id where A.id=${id}`;
+  var query = `select B.* from weeklongs A join weeklong_missions B on A.id=B.weeklong_id where A.id=${id}`;
   database.queryFetchAll(query, res);
 });
 

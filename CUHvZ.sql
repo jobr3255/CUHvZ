@@ -2025,11 +2025,9 @@ IMAGE[/images/selfies-spring2020.jpg]"),
 (6, "thursday", "off", "Egg-scort", "5:30 pm", "Martin park", "https://www.google.com/maps/place/Martin+Park/@39.9889483,-105.2520282,17z/data=!3m1!4b1!4m12!1m6!3m5!1s0x876beda6c350f9cd:0xbfe19b6c4417032e!2sMartin+Park!8m2!3d39.9889442!4d-105.2498342!3m4!1s0x876beda6c350f9cd:0xbfe19b6c4417032e!8m2!3d39.9889442!4d-105.2498342", "All players present receive 10 points and +6 hours on their starve timer"),
 (6, "friday", "on", "", "", "", "",
 "Canceled
-
 Due to the rising risks of Covid-19 we have decided to cancel Friday's on and off-campus missions. Stay safe out there."),
 (6, "friday", "off", "", "", "", "",
 "Canceled
-
 Due to the rising risks of Covid-19 we have decided to cancel Friday's on and off-campus missions. Stay safe out there.");
 
 
