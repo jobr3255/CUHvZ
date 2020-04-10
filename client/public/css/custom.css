@@ -4,6 +4,10 @@ body, html {
   color: #D1D1D1;
 }
 
+.caps {
+  text-transform: uppercase;
+}
+
 .tab-nav{
   margin: auto;
   text-align: center;
@@ -184,18 +188,6 @@ li.plain{
 
 .row-header {
   text-align: center;
-}
-
-.stats-header{
-  margin: 0;
-  text-align: center;
-  font-size: 30px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.05rem;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  text-decoration: none;
 }
 .show-mobile {
   display: none;

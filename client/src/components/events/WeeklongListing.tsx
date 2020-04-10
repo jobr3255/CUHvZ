@@ -11,7 +11,7 @@ export default class WeeklongListing extends EventListing<WeeklongListingProps> 
   render() {
     var weeklong = this.props.weeklong;
     var pageLink = "/weeklong/" + weeklong.getID();
-    var activeLinks = null;
+    // var activeLinks = null;
     // if(lockin.getState() === 2){
     //   var eventbriteLink = null;
     //   if(lockin.getEventbrite()){

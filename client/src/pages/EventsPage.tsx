@@ -30,7 +30,7 @@ class EventsPage extends React.Component<any, EventsPageState> {
   render() {
     return (
         <div className="container">
-          <div className="content lightslide-box">
+          <div className="content lightslide-box white">
             <h1 className='white' ><strong>Weeklongs</strong></h1>
             <div>
               An HvZ weeklong is a whole-campus game of zombie tag. During a single week, players play the game alongside attending classes and carrying out their lives. But the game is only played outside 8:00-5:00. Starting as a human player, you will do your best to avoid being tagged by zombie players while also completing mission objectives. In short: you will try to survive the week.

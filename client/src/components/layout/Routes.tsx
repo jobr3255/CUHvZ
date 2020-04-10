@@ -12,6 +12,7 @@ import LoginPage from '../../pages/LoginPage';
 import ProfilePage from '../../pages/ProfilePage';
 import LockinPage from '../../pages/LockinPage';
 import WeeklongPage from '../../pages/WeeklongPage';
+import WeeklongStatsPage from '../../pages/WeeklongStatsPage';
 
 import NotFound from '../errors/NotFound';
 
@@ -28,6 +29,7 @@ export default class Routes extends React.Component {
         <Route path="/profile"    component={ProfilePage}/>
 
         <Route path="/lockin/:id"       component={LockinPage}/>
+        <Route path="/weeklong/:id/stats"     component={WeeklongStatsPage}/>
         <Route path="/weeklong/:id"     component={WeeklongPage}/>
 
         <Route                    component={NotFound} />

@@ -5,7 +5,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className="App container">
+      <div className="container">
         <div className="five columns">
           <h1 className="section-heading">Humans
           <span className="white"> versus </span>Zombies</h1>

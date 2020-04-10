@@ -2,13 +2,10 @@ import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 import { Helmet } from "react-helmet";
 import WeeklongController from "../controllers/WeeklongController"
-import WeeklongListing from "../components/events/WeeklongListing"
-import FormattedText from "../components/layout/FormattedText"
-import WeeklongDayTab from "../components/events/WeeklongDayTab"
 
 import Tabulator, { Tab } from "../components/Tabulator/Tabulator"
 
-class WeeklongPage extends React.Component<any, any> {
+class WeeklongStatsPage extends React.Component<any, any> {
 
   constructor(props: any) {
     super(props);
@@ -31,55 +28,52 @@ class WeeklongPage extends React.Component<any, any> {
 
   render() {
     var pageTitle = "Weeklong";
-    var header, details;
+    var header;
     var tabs = [];
     if (this.state.weeklong) {
       var weeklong = this.state.weeklong;
+      var weeklongController = new WeeklongController();
       pageTitle = weeklong.getTitle();
-      header = <WeeklongListing
-        key={weeklong.getID()}
-        titleSize={3}
-        id={weeklong.getID()}
-        weeklong={weeklong} />
-
-      details = <FormattedText text={weeklong.getDetails().getDescription()} />
-      // details = <TabContent ><FormattedText text={weeklong.getDetails().getDescription()} /></TabContent>;
-
-      tabs.push(
-        <Tab key={1} name="Details" default>
-          {details}
-        </Tab>
-      );
-      var weeklongDetails = weeklong.getDetails();
-      tabs.push(
-        <Tab key={2} name="Monday">
-          <WeeklongDayTab day={weeklongDetails.getMonday()} />
-        </Tab>
+      header = (
+        <>
+          <h1 className='stats-header'>
+            <a className='white caps' href={`/weeklong/${weeklong.getID()}`}>{pageTitle}</a>
+            <br/>
+            <span className="stats-header orange caps"> Player Statistics</span>
+            <br/>
+            <span className='stats-header'>Zombie Stun Timer = {weeklongController.formatStunTimer(weeklong)}</span>
+          </h1>
+        </>
       );
 
       tabs.push(
-        <Tab key={3} name="Tuesday">
-          <WeeklongDayTab day={weeklongDetails.getTuesday()} />
+        <Tab key={1} name="All" default>
+          All players table
+        </Tab>
+      );
+      tabs.push(
+        <Tab key={2} name="Humans">
+          Humans table
         </Tab>
       );
 
       tabs.push(
-        <Tab key={3} name="Wednesday">
-          <WeeklongDayTab day={weeklongDetails.getWednesday()} />
+        <Tab key={3} name="Zombies">
+          Zombies table
         </Tab>
       );
 
       tabs.push(
-        <Tab key={3} name="Thursday">
-          <WeeklongDayTab day={weeklongDetails.getThursday()} />
+        <Tab key={3} name="Deceased">
+          Deceased table
         </Tab>
       );
 
-      tabs.push(
-        <Tab key={3} name="Friday">
-          <WeeklongDayTab day={weeklongDetails.getFriday()} />
-        </Tab>
-      );
+      // tabs.push(
+      //   <Tab key={3} name="Activity">
+      //     Activity table
+      //   </Tab>
+      // );
     }
     return (
       <div className="container">
@@ -97,4 +91,4 @@ class WeeklongPage extends React.Component<any, any> {
   }
 }
 
-export default withIonLifeCycle(WeeklongPage);
+export default withIonLifeCycle(WeeklongStatsPage);

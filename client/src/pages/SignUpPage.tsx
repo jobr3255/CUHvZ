@@ -43,11 +43,11 @@ class SignUpPage extends React.Component<SignUpPageProps> {
 
   render() {
     return (
-      <div className="App signup lightslide">
+      <div className="container">
         <Helmet>
             <title>Signup</title>
         </Helmet>
-        <div className="container">
+        <div className="content lightslide-box white">
 
         </div>
       </div>

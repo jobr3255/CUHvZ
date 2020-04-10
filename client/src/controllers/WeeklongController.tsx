@@ -57,4 +57,16 @@ export default class WeeklongController {
       }
     }
   }
+
+  formatStunTimer(weeklong: Weeklong): string{
+    var totalTime = weeklong.getStunTimer();
+    var min = Math.floor(totalTime / 60);
+    var seconds = totalTime - (min * 60);
+    var stunTimer = `${min}:${seconds}`
+    if(seconds === 0)
+      stunTimer = `${min}:00`;
+    else if(seconds < 10)
+      stunTimer = `${min}:0${seconds}`
+    return stunTimer;
+  }
 }

@@ -23,12 +23,10 @@ class LockinPage extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="App signup lightslide">
-        <div className="container">
-          <div className="row">
-            <div className="content lightslide-box">
-              {this.state.lockin}
-            </div>
+      <div className="container">
+        <div className="row">
+          <div className="content lightslide-box">
+            {this.state.lockin}
           </div>
         </div>
       </div>

@@ -12,9 +12,9 @@ export default class WeeklongMissionDetails extends React.Component<WeeklongMiss
   render() {
     var mission = this.props.mission;
       var campusText;
-      if(mission.getCampus() == "on"){
+      if(mission.getCampus() === "on"){
         campusText = "On Campus";
-      }else if(mission.getCampus() == "off"){
+      }else if(mission.getCampus() === "off"){
         campusText = "Off Campus";
       }
       var campus = <h5 style={{margin: 0}}>{campusText}</h5>
