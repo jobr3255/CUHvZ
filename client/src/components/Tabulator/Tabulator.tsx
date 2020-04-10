@@ -44,7 +44,7 @@ export default class Tabulator extends React.Component<any, any> {
       React.Children.map(this.props.children, (tab: any) => {
         var active = "";
         var activeStyle = {};
-        var tabID = `${tab.props.name}-tab-button`;
+        var tabID = `${tab.props.id ? tab.props.id : tab.props.name}-tab-button`;
         if(this.state.selectedTab){
           if(tabID === this.state.selectedTab){
             active = "active";

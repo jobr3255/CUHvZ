@@ -1,7 +1,7 @@
 import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 import { Helmet } from "react-helmet";
-import WeeklongController from "../controllers/WeeklongController"
+import WeeklongStatsController from "../controllers/WeeklongStatsController"
 
 import Tabulator, { Tab } from "../components/Tabulator/Tabulator"
 
@@ -17,10 +17,9 @@ class WeeklongStatsPage extends React.Component<any, any> {
   async componentDidMount() {
     const { match: { params } } = this.props;
     var id = params["id"];
-    var weeklongController = new WeeklongController();
+    var weeklongController = new WeeklongStatsController();
     var weeklong = await weeklongController.getWeeklong(id);
-    await weeklongController.setWeeklongDetails(weeklong);
-    // console.log(weeklong);
+    await weeklongController.setPlayers(weeklong);
     this.setState({
       weeklong: weeklong
     });
@@ -29,51 +28,39 @@ class WeeklongStatsPage extends React.Component<any, any> {
   render() {
     var pageTitle = "Weeklong";
     var header;
-    var tabs = [];
+    var tabulator;
     if (this.state.weeklong) {
       var weeklong = this.state.weeklong;
-      var weeklongController = new WeeklongController();
+      var weeklongController = new WeeklongStatsController();
       pageTitle = weeklong.getTitle();
       header = (
         <>
           <h1 className='stats-header'>
             <a className='white caps' href={`/weeklong/${weeklong.getID()}`}>{pageTitle}</a>
-            <br/>
+            <br />
             <span className="stats-header orange caps"> Player Statistics</span>
-            <br/>
+            <br />
             <span className='stats-header'>Zombie Stun Timer = {weeklongController.formatStunTimer(weeklong)}</span>
           </h1>
         </>
       );
 
-      tabs.push(
-        <Tab key={1} name="All" default>
-          All players table
-        </Tab>
+      tabulator = (
+        <Tabulator id="weeklong-stats">
+          <Tab id="all-players" name={`All: ${weeklong.getPlayers().getAllPlayers().length}`} default>
+            All players table
+          </Tab>
+          <Tab id="humans" name={`Humans: ${weeklong.getPlayers().getHumans().length}`} >
+            Humans table
+          </Tab>
+          <Tab id="zombies" name={`Zombies: ${weeklong.getPlayers().getZombies().length}`}>
+            Zombies table
+          </Tab>
+          <Tab id="deceased" name={`Deceased: ${weeklong.getPlayers().getDeceased().length}`}>
+            Deceased table
+          </Tab>
+        </Tabulator>
       );
-      tabs.push(
-        <Tab key={2} name="Humans">
-          Humans table
-        </Tab>
-      );
-
-      tabs.push(
-        <Tab key={3} name="Zombies">
-          Zombies table
-        </Tab>
-      );
-
-      tabs.push(
-        <Tab key={3} name="Deceased">
-          Deceased table
-        </Tab>
-      );
-
-      // tabs.push(
-      //   <Tab key={3} name="Activity">
-      //     Activity table
-      //   </Tab>
-      // );
     }
     return (
       <div className="container">
@@ -82,9 +69,7 @@ class WeeklongStatsPage extends React.Component<any, any> {
         </Helmet>
         <div className="content lightslide-box white">
           {header}
-          <Tabulator id="weeklong-details">
-            {tabs}
-          </Tabulator>
+          {tabulator}
         </div>
       </div>
     );

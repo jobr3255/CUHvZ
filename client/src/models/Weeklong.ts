@@ -1,4 +1,5 @@
 import WeeklongDetails from "./WeeklongDetails";
+import PlayerList from "./PlayerList";
 
 export default class Weeklong {
   private id: number;
@@ -9,8 +10,8 @@ export default class Weeklong {
   private waiver: string;
   private stunTimer: number;
   private details:  WeeklongDetails;
-  // private players: Array<Player>;
-  // private activity: Array<Player>;
+  private players: PlayerList;
+  // private activity: Array<Activity>;
   private static activeGame: Weeklong;
 
   constructor(data: any) {
@@ -22,7 +23,7 @@ export default class Weeklong {
     this.waiver = data["waiver"];
     this.stunTimer = data["stun_timer"];
     this.details = new WeeklongDetails(data);
-    // this.players = new Array<Player>();
+    this.players = new PlayerList();
     // this.activity = new Array<Activity>();
   }
 
@@ -62,9 +63,12 @@ export default class Weeklong {
     return this.details;
   }
 
-  // getPlayers()
+  getPlayers(): PlayerList {
+    return this.players;
+  }
+
   // getActivity()
-  
+
   static getActiveWeeklong(): Weeklong{
     return Weeklong.activeGame;
   }
@@ -96,11 +100,11 @@ export default class Weeklong {
     this.details = details;
   }
 
-  // setDetails(details)
-  // setPlayers(players[])
-  // addPlayer(player)
+  setPlayers(players: PlayerList) {
+    this.players = players;
+  }
+
   // setActivity(activity[])
-  // addActivity(activity)
 
   setActiveWeeklong(){
     Weeklong.activeGame = this;
