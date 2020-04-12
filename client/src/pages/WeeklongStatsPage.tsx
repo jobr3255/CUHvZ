@@ -3,10 +3,10 @@ import React from 'react';
 import { Helmet } from "react-helmet";
 import WeeklongStatsController from "../controllers/WeeklongStatsController";
 import Tabulator, { Tab } from "../components/Tabulator/Tabulator";
-import Paginator from "../components/Paginator/Paginator";
 import PlayersTable from "../components/tables/PlayersTable";
 import Weeklong from "../models/Weeklong";
 import Player from "../models/Player";
+import Paginator from "../components/Paginator/Paginator";
 
 import "./Pages.css";
 
@@ -15,8 +15,10 @@ class WeeklongStatsPage extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      weeklong: null
+      weeklong: null,
+      rerender: false
     };
+    this.rerenderPaginator = this.rerenderPaginator.bind(this);
   }
 
   async componentDidMount() {
@@ -27,6 +29,12 @@ class WeeklongStatsPage extends React.Component<any, any> {
     await weeklongController.setPlayers(weeklong);
     this.setState({
       weeklong: weeklong
+    });
+  }
+
+  rerenderPaginator(){
+    this.setState({
+      rerender: !this.state.rerender
     });
   }
 
@@ -54,30 +62,53 @@ class WeeklongStatsPage extends React.Component<any, any> {
       allPlayers.sort((a: Player, b: Player) => {
         let aP = a.getPoints();
         let bP = b.getPoints();
-        if(a.getClearance() > 0)
+        if (a.getClearance() > 0)
           aP = 0;
-        if(b.getClearance() > 0)
+        if (b.getClearance() > 0)
           bP = 0;
         return (aP < bP) ? 1 : -1
       });
-      topPlayers = <PlayersTable id="all-players" players={[allPlayers[0],allPlayers[1],allPlayers[2]]} headers={["Username", "Points", "Hunger"]}/>
+      topPlayers = <PlayersTable id="top-players" className="color-players" players={[allPlayers[0], allPlayers[1], allPlayers[2]]} headers={["Username", "Points", "Hunger"]} />
       allPlayers = weeklong.getPlayers().getAllPlayers();
       allPlayers.sort((a: Player, b: Player) => (a.getPoints() < b.getPoints()) ? 1 : -1);
       tabulator = (
         <Tabulator id="weeklong-stats">
           <Tab id="all-players" name={`All: ${allPlayers.length}`} default>
-            <Paginator perPage={2} id="all-players">
-              <PlayersTable id="all-players" players={allPlayers} headers={["Username", "Points", "Hunger"]}/>
+            <Paginator id="all-players" perPage={15} reset={this.state.rerender}>
+              <PlayersTable
+                id="all-players"
+                className="color-players"
+                headers={["Username", "Points", "Hunger"]}
+                players={allPlayers}
+                rerenderCallback={this.rerenderPaginator}/>
             </Paginator>
           </Tab>
           <Tab id="humans" name={`Humans: ${weeklong.getPlayers().getHumans().length}`} >
-            <PlayersTable id="humans" players={weeklong.getPlayers().getHumans()} headers={["Username", "Points", "Hunger"]}/>
+            <Paginator id="humans" perPage={15} reset={this.state.rerender}>
+              <PlayersTable
+                id="humans"
+                players={weeklong.getPlayers().getHumans()}
+                headers={["Username", "Points", "Hunger"]}
+                rerenderCallback={this.rerenderPaginator} />
+            </Paginator>
           </Tab>
           <Tab id="zombies" name={`Zombies: ${weeklong.getPlayers().getZombies().length}`}>
-            <PlayersTable id="zombies" players={weeklong.getPlayers().getZombies()} headers={["Username", "Type", "Kills", "Points", "Hunger"]}/>
+            <Paginator id="zombies" perPage={15} reset={this.state.rerender}>
+              <PlayersTable
+                id="zombies"
+                players={weeklong.getPlayers().getZombies()}
+                headers={["Username", "Type", "Kills", "Points", "Hunger"]}
+                rerenderCallback={this.rerenderPaginator} />
+            </Paginator>
           </Tab>
           <Tab id="deceased" name={`Deceased: ${weeklong.getPlayers().getDeceased().length}`}>
-            <PlayersTable id="deceased" players={weeklong.getPlayers().getDeceased()} headers={["Username", "Kills", "Points", "Starved"]}/>
+            <Paginator id="deceased" perPage={15} reset={this.state.rerender}>
+              <PlayersTable
+                id="deceased"
+                players={weeklong.getPlayers().getDeceased()}
+                headers={["Username", "Kills", "Points", "Starved"]}
+                rerenderCallback={this.rerenderPaginator} />
+            </Paginator>
           </Tab>
         </Tabulator>
       );

@@ -16,7 +16,6 @@ export default class Tabulator extends React.Component<any, any> {
     var currentPage = sessionStorage.getItem('currentPage');
     if(currentPage === prevPage){
       var lastTabOpened = sessionStorage.getItem(`lastTabOpened-${this.props.id}`);
-      console.log("open tab: "+lastTabOpened)
       this.setState({
         selectedTab: lastTabOpened
       });
@@ -43,21 +42,17 @@ export default class Tabulator extends React.Component<any, any> {
       var keyIndex = 1;
       React.Children.map(this.props.children, (tab: any) => {
         var active = "";
-        var activeStyle = {};
         var tabID = `${tab.props.id ? tab.props.id : tab.props.name}-tab-button`;
+        var showContent = false;
         if(this.state.selectedTab){
           if(tabID === this.state.selectedTab){
+            showContent = true;
             active = "active";
-            activeStyle = {
-              display: "block"
-            };
           }
         }else{
           if(tab.props.default){
+            showContent = true;
             active = "active";
-            activeStyle = {
-              display: "block"
-            };
           }
         }
         tabButtons.push(
@@ -65,11 +60,13 @@ export default class Tabulator extends React.Component<any, any> {
             <button className={`tablink small-tab ${active}`} id={tabID} onClick={this.handleTabClick}>{tab.props.name}</button>
           </span>
         );
-        tabContents.push(
-          <div className="tabcontent" key={keyIndex} style={activeStyle}>
-            {tab.props.children}
-          </div>
-        );
+        if(showContent){
+          tabContents = (
+            <div key={keyIndex}>
+              {tab.props.children}
+            </div>
+          );
+        }
       });
     }
     return (

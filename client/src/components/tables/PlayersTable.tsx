@@ -5,7 +5,9 @@ import './PlayersTable.css';
 interface PlayersTableProps {
   id: string,
   players: Array<Player>,
-  headers: Array<string> // username, points, hunger, kills, type, starved
+  headers: Array<string>, // username, points, hunger, kills, type, starved
+  className?: string,
+  rerenderCallback?: () => void
 }
 
 interface PlayersTableState {
@@ -26,7 +28,6 @@ export default class PlayersTable extends React.Component<PlayersTableProps, Pla
   }
 
   handleSort(e: any) {
-    e.preventDefault();
     var element = (e.target as HTMLElement);
     var sortID = element.id;
     var sortOrder = this.state.sortOrder;
@@ -61,6 +62,10 @@ export default class PlayersTable extends React.Component<PlayersTableProps, Pla
       sortID: sortID,
       sortOrder: sortOrder
     });
+    if(this.props.rerenderCallback){
+      console.log("trigger rerender");
+      this.props.rerenderCallback();
+    }
   }
 
   render() {
@@ -119,7 +124,7 @@ export default class PlayersTable extends React.Component<PlayersTableProps, Pla
           </tr>
         </thead>
 
-        <tbody className={this.props.id} id={`${this.props.id}-tbody`}>
+        <tbody className={this.props.className} id={`${this.props.id}-tbody`}>
         {playerRows}
         </tbody>
       </table>
