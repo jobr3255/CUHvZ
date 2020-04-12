@@ -49,13 +49,6 @@ export default class WeeklongDetails {
       SETTERS
    ***************/
 
-  setWeeklongDays(data: any) {
-  // this.monday = new WeeklongDay(data["moday"]);
-    for (var weeklongMissionData of data) {
-      // this.monday = new WeeklongDay(data["moday"]);
-    }
-  }
-
   setDescription(des: string) {
     this.description = des;
   }

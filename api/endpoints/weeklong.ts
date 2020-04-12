@@ -11,7 +11,8 @@ router.get("/weeklong/:id", function(req: any, res: any) {
 
 router.get("/weeklong/:id/players", function(req: any, res: any) {
   var id = req.params.id;
-  var query = `select A.*,B.username,B.clearance from weeklong_players A join users B on A.user_id=B.id where A.weeklong_id=${id}`;
+  // var query = `select A.*,B.username,B.clearance from weeklong_players A join users B on A.user_id=B.id where A.weeklong_id=${id}`;
+  var query = `select A.*,B.username,B.clearance,C.end_date from weeklong_players A join users B on A.user_id=B.id join weeklongs C on A.weeklong_id=C.id where A.weeklong_id=${id}`;
   database.queryFetchAll(query, res);
 });
 

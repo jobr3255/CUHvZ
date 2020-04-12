@@ -1,0 +1,179 @@
+.mod {
+  color: #eb42f4;
+}
+
+th, td {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  padding: 1vh;
+}
+
+tr {
+  color: #D1D1D1;
+  font-weight: 400;
+  font-size: 2vh;
+  display: inline-block;
+  width: 100%;
+  border-bottom: 1px solid white;
+}
+
+table {
+  line-height: 1em;
+  margin: auto;
+}
+
+/* Table cell css
+––––––––––––––––––––––––––––––––––––––––––––––––––*/
+
+.table-cell {
+  display: inline-block;
+  float: left;
+}
+
+.table-cell.Username {
+  min-width: 40%;
+  display: inline-block;
+  margin: 5px 2% 5px 2%;
+}
+
+.table-cell.Points {
+  min-width: 12%;
+  display: inline-block;
+  margin: 5px 2% 5px 2%;
+}
+
+.table-cell.Kills {
+  min-width: 12%;
+  display: inline-block;
+  margin: 5px 2% 5px 2%;
+}
+
+.table-cell.Hunger {
+  min-width: 12%;
+  display: inline-block;
+  margin: 5px 2% 5px 2%;
+}
+
+.table-cell.Type {
+  min-width: 20%;
+  display: inline-block;
+  margin: 5px 2% 5px 2%;
+}
+
+.all-players .table-cell.Human {
+  color: #34abeb;
+}
+
+.all-players .table-cell.Zombie {
+  color: #40eb34;
+}
+
+.all-players .table-cell.Deceased {
+  color: #ffffff;
+  text-decoration: line-through;
+}
+
+/* Other
+––––––––––––––––––––––––––––––––––––––––––––––––––*/
+
+/* @media (max-width: 600px) {
+  .table-cell-username {
+    width: 96%;
+    display: inline-block;
+    margin: 5px 2% 5px 2%;
+  }
+
+  .table-cell-number {
+    min-width: 58px;
+    display: inline-block;
+    margin: 5px 2% 5px 2%;
+  }
+
+  .table-cell-status {
+    min-width: 70px;
+    display: inline-block;
+    margin: 5px 2% 5px 2%;
+  }
+} */
+
+
+/* Display player tables
+––––––––––––––––––––––––––––––––––––––––––––––––––*/
+
+
+
+
+/* .row-header {
+  text-align: center;
+}
+.show-mobile {
+  display: none;
+}
+.table-show-mobile {
+  display: none;
+ }
+.table-hide-mobile {
+  display: table-row;
+}
+@media (max-width: 600px){
+  .statistics{
+    overflow: auto;
+    display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 680px;
+  }
+  .stats-table {
+    width: 100%;
+  }
+  .table-show-mobile {
+    display: table-row;
+      }
+  .table-hide-mobile {
+    display: none;
+  }
+  .hide-mobile {
+    display: none;
+  }
+  .show-mobile {
+    display: table-row-group;
+  }
+} */
+
+/* @media (min-width: 735px) and (max-width: 1300px){
+  .statistics{
+    overflow: auto;
+    display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 680px;
+  }
+  .human-container{
+    width: 480px;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    overflow:hidden;
+  }
+} */
+
+
+/* .data tr {
+  display: none;
+}
+
+.mobile-table-line-1 {
+    padding: 10px;
+    width: 40%;
+    display: inline-block;
+}
+.mobile-table-line-2 {
+    padding: 10px;
+    display: inline-block;
+    width: 30%;
+}
+
+.paginater{
+  display: inline;
+} */
