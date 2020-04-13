@@ -1,12 +1,13 @@
 var express = require("express");
 var router = express.Router();
 
-var database = require("../database");
+import Database from "../Database";
 
 router.get("/lockin/:id", function(req: any, res: any) {
+  let db: Database = Database.getInstance();
   var id = req.params.id;
   var query = `select * from lockins join lockin_text on lockins.id=lockin_text.id where lockins.id=${id}`;
-  database.queryFetch(query, res);
+  db.queryFetch(query, res);
 });
 
 router.post('/lockin/new', function(_req: any, _res: any) {

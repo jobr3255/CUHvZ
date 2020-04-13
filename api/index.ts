@@ -8,13 +8,14 @@ var cors = require("cors");
 // const fileUpload = require('express-fileupload');
 
 // require all the routes
-var eventsRouter = require('./endpoints/events');
-var weeklongRouter = require('./endpoints/weeklong');
-var lockinRouter = require('./endpoints/lockin');
-var userRouter = require('./endpoints/user');
-var codeRouter = require('./endpoints/code');
-var validateRouter = require('./endpoints/validate');
-var supplyDropRouter = require('./endpoints/supplydrop');
+var eventsRouter = require('./src/endpoints/events');
+var weeklongRouter = require('./src/endpoints/weeklong');
+var lockinRouter = require('./src/endpoints/lockin');
+var userRouter = require('./src/endpoints/user');
+var codeRouter = require('./src/endpoints/code');
+var validateRouter = require('./src/endpoints/validate');
+var supplyDropRouter = require('./src/endpoints/supplydrop');
+var myLogger = require("./logger");
 
 const app = express();
 
@@ -118,9 +119,11 @@ function onError(error: any) {
   switch (error.code) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges');
+      myLogger.error(bind + ' requires elevated privileges');
       process.exit(1);
     case 'EADDRINUSE':
       console.error(bind + ' is already in use');
+      myLogger.error(bind + ' is already in use');
       process.exit(1);
     default:
       throw error;
@@ -138,4 +141,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
   console.log('Listening on ' + bind);
+  myLogger.log('Listening on ' + bind);
 }

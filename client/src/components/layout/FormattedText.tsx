@@ -24,7 +24,6 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
     });
   }
 
-
   // BOLD[content]
   // LINK[name][link]
   // LINK_NEW_TAB[name][link]
@@ -118,10 +117,6 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
     }
     formattedText.push(<span key={keyIndex++}>{data.substring(lastMatchedIndex, data.length)}</span>);
     return formattedText;
-  }
-
-  formatLink(){
-
   }
 
   render() {

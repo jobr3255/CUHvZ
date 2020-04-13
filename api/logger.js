@@ -1,5 +1,7 @@
 var fs = require('fs');
 
+var LOGS_FOLDER = "/logs/";
+
 function formatOutput(text){
   return getTimestamp() + text + "\n"
 }
@@ -16,7 +18,7 @@ function getFilePath(logType){
   var month = currentDate.getMonth();
   var year = currentDate.getFullYear();
   var monthDateYear  = (month+1) + "-" + date + "-" + year;
-  var dir = __dirname + "/" + (month+1) + "-" + year;
+  var dir = __dirname + LOGS_FOLDER + (month+1) + "-" + year;
   if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
 }
