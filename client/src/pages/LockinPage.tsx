@@ -2,15 +2,28 @@ import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 import LockinController from "../controllers/LockinController"
 
-class LockinPage extends React.Component<any, any> {
+/**
+ * LockinPage state variables
+ */
+interface LockinPageStates {
+  lockin: JSX.Element | null
+}
+
+/**
+ * LockinPage component
+ */
+class LockinPage extends React.Component<any, LockinPageStates> {
 
   constructor(props: any) {
     super(props);
     this.state = {
-      lockin: ""
+      lockin: null
     };
   }
 
+  /**
+   * Fires when component loads on page
+   */
   async componentDidMount() {
     const { match: { params } } = this.props;
     var id = params["id"];

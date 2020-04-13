@@ -4,7 +4,14 @@ import PlayerList from "../models/PlayerList";
 import { Human, Zombie, Deceased } from "../models/Player";
 import WeeklongController from "./WeeklongController";
 
+/**
+ * Controller for the WeeklongStatsPage
+ */
 export default class WeeklongStatsController extends WeeklongController {
+
+  /**
+   * Formats the stun timer from a Weeklong object
+   */
   formatStunTimer(weeklong: Weeklong): string {
     var totalTime = weeklong.getStunTimer();
     var min = Math.floor(totalTime / 60);
@@ -17,6 +24,9 @@ export default class WeeklongStatsController extends WeeklongController {
     return stunTimer;
   }
 
+  /**
+   * Calls the API and sets the players in a Weeklong object
+   */
   async setPlayers(weeklong: Weeklong) {
     let playersData = await API.get(`/api/weeklong/${weeklong.getID()}/players`)
       .then(function(response: any) {
@@ -25,7 +35,6 @@ export default class WeeklongStatsController extends WeeklongController {
         }
         return [];
       });
-    // console.log(playersData);
     var players = new PlayerList();
     for (var data of playersData) {
       switch (data["status"]) {

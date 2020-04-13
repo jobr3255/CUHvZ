@@ -5,9 +5,15 @@ import LockinListing from "../components/events/LockinListing"
 import FormattedText from "../components/layout/FormattedText"
 import { Helmet } from "react-helmet";
 
+/**
+ * Controller for the LockinPage
+ */
 export default class LockinController {
 
-  async getLockinView(id: number) {
+  /**
+   * Calls API and returns LockinListing object
+   */
+  async getLockinView(id: number): Promise<JSX.Element> {
     let lockinData = await API.get(`/api/lockin/${id}`)
       .then(function(response: any) {
         if (response.status === 200) {

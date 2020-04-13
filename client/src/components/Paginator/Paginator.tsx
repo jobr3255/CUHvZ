@@ -1,6 +1,9 @@
 import React from 'react';
 import "./Paginator.css";
 
+/**
+ * Paginator properties
+ */
 interface PaginatorProps {
   perPage: number,
   id: string,
@@ -8,31 +11,38 @@ interface PaginatorProps {
   reset?: boolean
 }
 
-interface PaginatorPropsState {
+/**
+ * Paginator states variables
+ */
+interface PaginatorStates {
   currentPage: number,
-  tableRows: any[],
-  ref: any
+  tableRows: HTMLTableRowElement[]
 }
 
-export default class Paginator extends React.Component<PaginatorProps, PaginatorPropsState> {
-  constructor(props: PaginatorProps, ref: any) {
+/**
+ * Takes many rows in a table and "paginates" them
+ */
+export default class Paginator extends React.Component<PaginatorProps, PaginatorStates> {
+  constructor(props: PaginatorProps) {
     super(props);
     this.state = {
       currentPage: 1,
-      tableRows: [],
-      ref: ref
+      tableRows: []
     }
     this.handlePageClick = this.handlePageClick.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
   }
 
+  /**
+   * Fires when component loads on page
+   */
   componentDidMount() {
     var tbody = document.getElementById(`${this.props.id}-tbody`);
     if (!tbody)
       return
     var trRows = tbody.getElementsByTagName("tr");
-    var rows: any[] = [];
+    var rows: HTMLTableRowElement[] = [];
     for (let i = 0; i < trRows.length; ++i) {
       rows.push(trRows[i]);
     }
@@ -43,6 +53,9 @@ export default class Paginator extends React.Component<PaginatorProps, Paginator
     this.navigateToPage(1, rows);
   }
 
+  /**
+   * Resets paginator to first page if the reset prop is different
+   */
   componentWillReceiveProps(props: PaginatorProps) {
     const { reset } = this.props;
     console.log(`props.reset = ${props.reset} this.props.reset = ${this.props.reset}`);
@@ -51,14 +64,23 @@ export default class Paginator extends React.Component<PaginatorProps, Paginator
     }
   }
 
+  /**
+   * Switches to the next page
+   */
   nextPage(){
     this.changePage(1);
   }
 
+  /**
+   * Switches to the previous page
+   */
   previousPage(){
     this.changePage(-1);
   }
 
+  /**
+   * Switches the page by the specified number if able
+   */
   changePage(num: number){
     var numPages = Math.ceil(this.state.tableRows.length / this.props.perPage);
     var currentPage = this.state.currentPage;
@@ -70,20 +92,24 @@ export default class Paginator extends React.Component<PaginatorProps, Paginator
     this.navigateToPage(currentPage);
   }
 
+  /**
+   * Hanldes user selection of a page number
+   */
   handlePageClick(e: any) {
     var element = (e.target as HTMLElement);
     var elementID = parseInt(element.innerText)
     this.navigateToPage(elementID);
   }
 
+  /**
+   * Hides / unhides the rows to represent a page
+   */
   navigateToPage(pageNum: number, trRows?: any[]) {
     var rows = trRows ? trRows : this.state.tableRows;
     var perPage = this.props.perPage;
-    // console.log(rows);
     for (let i = 0; i < rows.length; ++i) {
       let element = (rows[i] as HTMLElement);
       if(i >= (perPage * (pageNum - 1)) && i < (perPage * pageNum)){
-        // console.log(element);
         element.hidden = false;
       }else{
         element.hidden = true;

@@ -2,6 +2,9 @@ import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 import { Helmet } from "react-helmet";
 
+/**
+ * ProfilePage component
+ */
 class ProfilePage extends React.Component {
   render() {
     return (

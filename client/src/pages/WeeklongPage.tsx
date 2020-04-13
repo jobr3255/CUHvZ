@@ -5,9 +5,11 @@ import WeeklongController from "../controllers/WeeklongController"
 import WeeklongListing from "../components/events/WeeklongListing"
 import FormattedText from "../components/layout/FormattedText"
 import WeeklongDayTab from "../components/events/WeeklongDayTab"
-
 import Tabulator, { Tab } from "../components/Tabulator/Tabulator"
 
+/**
+ * WeeklongPage component
+ */
 class WeeklongPage extends React.Component<any, any> {
 
   constructor(props: any) {
@@ -17,13 +19,15 @@ class WeeklongPage extends React.Component<any, any> {
     };
   }
 
+  /**
+   * Fires when component loads on page
+   */
   async componentDidMount() {
     const { match: { params } } = this.props;
     var id = params["id"];
     var weeklongController = new WeeklongController();
     var weeklong = await weeklongController.getWeeklong(id);
     await weeklongController.setWeeklongDetails(weeklong);
-    // console.log(weeklong);
     this.setState({
       weeklong: weeklong
     });
@@ -43,7 +47,6 @@ class WeeklongPage extends React.Component<any, any> {
         weeklong={weeklong} />
 
       details = <FormattedText text={weeklong.getDetails().getDescription()} />
-      // details = <TabContent ><FormattedText text={weeklong.getDetails().getDescription()} /></TabContent>;
 
       tabs.push(
         <Tab key={1} name="Details" default>

@@ -1,6 +1,9 @@
 import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 
+/**
+ * RulesPage component
+ */
 class RulesPage extends React.Component {
   render() {
     return(

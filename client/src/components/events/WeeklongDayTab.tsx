@@ -5,10 +5,16 @@ import WeeklongMissionDetails from "./WeeklongMissionDetails"
 
 import './Weeklong.css';
 
+/**
+ * WeeklongDayTab properties
+ */
 interface WeeklongDayTabProps {
   day: WeeklongDay
 }
 
+/**
+ * Formats a WeeklongDay into html
+ */
 export default class WeeklongDayTab extends React.Component<WeeklongDayTabProps> {
   render() {
     var day = this.props.day;

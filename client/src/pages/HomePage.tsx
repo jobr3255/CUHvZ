@@ -1,6 +1,9 @@
 import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 
+/**
+ * HomePage component
+ */
 class HomePage extends React.Component {
 
   render() {

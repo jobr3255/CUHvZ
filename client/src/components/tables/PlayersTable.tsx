@@ -2,21 +2,31 @@ import React from 'react';
 import Player,{Deceased} from "../../models/Player";
 import './PlayersTable.css';
 
+/**
+ * PlayersTable properties
+ */
 interface PlayersTableProps {
   id: string,
   players: Array<Player>,
-  headers: Array<string>, // username, points, hunger, kills, type, starved
+  headers: Array<string>, // Username, Points, Hunger, Kills, Type, Starved
   className?: string,
   rerenderCallback?: () => void
 }
 
-interface PlayersTableState {
+/**
+ * PlayersTable states variables
+ */
+interface PlayersTableStates {
   players: Array<Player>,
   sortID: string,
   sortOrder: number
 }
 
-export default class PlayersTable extends React.Component<PlayersTableProps, PlayersTableState> {
+
+/**
+ * Renders a table of Player objects. Customize by changing the headers property to display the rows you want to display
+ */
+export default class PlayersTable extends React.Component<PlayersTableProps, PlayersTableStates> {
   constructor(props: PlayersTableProps) {
     super(props);
     this.state = {
@@ -27,6 +37,9 @@ export default class PlayersTable extends React.Component<PlayersTableProps, Pla
     this.handleSort = this.handleSort.bind(this);
   }
 
+  /**
+   * Sorts the rows of the table by the header clicked
+   */
   handleSort(e: any) {
     var element = (e.target as HTMLElement);
     var sortID = element.id;

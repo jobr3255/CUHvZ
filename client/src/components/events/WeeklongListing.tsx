@@ -3,10 +3,16 @@ import EventDate from "./EventDate";
 import EventListing, { EventListingProps } from "./EventListing";
 import Weeklong from "../../models/Weeklong"
 
+/**
+ * WeeklongListing properties
+ */
 interface WeeklongListingProps extends EventListingProps {
   weeklong: Weeklong
 }
 
+/**
+ * Listing view for a weeklong
+ */
 export default class WeeklongListing extends EventListing<WeeklongListingProps> {
   render() {
     var weeklong = this.props.weeklong;
@@ -41,7 +47,6 @@ export default class WeeklongListing extends EventListing<WeeklongListingProps> 
         {title}
         <p>
           <EventDate
-            type="weeklong"
             startDate={weeklong.getStartDate()}
             endDate={weeklong.getEndDate()}
           /> | <a href={pageLink + "/stats"}>Player stats</a>

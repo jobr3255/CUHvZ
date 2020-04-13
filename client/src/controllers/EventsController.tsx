@@ -5,9 +5,15 @@ import LockinListing from "../components/events/LockinListing"
 import Weeklong from "../models/Weeklong"
 import Lockin from "../models/Lockin"
 
+/**
+ * Controller for the EventsPage
+ */
 export default class EventsController {
 
-  async getWeeklongListings() {
+  /**
+   * Calls API and returns WeeklongListing objects
+   */
+  async getWeeklongListings(): Promise<JSX.Element[]> {
     let weeklongData = await API.get("/api/weeklongs")
       .then(function(response: any) {
         if (response.status === 200) {
@@ -28,9 +34,12 @@ export default class EventsController {
           weeklong = { weeklong } />);
     }
     return weeklongListings;
-  }
+  } 
 
-  async getLockinListings() {
+  /**
+   * Calls API and returns LockinListing objects
+   */
+  async getLockinListings(): Promise<JSX.Element[]> {
     let lockinData = await API.get("/api/lockins")
       .then(function(response: any) {
         if (response.status === 200) {

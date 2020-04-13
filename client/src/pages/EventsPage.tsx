@@ -2,11 +2,17 @@ import { withIonLifeCycle } from '@ionic/react';
 import React from "react";
 import EventsController from "../controllers/EventsController"
 
+/**
+ * EventsPage state variables
+ */
 interface EventsPageState {
-  weeklongs: any,
-  lockins: any
+  weeklongs: JSX.Element[],
+  lockins: JSX.Element[]
 }
 
+/**
+ * EventsPage component
+ */
 class EventsPage extends React.Component<any, EventsPageState> {
 
   constructor(props: any) {
@@ -17,6 +23,9 @@ class EventsPage extends React.Component<any, EventsPageState> {
      };
   }
 
+  /**
+   * Fires when component loads on page
+   */
   async componentDidMount() {
     var eventsController = new EventsController();
     var weeklongs = await eventsController.getWeeklongListings();

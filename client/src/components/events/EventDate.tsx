@@ -1,13 +1,21 @@
 import React from "react";
 
+/**
+ * EventDate properties
+ */
 export interface EventDateProps {
-  type: string,
   startDate: string,
   endDate?: string
 }
 
+/**
+ * Formats dates for display for a weeklong or lockin event
+ */
 export default class EventDate extends React.Component<EventDateProps, any> {
 
+  /**
+   * Adds the correct ordinal to a number
+   */
   private addOrdinal(num: any): string {
     num += "";
     var lastNum = num.substring(num.length-1, num.length);
@@ -21,6 +29,9 @@ export default class EventDate extends React.Component<EventDateProps, any> {
       return num + "th";
   }
 
+  /**
+   * Formats start and end dates
+   */
   private formatDate(startDateString:string, endDateString?: string): string {
     var monthNames = [
       "January", "February", "March",
@@ -37,16 +48,12 @@ export default class EventDate extends React.Component<EventDateProps, any> {
     return month + " " + day + ", " + year + "";
   }
 
-  private formatLockinDate(startDate: string){
-    return this.formatDate(startDate) + ", 9pm - 3am";
-  }
-
   render() {
     var date = null;
-    if(this.props.type === "lockin"){
-      date = this.formatLockinDate(this.props.startDate);
-    }else if(this.props.type === "weeklong"){
+    if(this.props.endDate){
       date = this.formatDate(this.props.startDate, this.props.endDate);
+    }else{
+      date = this.formatDate(this.props.startDate) + ", 9pm - 3am";
     }
     return (
       <span>

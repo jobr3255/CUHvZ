@@ -4,10 +4,16 @@ import FormattedText from "../layout/FormattedText"
 
 import './Weeklong.css';
 
+/**
+ * WeeklongMissionDetails properties
+ */
 interface WeeklongMissionDetailsProps {
   mission: WeeklongMission
 }
 
+/**
+ * Formats the display for a single weeklong mission
+ */
 export default class WeeklongMissionDetails extends React.Component<WeeklongMissionDetailsProps> {
   render() {
     var mission = this.props.mission;

@@ -10,7 +10,18 @@ import Paginator from "../components/Paginator/Paginator";
 
 import "./Pages.css";
 
-class WeeklongStatsPage extends React.Component<any, any> {
+/**
+ * WeeklongStatsPage states variables
+ */
+interface WeeklongStatsPageStates {
+  weeklong: Weeklong | null,
+  rerender: boolean
+}
+
+/**
+ * WeeklongStatsPage component
+ */
+class WeeklongStatsPage extends React.Component<any, WeeklongStatsPageStates> {
 
   constructor(props: any) {
     super(props);
@@ -21,6 +32,9 @@ class WeeklongStatsPage extends React.Component<any, any> {
     this.rerenderPaginator = this.rerenderPaginator.bind(this);
   }
 
+  /**
+   * Fires when component loads on page
+   */
   async componentDidMount() {
     const { match: { params } } = this.props;
     var id = params["id"];
@@ -32,6 +46,9 @@ class WeeklongStatsPage extends React.Component<any, any> {
     });
   }
 
+  /**
+   * Callback to trigger a rerender to reset the paginator to the first page whenever a table is reordered
+   */
   rerenderPaginator(){
     this.setState({
       rerender: !this.state.rerender

@@ -1,13 +1,31 @@
 import React from "react";
 
+/**
+ * FormattedText properties
+ */
 interface FormattedTextProps {
   text: string
 }
 
+/**
+ * FormattedText state variables
+ */
 interface FormattedTextState {
   text: any[]
 }
 
+/**
+ * Implments the Interpreter pattern
+ * Formats text to be displayed as html. Used to display details from the database
+ * Can interpret:
+  BOLD[content]
+  LINK[name][link]
+  LINK_NEW_TAB[name][link]
+  IMAGE[link]
+  IMAGE[link][size %]
+  [LINE]
+  [SUPPLY_DROPS]
+ */
 export default class FormattedText extends React.Component<FormattedTextProps, FormattedTextState> {
 
   constructor(props: FormattedTextProps) {
@@ -17,6 +35,9 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
      };
   }
 
+  /**
+   * Fires when component loads on page
+   */
   componentDidMount() {
     var formattedText = this.formatData(this.props.text);
     this.setState({
@@ -24,14 +45,10 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
     });
   }
 
-  // BOLD[content]
-  // LINK[name][link]
-  // LINK_NEW_TAB[name][link]
-  // IMAGE[link]
-  // IMAGE[link][size %]
-  // [LINE]
-  // [SUPPLY_DROPS]
-  formatData(data: string) {
+  /**
+   * formats string into a list of html components
+   */
+  formatData(data: string): any[] {
     var formattedText = [];
     // formats <br> tags where there are line breaks
     var brDel = "(^\n)";

@@ -1,13 +1,18 @@
 import React from "react";
 
+/**
+ * EventListing properties
+ */
 export interface EventListingProps {
   id: number,
   titleSize?: number
 }
-// ,
-// titleSize?: number
+
+/**
+ * Abstract EventListing class
+ */
 export default abstract class EventListing< T > extends React.Component<T, any> {
-  getTitle(titleLink: JSX.Element, titleSize: number){
+  getTitle(titleLink: JSX.Element, titleSize: number): JSX.Element{
     var title;
     switch (titleSize) {
       case 1:

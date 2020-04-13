@@ -2,9 +2,15 @@ import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 import { Helmet } from "react-helmet";
 
+/**
+ * SignUpPageProps properties
+ */
 interface SignUpPageProps {
 }
 
+/**
+ * SignUpPage component
+ */
 class SignUpPage extends React.Component<SignUpPageProps> {
   constructor (props: SignUpPageProps){
     super(props);

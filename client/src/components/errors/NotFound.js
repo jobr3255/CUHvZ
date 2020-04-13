@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * NotFound component
+ */
 const NotFound = ({ location }) => (
   <div className="lightslide">
     <div className="container">

@@ -3,10 +3,16 @@ import EventDate from "./EventDate";
 import EventListing, { EventListingProps } from "./EventListing";
 import Lockin from "../../models/Lockin"
 
+/**
+ * LockinListing properties
+ */
 interface LockinListingProps extends EventListingProps {
   lockin: Lockin
 }
 
+/**
+ * Listing view for a lockin
+ */
 export default class LockinListing extends EventListing<LockinListingProps> {
   render() {
     var lockin = this.props.lockin;
@@ -35,7 +41,6 @@ export default class LockinListing extends EventListing<LockinListingProps> {
         {title}
         <p>
           <EventDate
-            type="lockin"
             startDate={lockin.getEventDate()}
           /> | <a href={lockin.getWaiver()}>Waiver</a> {activeLinks}
         </p>

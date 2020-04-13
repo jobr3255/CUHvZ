@@ -2,6 +2,9 @@ import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 import Form from "../components/Form/Form";
 
+/**
+ * LoginPage component
+ */
 class LoginPage extends React.Component {
   constructor(props: any) {
     super(props);

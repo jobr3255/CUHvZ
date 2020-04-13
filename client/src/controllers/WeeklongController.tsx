@@ -2,9 +2,15 @@ import API from "../util/API";
 import Weeklong from "../models/Weeklong"
 import WeeklongMission from "../models/WeeklongMission";
 
+/**
+ * Controller for the WeeklongPage
+ */
 export default class WeeklongController {
 
-  async getWeeklong(id: number) {
+  /**
+   * Calls API and creates Weeklong object
+   */
+  async getWeeklong(id: number): Promise<Weeklong> {
     let weeklongData = await API.get(`/api/weeklong/${id}`)
       .then(function(response: any) {
         if (response.status === 200) {
@@ -16,6 +22,9 @@ export default class WeeklongController {
     return weeklong;
   }
 
+  /**
+   * Calls API and sets the weeklong details for a Weeklong object
+   */
   async setWeeklongDetails(weeklong: Weeklong) {
     let weeklongDetailsData = await API.get(`/api/weeklong/${weeklong.getID()}/missions`)
       .then(function(response: any) {

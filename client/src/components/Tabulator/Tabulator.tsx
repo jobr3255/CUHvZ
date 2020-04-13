@@ -1,9 +1,26 @@
 import React from 'react';
 import './Tabulator.css';
 
-export default class Tabulator extends React.Component<any, any> {
+/**
+ * Tabulator properties
+ */
+interface TabulatorProps {
+  id: string
+}
 
-  constructor(props: any) {
+/**
+ * Tabulator states variables
+ */
+interface TabulatorStates {
+  selectedTab: string | null
+}
+
+/**
+ * Formats child Tab elements into tabs with content in each tab
+ */
+export default class Tabulator extends React.Component<TabulatorProps, TabulatorStates> {
+
+  constructor(props: TabulatorProps) {
     super(props);
     this.state = {
       selectedTab: null
@@ -11,6 +28,9 @@ export default class Tabulator extends React.Component<any, any> {
     this.handleTabClick = this.handleTabClick.bind(this);
   }
 
+  /**
+   * Fires when component loads on page
+   */
   componentDidMount() {
     var prevPage = sessionStorage.getItem('prevPage');
     var currentPage = sessionStorage.getItem('currentPage');
@@ -22,6 +42,9 @@ export default class Tabulator extends React.Component<any, any> {
     }
   }
 
+  /**
+   * Switches tab to clicked on tab
+   */
   handleTabClick(e: any){
     var element = (e.target as HTMLElement);
     var elementID = element.getAttribute("id");
