@@ -13,7 +13,6 @@ var weeklongRouter = require('./src/endpoints/weeklong');
 var lockinRouter = require('./src/endpoints/lockin');
 var userRouter = require('./src/endpoints/user');
 var codeRouter = require('./src/endpoints/code');
-var validateRouter = require('./src/endpoints/validate');
 var supplyDropRouter = require('./src/endpoints/supplydrop');
 var myLogger = require("./logger");
 
@@ -37,7 +36,6 @@ app.use('/api', weeklongRouter);
 app.use('/api', lockinRouter);
 app.use('/api', userRouter);
 app.use('/api', codeRouter);
-app.use('/api', validateRouter);
 app.use('/api', supplyDropRouter);
 
 // catch 404 and forward to error handler

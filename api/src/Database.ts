@@ -18,39 +18,43 @@ export default class Database {
     return Database.db;
   }
 
-  public queryFetch(queryText: string, res?: any): any {
-    this.connection.query(queryText, function(err: any, data: any) {
+  public queryFetch(queryText: string, res?: any, callback?: any): any {
+    this.connection.query(queryText, async function(err: any, data: any) {
       if (err) {
         console.log(err);
         logger.error(err);
         if (res) {
           res.status(400).send(err);
+        }else if(callback){
+          callback({error: err});
         }
-        return false;
       }
       if (res) {
         res.status(200).json(data[0]);
+      }else if(callback){
+        callback(data[0]);
       }
-      return data[0];
     })
-  };
+  }
 
-  public queryFetchAll(queryText: string, res?: any): any {
+  public async queryFetchAll(queryText: string, res?: any, callback?: any): Promise<any> {
     this.connection.query(queryText, function(err: any, data: any) {
       if (err) {
         console.log(err);
         logger.error(err);
         if (res) {
           res.status(400).send(err);
+        }else if(callback){
+          callback({error: err});
         }
-        return false;
       }
       if (res) {
         res.status(200).json(data);
+      }else if(callback){
+        callback(data);
       }
-      return data;
     })
-  };
+  }
 
   private formatInsertValues(insertData: any): any {
     var values = Object.values(insertData);
