@@ -127,7 +127,7 @@ export default class PlayersTable extends React.Component<PlayersTableProps, Pla
       );
     }
     return (
-      <table>
+      <table className="players-table">
 
         <thead>
           <tr>

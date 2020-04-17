@@ -2,14 +2,14 @@
   color: #eb42f4;
 }
 
-th, td {
+.players-table th, td {
   display: inline-block;
   width: 100%;
   text-align: left;
   padding: 1vh;
 }
 
-tr {
+.players-table tr {
   color: #D1D1D1;
   font-weight: 400;
   font-size: 2vh;
@@ -18,7 +18,7 @@ tr {
   border-bottom: 1px solid white;
 }
 
-table {
+.players-table table {
   line-height: 1em;
   margin: auto;
 }

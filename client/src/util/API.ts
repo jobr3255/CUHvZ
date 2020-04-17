@@ -16,7 +16,7 @@ export default class API {
     });
   }
 
-  static async post(url: string, data: JSON) {
+  static async post(url: string, data: any) {
     return new Promise(function(resolve, reject) {
       axios({
         method: 'POST',

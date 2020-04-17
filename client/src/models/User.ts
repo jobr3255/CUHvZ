@@ -5,7 +5,6 @@ export default class User {
   private email: string;
   private firstName: string;
   private lastName: string;
-  private password: string;
   private clearance: number;
   private activated: boolean;
   private subscribed: boolean;
@@ -17,7 +16,6 @@ export default class User {
     this.email = data["email"];
     this.firstName = data["first_name"];
     this.lastName = data["last_name"];
-    this.password = data["password"];
     this.clearance = data["clearance"];
     this.activated = data["activated"];
     this.subscribed = data["subscribed"];
@@ -46,10 +44,6 @@ export default class User {
 
   getLastName(): string {
     return this.lastName;
-  }
-
-  getPassword(): string {
-    return this.password;
   }
 
   getClearance(): number {
@@ -86,10 +80,6 @@ export default class User {
 
   setLastName(name: string) {
     this.lastName = name;
-  }
-
-  setPassword(pass: string) {
-    this.password = pass;
   }
 
   setClearance(clear: number) {

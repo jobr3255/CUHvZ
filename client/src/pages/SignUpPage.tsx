@@ -1,20 +1,27 @@
 import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 import { Helmet } from "react-helmet";
+import SignUpController from "../controllers/SignUpController";
 
 /**
- * SignUpPageProps properties
+ * LoginPage state variables
  */
-interface SignUpPageProps {
+interface SignUpPageStates {
+  usernames: string[],
+  emails: string[]
 }
-
 /**
  * SignUpPage component
  */
-class SignUpPage extends React.Component<SignUpPageProps> {
-  constructor (props: SignUpPageProps){
+class SignUpPage extends React.Component<any, SignUpPageStates> {
+  constructor (props: any){
     super(props);
+    this.state = {
+      usernames: [],
+      emails: []
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.validateUsername = this.validateUsername.bind(this);
   }
 
   getFormData(event: any){
@@ -47,6 +54,29 @@ class SignUpPage extends React.Component<SignUpPageProps> {
     // });
   }
 
+  /**
+   * Fires when component loads on page
+   */
+  async componentDidMount() {
+    var controller = new SignUpController();
+    var userData = await controller.getUsersList();
+    var usernames = [];
+    var emails = [];
+    for (var data of userData) {
+      usernames.push(data["username"]);
+      emails.push(data["email"]);
+    }
+    this.setState({
+      emails: emails,
+      usernames: usernames
+    });
+  }
+
+  validateUsername(e: any) {
+    var element = (e.target as HTMLElement);
+    console.log(element);
+  }
+
   render() {
     return (
       <div className="container">
@@ -62,3 +92,4 @@ class SignUpPage extends React.Component<SignUpPageProps> {
 }
 
 export default withIonLifeCycle(SignUpPage);
+ // onBlur={this.validateUsername}

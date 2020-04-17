@@ -8,11 +8,6 @@ body, html {
   text-transform: uppercase;
 }
 
-.tab-nav{
-  margin: auto;
-  text-align: center;
-}
-
 .details-content{
   white-space: pre-line;
 }
@@ -137,56 +132,6 @@ padding: 0 50px 0 50px;
   padding: 0;
 }
 }
-/*
-
-@media (min-width: 481px) and (max-width: 790px){
-  nav a {
-    line-height: 20px;
-    font-size: 70%;
-  }
-}
-
-.humanlist{
-  width:15%;
-  height:100%;
-  overflow:auto;
-  text-align: center;
-  float: left;
-}
-
-.zombielist{
-  width:60%;
-  height:100%;
-  overflow:auto;
-  text-align: center;
-  float: left;
-}
-
-.deadlist{
-  width:38%;
-  height:100%;
-  overflow:auto;
-  text-align: center;
-  float: left;
-}
-
-.human_border{
-  width:30%;
-  height:100%;
-  overflow:auto;
-  border-right: double;
-  float: left;
-  margin-right: 5%;
-}
-.zombie_border{
-  width:55%;
-  height:100%;
-  overflow:auto;
-  border-right: double;
-  float: left;
-  margin-right: 5%;
-}
-*/
 
 /* FEED ZOMBIE TABLE
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -260,35 +205,6 @@ padding: 0 50px 0 50px;
     display: none;
 }
 
-/* Next & previous buttons
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-}
-*/
-
-/* Position the "next button" to the right
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-*/
-
-/* On hover, add a black background color with a little bit see-through
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-*/
-
 /* Caption text */
 .text {
   color: #f2f2f2;
@@ -321,95 +237,7 @@ padding: 0 50px 0 50px;
   transition: background-color 0.6s ease;
 }
 
-/* NAVBAR
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-/* .nav-container {
-  margin: 0;
-  padding: 0;
-  background-color: #222;
-  overflow: hidden;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  background-color: #222;
-  overflow: hidden;
-}
-
-nav a {
-  color: rgba(255,255,255,.5);
-  display: block;
-  font-size: 130%;
-  line-height: 35px;
-  font-family: 'Roboto', sans-serif;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-weight: 700;
-  margin: 1% 0.5% 1% 0.5%;
-  padding: 0.5% 1% 0.5% 1%;
-}
-
-@media (min-width: 961px) and (max-width: 1140px){
-  nav a {
-    line-height: 30px;
-    font-size: 110%;
-  }
-}
-@media (min-width: 791px) and (max-width: 960px){
-  nav a {
-    line-height: 25px;
-    font-size: 90%;
-  }
-}
-@media (min-width: 481px) and (max-width: 790px){
-  nav a {
-    line-height: 20px;
-    font-size: 70%;
-  }
-}
-@media (max-width: 480px){
-  .hideable{
-    display: none;
-  }
-}
-
-
-nav a{
-  float: left;
-}
-
-nav li{
-  margin: 0px;
-}
-
-nav a{
-  background-color: #222;
-  transition: 0.3s;
-}
-
-nav a:active {
-  background-color: rgb(234, 123, 0);
-  text-decoration: none;
-  color: #FFF;
-}
-
-nav a:hover {
-  background-color: rgba(234, 123, 0, 0.4);
-  color: #FFF;
-  transition: 0.3s;
-}
-
-nav a:visited, nav a:link{
-  text-decoration: none;
-} */
-
 /* DROPDOWN MENU */
-
-
-
 .dropdown-navbar {
   float: left;
   overflow: hidden;
@@ -817,40 +645,6 @@ a:hover {
   color: #000000;
 }
 
-
-/* MEDIA QUERY
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-/* Bigger than 550 */
-/*
-@media (min-width: 550px) {
-  .section {
-    padding: 12rem 0 11rem;
-  }
-}
-*/
-/* Bigger than 750 */
-/*
-@media (min-width: 750px) {
-  .section {
-    padding: 4rem 0 15rem;
-  }
-  .section-description {
-    max-width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-*/
-/* Bigger than 1000 */
-/*
-@media (min-width: 1000px) {
-  .section {
-    padding: 15rem 0 19rem;
-  }
-}
-*/
-
 /* LOGIN STYLING
 ––––––––––––––––––––––––––––––––––––––––––––––––––*/
 .login{
@@ -864,42 +658,6 @@ a:hover {
     margin: 0 auto;
   }
 }
-
-/* IN PROGRESS STYLING */
-
-/* STATS TRACKING
-––––––––––––––––––––––––––––––––––––––––––––––––––
-.stats {
-  background-color: #111;
-  color: #D1D1D1;
-  text-align: center;
-  padding-top: 7em;
-  padding-bottom: 4em;
-}
-
-.values {
-  background-image: url('../images/cover3.jpg');
-  background-size: cover;
-  color: #fff;
-  padding-bottom: 5rem;
-}
-.value-multiplier {
-  margin-bottom: .5rem;
-  color: #ea7b00;
-  font-size: 8rem;
-  letter-spacing: 0.1rem;
-}
-.value-heading {
-  margin-bottom: .3rem;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-.value-description {
-  opacity: .8;
-  font-weight: 300;
-}
-
-*/
 
 .signup{
   margin: auto;

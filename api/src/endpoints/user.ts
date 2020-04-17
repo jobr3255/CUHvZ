@@ -29,6 +29,7 @@ router.post('/user/login', function(req: any, res: any) {
     } else {
       var passHash = data["password"];
       if (Password.verify(pass, passHash)) {
+        delete data["password"];
         res.status(200).json(data);
       } else {
         // Unauthorized

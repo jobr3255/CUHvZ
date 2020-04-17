@@ -14,7 +14,23 @@ ul {
 }
 
 nav a {
-  color: rgba(255,255,255,.5);
+  transition: 0.3s;
+  color: rgba(255, 255, 255, .5);
+}
+
+nav a:hover {
+  transition: 0.3s;
+  color: rgba(255, 255, 255);
+}
+
+nav a:active {
+  background-color: rgb(234, 123, 0);
+  text-decoration: none;
+  color: #FFF;
+}
+
+nav li {
+  color: rgba(255, 255, 255, .5);
   display: block;
   font-size: 130%;
   line-height: 35px;
@@ -24,58 +40,32 @@ nav a {
   font-weight: 700;
   margin: 1% 0.5% 1% 0.5%;
   padding: 0.5% 1% 0.5% 1%;
-}
-
-@media (min-width: 961px) and (max-width: 1140px){
-  nav a {
-    line-height: 30px;
-    font-size: 110%;
-  }
-}
-@media (min-width: 791px) and (max-width: 960px){
-  nav a {
-    line-height: 25px;
-    font-size: 90%;
-  }
-}
-@media (min-width: 481px) and (max-width: 790px){
-  nav a {
-    line-height: 20px;
-    font-size: 70%;
-  }
-}
-@media (max-width: 480px){
-  .hideable{
-    display: none;
-  }
-}
-
-
-nav a{
   float: left;
-}
-
-nav li{
-  margin: 0px;
-}
-
-nav a{
   background-color: #222;
   transition: 0.3s;
+  height: 50px;
 }
 
-nav a:active {
-  background-color: rgb(234, 123, 0);
-  text-decoration: none;
-  color: #FFF;
+nav button {
+  color: rgba(255, 255, 255, .5);
+  font-size: 100%;
+  transition: 0.3s;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
-nav a:hover {
+nav button:hover {
+  transition: 0.3s;
+  color: rgba(255, 255, 255);
+}
+
+nav li:hover {
   background-color: rgba(234, 123, 0, 0.4);
   color: #FFF;
   transition: 0.3s;
 }
 
-nav a:visited, nav a:link{
+nav a:visited, nav a:link {
   text-decoration: none;
 }
