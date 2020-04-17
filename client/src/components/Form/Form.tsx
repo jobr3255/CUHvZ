@@ -1,7 +1,8 @@
 import React, { FormEvent } from 'react';
 
 interface FormProps {
-  onSubmit: (data: { [key: string]: string | number }) => void;
+  onSubmit: (data: { [key: string]: string | number }) => void,
+  autoComplete?: string
 }
 
 export default class Form extends React.Component<FormProps> {
@@ -25,7 +26,7 @@ export default class Form extends React.Component<FormProps> {
 
   render() {
     return (
-      <form onSubmit={e => this.handleSubmit(e)} action="post" >
+      <form onSubmit={e => this.handleSubmit(e)} action="post" autoComplete={this.props.autoComplete}>
         {this.props.children}
       </form>
     );

@@ -1,5 +1,5 @@
 {
-  "name": "CU HvZ",
+  "name": "CUHvZ",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -19,6 +19,7 @@
     "glob": "^7.1.6",
     "ionicons": "^5.0.0",
     "node-php-password": "^0.1.2",
+    "nodemailer": "^6.4.6",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",

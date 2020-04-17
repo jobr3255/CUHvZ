@@ -8,8 +8,6 @@ import Weeklong from "../models/Weeklong";
 import Player from "../models/Player";
 import Paginator from "../components/Paginator/Paginator";
 
-import "./Pages.css";
-
 /**
  * WeeklongStatsPage states variables
  */

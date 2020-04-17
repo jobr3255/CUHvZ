@@ -66,7 +66,7 @@ export default class Database {
     return values.toString();
   }
 
-  public insert(table: string, insertData: any, res?: any): any {
+  public insert(table: string, insertData: any, res?: any, callback?: any): any {
     var keys = Object.keys(insertData).toString();
     var values = this.formatInsertValues(insertData);
     var query = `insert into ${table} (${keys}) values (${values})`;
@@ -76,10 +76,16 @@ export default class Database {
         logger.error(err);
         if (res) {
           res.status(400).send(err);
+        }else if(callback){
+          callback(false);
         }
-        return false;
+        return;
       }
     })
-    return this.queryFetch("SELECT LAST_INSERT_ID()", res);
+    if (res) {
+      res.status(200).send();
+    }else if(callback){
+      callback(true);
+    }
   }
 }

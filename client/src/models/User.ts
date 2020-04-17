@@ -19,7 +19,7 @@ export default class User {
     this.clearance = data["clearance"];
     this.activated = data["activated"];
     this.subscribed = data["subscribed"];
-    this.joinDate = data["username"];
+    this.joinDate = data["join_date"];
   }
 
   /***************

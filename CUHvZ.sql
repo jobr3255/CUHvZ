@@ -2854,6 +2854,15 @@ INSERT INTO subscriptions (id) VALUES (NEW.id);
 END$$
 
 USE `CUHvZ`$$
+DROP TRIGGER IF EXISTS `CUHvZ`.`users_BEFORE_DELETE` $$
+USE `CUHvZ`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `CUHvZ`.`users_BEFORE_DELETE` BEFORE DELETE ON `users` FOR EACH ROW
+BEGIN
+delete from subscriptions where id=OLD.id;
+delete from user_details where id=OLD.id;
+END$$
+
+USE `CUHvZ`$$
 DROP TRIGGER IF EXISTS `CUHvZ`.`activity_AFTER_INSERT` $$
 USE `CUHvZ`$$
 CREATE DEFINER = CURRENT_USER TRIGGER `CUHvZ`.`activity_AFTER_INSERT` AFTER INSERT ON `activity` FOR EACH ROW
@@ -2861,6 +2870,14 @@ BEGIN
 IF (NEW.time_logged IS NULL) THEN
 	UPDATE activity set time_logged=(DATE_ADD(NOW(), INTERVAL (select offset from time_offset where id=1) HOUR)) where id=NEW.id;
 END IF;
+END$$
+
+USE `CUHvZ`$$
+DROP TRIGGER IF EXISTS `CUHvZ`.`weeklongs_BEFORE_DELETE` $$
+USE `CUHvZ`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `CUHvZ`.`weeklongs_BEFORE_DELETE` BEFORE DELETE ON `weeklongs` FOR EACH ROW
+BEGIN
+delete from weeklong_details where id=OLD.id;
 END$$
 
 DELIMITER ;

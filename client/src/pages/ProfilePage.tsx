@@ -33,7 +33,7 @@ class ProfilePage extends React.Component<ProfilePageProps, any> {
           <div className="row">
 
             <div className="two columns hide-mobile">
-              <img src="images/skull.png" className="u-max-full-width" alt="Skull"/>
+              <img src="images/skull.png" className="u-max-full-width" alt="Skull" />
             </div>
             <div className="ten columns hide-mobile">
               <p className="grey subheader">
@@ -52,12 +52,16 @@ class ProfilePage extends React.Component<ProfilePageProps, any> {
             <table>
               <tbody>
                 <tr>
-                  <span className="subheader deeporange col-6">Username</span>
-                  <span>{user.getUsername()}</span>
+                  <td>
+                    <span className="subheader deeporange col-6">Username</span>
+                    <span>{user.getUsername()}</span>
+                  </td>
                 </tr>
                 <tr>
-                  <span className="subheader deeporange col-6">Email</span>
-                  <span>{user.getEmail()}</span>
+                  <td>
+                    <span className="subheader deeporange col-6">Email</span>
+                    <span>{user.getEmail()}</span>
+                  </td>
                 </tr>
               </tbody>
             </table>

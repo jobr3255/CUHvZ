@@ -23,7 +23,7 @@ class LoginPage extends React.Component<any, LoginPageStates> {
   }
 
   /**
-   * Submits the form
+   * Handles the form submission
    */
   async handleSubmit(data: any) {
     var controller = new LoginController();
@@ -65,7 +65,7 @@ class LoginPage extends React.Component<any, LoginPageStates> {
 
             <div className="form-group">
               <label>Password</label>
-              <input type="password" name="password" placeholder="Password" required></input>
+              <input type="password" name="password" placeholder="Password" required autoComplete="new-password"></input>
             </div>
 
             <div style={{ float: "left", width: "100%" }}>

@@ -24,10 +24,10 @@ export default class LoginController {
           return {error: "Email/username not found"};
         }else if (error.response.status === 401) {
           return {error: "Password incorrect"};
+        }else{
+          return {error: "Error connecting to the server"};
         }
       });
-    // if(!userData["error"])
-    //   sessionStorage.setItem("sessionUser", JSON.stringify(userData));
     return userData;
   }
 }
