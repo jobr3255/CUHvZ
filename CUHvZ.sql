@@ -346,7 +346,6 @@ INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `email`, `pass
 (264, 'nohe', 'nohe', 'revelo', 'nohegeno@hotmail.com', '$2y$10$bR.XZLuunwK7revJ12NofOZu9tFOrw7/5WJB7HU85Us2iEiKNQMeu', '6124443252', 0),
 (265, 'pjwarrior12', 'Ryan', 'Taylor', 'ryta4737@colorado.edu', '$2y$10$EN7pUvkLH/3oBzmrNlpvzuGwTeYL2GK4zIXOszb/xF.X8ALAL8tR.', '5624772165', 0),
 (266, 'Clairewilcox', 'Claire', 'Wilcox', 'clairefwilcox@gmail.com', '$2y$10$XS.MzWrJIrEkhdrbvwnmt.IgC4zqgCVKgawKAJgmFBNDOMQi/hKzG', '6184209737', 0),
-(269, 'Tester', 'Test', 'User', 'josh.brown.3255@gmail.com', '$2y$10$ZOS372jb2TIAldvJo/JRZunYuiRrSI17FoLQtCOJBEuKlCrJUO90q', NULL, 0),
 (270, 'Gary', 'Gary', 'Baines', 'champ.baines@gmail.com', '$2y$10$RXVfpoetlxDe2Fa7Y8sA/us3mpiPuUQFIpJ9YprN/z8.Qp8PqSDZa', '9014284074', 0),
 (271, 'xXNerfan11Xx', 'Trent', 'Richardson', 'tmr710@gmail.com', '$2y$10$5tOn7kZWr1H0eNMvcyZFyOzvevWqcDfbo2gasF1wJOvahRmQIgdbC', '7195517040', 0),
 (273, 'TestGuy', 'Test', 'Guy', 'golfinjosh@yahoo.com', '$2y$10$u10byIUGj0Yv/yUm0bNv0ebGkagni6EER04iamEd2nNUm/3xHcCDq', NULL, 0),
@@ -2504,7 +2503,7 @@ INSERT INTO `weeklong_players` (`weeklong_id`, `user_id`, `player_code`, `status
 CREATE TABLE IF NOT EXISTS `CUHvZ`.`tokens` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
-  `token` VARCHAR(45) NULL,
+  `token` VARCHAR(255) NOT NULL,
   `type` VARCHAR(45) NOT NULL,
   `experation` DATETIME NULL,
   PRIMARY KEY (`id`),
@@ -2860,6 +2859,7 @@ CREATE DEFINER = CURRENT_USER TRIGGER `CUHvZ`.`users_BEFORE_DELETE` BEFORE DELET
 BEGIN
 delete from subscriptions where id=OLD.id;
 delete from user_details where id=OLD.id;
+delete from tokens where user_id=OLD.id;
 END$$
 
 USE `CUHvZ`$$

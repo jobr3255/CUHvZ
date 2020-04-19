@@ -23,9 +23,9 @@ ion-content{
 ––––––––––––––––––––––––––––––––––––––––––––––––––*/
 .login-form {
   text-align: center;
-  padding: 3vw 6vw 1vw 6vw;
+  padding: 2em 2em 1em 2em;
   width: 80vw;
-  max-width: 400px;
+  max-width: 500px;
   margin: auto;
 }
 

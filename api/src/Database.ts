@@ -1,6 +1,7 @@
-var mysql = require('mysql')
+var mysql = require('mysql');
 
-var CONFIG = require('./config')
+// var DB_CONFIG = require('./config');
+import { DB_CONFIG } from "./config";
 var logger = require("../logger");
 
 export default class Database {
@@ -8,7 +9,7 @@ export default class Database {
   private static db: Database;
 
   private constructor() {
-    this.connection = mysql.createConnection(CONFIG);
+    this.connection = mysql.createConnection(DB_CONFIG);
   }
 
   public static getInstance(): Database {
@@ -25,13 +26,13 @@ export default class Database {
         logger.error(err);
         if (res) {
           res.status(400).send(err);
-        }else if(callback){
-          callback({error: err});
+        } else if (callback) {
+          callback({ error: err });
         }
       }
       if (res) {
         res.status(200).json(data[0]);
-      }else if(callback){
+      } else if (callback) {
         callback(data[0]);
       }
     })
@@ -44,13 +45,13 @@ export default class Database {
         logger.error(err);
         if (res) {
           res.status(400).send(err);
-        }else if(callback){
-          callback({error: err});
+        } else if (callback) {
+          callback({ error: err });
         }
       }
       if (res) {
         res.status(200).json(data);
-      }else if(callback){
+      } else if (callback) {
         callback(data);
       }
     })
@@ -70,13 +71,14 @@ export default class Database {
     var keys = Object.keys(insertData).toString();
     var values = this.formatInsertValues(insertData);
     var query = `insert into ${table} (${keys}) values (${values})`;
-    this.connection.query(query , function(err: any, data: any) {
+    console.log(query);
+    this.connection.query(query, function(err: any, data: any) {
       if (err) {
         console.log(err);
         logger.error(err);
         if (res) {
           res.status(400).send(err);
-        }else if(callback){
+        } else if (callback) {
           callback(false);
         }
         return;
@@ -84,7 +86,7 @@ export default class Database {
     })
     if (res) {
       res.status(200).send();
-    }else if(callback){
+    } else if (callback) {
       callback(true);
     }
   }
