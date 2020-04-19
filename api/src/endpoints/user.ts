@@ -68,6 +68,28 @@ router.post('/user/new', function(req: any, res: any) {
   });
 });
 
+router.post('/user/resendactivation', function(req: any, res: any) {
+  let db: Database = Database.getInstance();
+  var userID = req.body.userID;
+  var email = req.body.email;
+  db.queryFetch(`select * from users where id=${userID} and email="${email}"`, null, (data: any) => {
+    var userEmail = data["email"];
+
+    var userID = data["id"];
+    var activateCode = Password.hash(Math.random().toString(36), "PASSWORD_BCRYPT");
+    activateCode = activateCode.substr(8, activateCode.length).split("/").join("");
+    var tokenData = {
+      user_id: userID,
+      token: activateCode,
+      type: "activation"
+    };
+    db.insert("tokens", tokenData, null, (data: any) => {
+      sendActivationEmail(userEmail, activateCode);
+      res.status(200).send();
+    });
+  });
+});
+
 router.post('/user/edit', function(_req: any, _res: any) {
 });
 

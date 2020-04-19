@@ -71,7 +71,6 @@ export default class Database {
     var keys = Object.keys(insertData).toString();
     var values = this.formatInsertValues(insertData);
     var query = `insert into ${table} (${keys}) values (${values})`;
-    console.log(query);
     this.connection.query(query, function(err: any, data: any) {
       if (err) {
         console.log(err);
