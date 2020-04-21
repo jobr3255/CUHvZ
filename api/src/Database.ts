@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+const util = require('util');
 
 // var DB_CONFIG = require('./config');
 import { DB_CONFIG } from "./config";
@@ -12,6 +13,9 @@ export default class Database {
     this.connection = mysql.createConnection(DB_CONFIG);
   }
 
+  /**
+   * Get function for singleton
+   */
   public static getInstance(): Database {
     if (Database.db == null) {
       Database.db = new Database();
@@ -19,42 +23,63 @@ export default class Database {
     return Database.db;
   }
 
-  public queryFetch(queryText: string, res?: any, callback?: any): any {
-    this.connection.query(queryText, async function(err: any, data: any) {
-      if (err) {
-        console.log(err);
-        logger.error(err);
-        if (res) {
-          res.status(400).send(err);
-        } else if (callback) {
-          callback({ error: err });
-        }
-      }
-      if (res) {
-        res.status(200).json(data[0]);
-      } else if (callback) {
-        callback(data[0]);
-      }
-    })
+  // Promise based mysql queries from https://codeburst.io/node-js-mysql-and-promises-4c3be599909b
+  private query(sql: any) {
+    return new Promise((resolve, reject) => {
+      this.connection.query(sql, (err: any, rows: any) => {
+        if (err)
+          return reject(err);
+        resolve(rows);
+      });
+    });
   }
 
-  public async queryFetchAll(queryText: string, res?: any, callback?: any): Promise<any> {
-    this.connection.query(queryText, function(err: any, data: any) {
-      if (err) {
-        console.log(err);
-        logger.error(err);
+  /**
+   * Return a single result
+   */
+  public async queryFetch(queryText: string, res?: any): Promise<any> {
+    var data = await this.query(queryText)
+      .then(function(response: any) {
         if (res) {
-          res.status(400).send(err);
-        } else if (callback) {
-          callback({ error: err });
+          res.status(200).json(response);
+        } else {
+          return response[0];
         }
-      }
-      if (res) {
-        res.status(200).json(data);
-      } else if (callback) {
-        callback(data);
-      }
-    })
+      })
+      .catch(function(error: any) {
+        console.log(error);
+        logger.error(error);
+        if (res) {
+          res.status(400).send(error);
+        } else {
+          return { "error": error }
+        }
+      });
+    return data;
+  }
+
+  /**
+   * Return multiple results
+   */
+  public async queryFetchAll(queryText: string, res?: any): Promise<any> {
+    var data = await this.query(queryText)
+      .then(function(response: any) {
+        if (res) {
+          res.status(200).json(response);
+        } else {
+          return response;
+        }
+      })
+      .catch(function(error: any) {
+        console.log(error);
+        logger.error(error);
+        if (res) {
+          res.status(400).send(error);
+        } else {
+          return { "error": error }
+        }
+      });
+    return data;
   }
 
   private formatInsertValues(insertData: any): any {
@@ -67,26 +92,27 @@ export default class Database {
     return values.toString();
   }
 
-  public insert(table: string, insertData: any, res?: any, callback?: any): any {
+  public async insert(table: string, insertData: any, res?: any): Promise<any> {
     var keys = Object.keys(insertData).toString();
     var values = this.formatInsertValues(insertData);
     var query = `insert into ${table} (${keys}) values (${values})`;
-    this.connection.query(query, function(err: any, data: any) {
-      if (err) {
-        console.log(err);
-        logger.error(err);
+    var data = await this.query(query)
+      .then(async function(response: any) {
         if (res) {
-          res.status(400).send(err);
-        } else if (callback) {
-          callback(false);
+          res.status(200).json(response);
+        } else {
+          return true;
         }
-        return;
-      }
-    })
-    if (res) {
-      res.status(200).send();
-    } else if (callback) {
-      callback(true);
-    }
+      })
+      .catch(function(error: any) {
+        console.log(error);
+        logger.error(error);
+        if (res) {
+          res.status(400).send(error);
+        } else {
+          return false;
+        }
+      });
+    return data;
   }
 }
