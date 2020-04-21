@@ -12,7 +12,7 @@ router.get("/users", function(_req: any, res: any) {
   db.queryFetchAll('SELECT username,email,phone from users', res);
 });
 
-function sendActivationEmail(email: string, activationCode: string){
+function sendActivationEmail(email: string, activationCode: string) {
   var body = `<p>Thank you for registering to play Humans vs Zombies at CU Boulder.</p><p>To activate your account, please click on this link: <a href='cuhvz.com/activate/${activationCode}'>Activate your account</a></p><p>- CU BOULDER HVZ TEAM</p>`
   var mailOptions = {
     from: 'no-reply@cuhvz.com',
@@ -40,41 +40,40 @@ function sendActivationEmail(email: string, activationCode: string){
   });
 }
 
-router.post('/user/new', function(req: any, res: any) {
+router.post('/user/new', async function(req: any, res: any) {
   let db: Database = Database.getInstance();
   var data = req.body;
   data.password = Password.hash(req.body.password, "PASSWORD_BCRYPT");
-  db.insert("users", data, null, (data: any) => {
-    if (data) {
-      db.queryFetch("select * from users where id=LAST_INSERT_ID()", null, (data: any) => {
-        var userData = data;
-        var userEmail = data["email"];
-        var userID = data["id"];
-        var activateCode = Password.hash(Math.random().toString(36), "PASSWORD_BCRYPT");
-        activateCode = activateCode.substr(8, activateCode.length).split("/").join("");
-        var tokenData = {
-          user_id: userID,
-          token: activateCode,
-          type: "activation"
-        };
-        db.insert("tokens", tokenData, null, (data: any) => {
-          sendActivationEmail(userEmail, activateCode);
-          res.status(200).json(userData);
-        });
-      });
-    } else {
-      res.status(500).send();
-    }
-  });
+  var response = await db.insert("users", data, null);
+  if (response) {
+    var userData = await db.queryFetch("select * from users where id=LAST_INSERT_ID()", null);
+    var userEmail = userData["email"];
+    var userID = userData["id"];
+    var activateCode = Password.hash(Math.random().toString(36), "PASSWORD_BCRYPT");
+    activateCode = activateCode.substr(8, activateCode.length).split("/").join("");
+    var tokenData = {
+      user_id: userID,
+      token: activateCode,
+      type: "activation"
+    };
+    db.insert("tokens", tokenData, null);
+    sendActivationEmail(userEmail, activateCode);
+    res.status(200).json(userData);
+  } else {
+    res.status(500).send();
+  }
 });
 
-router.post('/user/resendactivation', function(req: any, res: any) {
+router.post('/user/resendactivation', async function(req: any, res: any) {
   let db: Database = Database.getInstance();
   var userID = req.body.userID;
   var email = req.body.email;
-  db.queryFetch(`select * from users where id=${userID} and email="${email}"`, null, (data: any) => {
+  var data = await db.queryFetch(`select * from users where id=${userID} and email="${email}"`, null);
+  if (!data) {
+    // Not found
+    res.status(404).send();
+  } else {
     var userEmail = data["email"];
-
     var userID = data["id"];
     var activateCode = Password.hash(Math.random().toString(36), "PASSWORD_BCRYPT");
     activateCode = activateCode.substr(8, activateCode.length).split("/").join("");
@@ -83,37 +82,39 @@ router.post('/user/resendactivation', function(req: any, res: any) {
       token: activateCode,
       type: "activation"
     };
-    db.insert("tokens", tokenData, null, (data: any) => {
+    if(await db.insert("tokens", tokenData, null)){
       sendActivationEmail(userEmail, activateCode);
       res.status(200).send();
-    });
-  });
+    }
+  }
 });
 
 router.post('/user/edit', function(_req: any, _res: any) {
 });
 
-router.post('/user/login', function(req: any, res: any) {
+router.post('/user/login', async function(req: any, res: any) {
   let db: Database = Database.getInstance();
-  var user = req.body.user;
+  var username = req.body.username;
+  var email = req.body.email;
   var pass = req.body.password;
-  db.queryFetch(`select * from users where (username="${user}" OR email="${user}")`, null, (data: any) => {
-    if (!data) {
-      // Not found
-      res.status(404).send();
-    } else if (data["error"]) {
-      res.status(400).send(data["error"]);
+  var data = await db.queryFetch(`select * from users where (username="${username}" OR email="${email}")`, null);
+  // console.log(data);
+  if (!data) {
+    // Not found
+    res.status(404).send();
+  } else if (data["error"]) {
+    // Bad request
+    res.status(400).send(data["error"]);
+  } else {
+    var passHash = data["password"];
+    if (Password.verify(pass, passHash)) {
+      delete data["password"];
+      res.status(200).json(data);
     } else {
-      var passHash = data["password"];
-      if (Password.verify(pass, passHash)) {
-        delete data["password"];
-        res.status(200).json(data);
-      } else {
-        // Unauthorized
-        res.status(401).send();
-      }
+      // Unauthorized
+      res.status(401).send();
     }
-  });
+  }
 });
 
 module.exports = router;
