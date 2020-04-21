@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-// import Routes from './Routes';
+import Dropdown from "../Dropdown/Dropdown";
 import './Navbar.css';
 import User from "../../models/User";
 
@@ -43,7 +43,7 @@ export default class Navbar extends React.Component<any, NavbarStates> {
     var prevPage = sessionStorage.getItem('currentPage');
     var currentPage = window.location.href;
     sessionStorage.setItem("currentPage", currentPage);
-    if(prevPage)
+    if (prevPage)
       sessionStorage.setItem("prevPage", prevPage);
     this.loadSessionUser();
   }
@@ -51,9 +51,9 @@ export default class Navbar extends React.Component<any, NavbarStates> {
   /**
    * Loads a logged in user if one exists
    */
-  loadSessionUser(){
+  loadSessionUser() {
     var userStr = sessionStorage.getItem('sessionUser');
-    if(userStr){
+    if (userStr) {
       var userJSON = JSON.parse(userStr);
       var user = new User(userJSON);
       this.setState({
@@ -65,7 +65,7 @@ export default class Navbar extends React.Component<any, NavbarStates> {
   /**
    * Clears the session of a user
    */
-  login(userData: any){
+  login(userData: any) {
     sessionStorage.setItem("sessionUser", JSON.stringify(userData));
     var user = new User(userData);
     this.setState({
@@ -76,7 +76,7 @@ export default class Navbar extends React.Component<any, NavbarStates> {
   /**
    * Clears the session of a user
    */
-  logout(){
+  logout() {
     sessionStorage.removeItem('sessionUser');
     this.setState({
       sessionUser: null
@@ -86,36 +86,55 @@ export default class Navbar extends React.Component<any, NavbarStates> {
   render() {
     var profileButton, logoutButton, loginButton, signupButton;
     var profilePage;
-    if(this.state.sessionUser){
-      profilePage = <ProfilePage user={this.state.sessionUser}/>;
-      profileButton = <li style={{float: 'right'}}><a id='profile_button' href='/profile'>Profile</a></li>
-      logoutButton = <li style={{float: 'right'}}><button id='logout_button' onClick={this.logout}>Logout</button></li>
-    }else{
-      loginButton = <li style={{float: 'right'}}><a id='login_button' href='/login'>Login</a></li>;
-      signupButton = <li style={{float: 'right'}}><a id='signup_button' href='/signup'>Sign Up</a></li>;
+    if (this.state.sessionUser) {
+      profilePage = <ProfilePage user={this.state.sessionUser} />;
+      profileButton = <li><a id='profile_button' href='/profile'>Profile</a></li>
+      logoutButton = <li><button id='logout_button' onClick={this.logout}>Logout</button></li>
+    } else {
+      loginButton = <li><a id='login_button' href='/login'>Login</a></li>;
+      signupButton = <li><a id='signup_button' href='/signup'>Sign Up</a></li>;
     }
-    return(
+    return (
       <div>
         <Router>
           <nav>
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/rules">Rules</a></li>
-              <li><a href="/events">Events</a></li>
-              {logoutButton}
-              {profileButton}
-              {signupButton}
-              {loginButton}
-            </ul>
+            <div className="nav-container">
+
+              <span className="menu main-menu-container">
+                <span className="dropdown-button-container">
+                  <div className="menu-bar"></div>
+                  <div className="menu-bar"></div>
+                  <div className="menu-bar"></div>
+                </span>
+                <ul className="main-menu">
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/rules">Rules</a></li>
+                  <li><a href="/events">Events</a></li>
+                </ul>
+              </span>
+
+              <span className="menu profile-menu-container">
+                <div className="dropdown-button-container profile">
+                  <div className="profile-head"></div>
+                  <div className="profile-body"></div>
+                </div>
+                <ul className="profile-menu">
+                  {logoutButton}
+                  {profileButton}
+                  {signupButton}
+                  {loginButton}
+                </ul>
+              </span>
+            </div>
           </nav>
           <Switch>
             <Route path="/" exact component={HomePage} />
 
             <Route path="/rules" component={RulesPage} />
             <Route path="/events" component={EventsPage} />
-            <ConditionalRoute path="/signup" component={<SignUpPage login={this.login}/>} rerouteOn={this.state.sessionUser} reroute="/profile"/>
-            <ConditionalRoute path="/login" component={<LoginPage login={this.login}/>} rerouteOn={this.state.sessionUser} reroute="/profile"/>
-            <ConditionalRoute path="/profile" component={profilePage} rerouteOn={this.state.sessionUser == null} reroute="/login"/>
+            <ConditionalRoute path="/signup" component={<SignUpPage login={this.login} />} rerouteOn={this.state.sessionUser} reroute="/profile" />
+            <ConditionalRoute path="/login" component={<LoginPage login={this.login} />} rerouteOn={this.state.sessionUser} reroute="/profile" />
+            <ConditionalRoute path="/profile" component={profilePage} rerouteOn={this.state.sessionUser == null} reroute="/login" />
 
             <Route path="/lockin/:id" component={LockinPage} />
             <Route path="/weeklong/:id/stats" component={WeeklongStatsPage} />
@@ -136,13 +155,13 @@ class ConditionalRoute extends React.Component<any, any> {
         path={this.props.path}
         render={({ location }) =>
           !this.props.rerouteOn ? this.props.component : (
-              <Redirect
-                to={{
-                  pathname: this.props.reroute,
-                  state: { from: location }
-                }}
-              />
-            )
+            <Redirect
+              to={{
+                pathname: this.props.reroute,
+                state: { from: location }
+              }}
+            />
+          )
         }
       />
     );
