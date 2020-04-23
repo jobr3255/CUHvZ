@@ -1,48 +1,131 @@
 import React, { Component } from 'react';
 import { IonApp } from '@ionic/react';
+import { Redirect } from "react-router-dom";
 
+import API from "./util/API";
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import User from "./models/User";
+import Weeklong from "./models/Weeklong";
 
-/* Core CSS required for Ionic components to work properly */
-// import '@ionic/react/css/core.css';
-
-/* Basic CSS for apps built with Ionic */
-// import '@ionic/react/css/normalize.css';
-// import '@ionic/react/css/structure.css';
-// import '@ionic/react/css/typography.css';
-
-/* Optional CSS utils that can be commented out */
-// import '@ionic/react/css/padding.css';
-// import '@ionic/react/css/float-elements.css';
-// import '@ionic/react/css/text-alignment.css';
-// import '@ionic/react/css/text-transformation.css';
-// import '@ionic/react/css/flex-utils.css';
-// import '@ionic/react/css/display.css';
-
-/* Theme variables */
-import './theme/variables.css';
+/* Styles */
 import './theme/app.css';
 
-// const App: React.FC = () => (
-  // <IonApp>
-  //   <IonReactRouter>
-  //     <IonRouterOutlet>
-  //       <Route path="/home" component={Home} exact={true} />
-  //       <Route exact path="/" render={() => <Redirect to="/home" />} />
-  //     </IonRouterOutlet>
-  //   </IonReactRouter>
-  // </IonApp>
-// );
-//
-// export default App;
 
-export default class App extends Component {
+/**
+ * Navbar state variables
+ */
+interface AppStates {
+  sessionUser: User | null,
+  activeWeeklong: Weeklong | null
+}
+
+/**
+ * Main entry component for the application
+ */
+export default class App extends Component<any, AppStates> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      sessionUser: null,
+      activeWeeklong: null
+    };
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  /**
+   * This fires before the componentDidMount method.
+   * Sets the currentPage and prevPage storageSession variables so that the Tabs in the Tabulator object will rerender to the last tab opened if the page is refreshed
+   */
+  UNSAFE_componentWillMount() {
+    var prevPage = sessionStorage.getItem('currentPage');
+    var currentPage = window.location.href;
+    sessionStorage.setItem("currentPage", currentPage);
+    if (prevPage)
+      sessionStorage.setItem("prevPage", prevPage);
+    this.loadSessionUser();
+    this.loadActiveWeeklong();
+  }
+
+  /**
+   * Loads an active weeklong if there is one
+   */
+  async loadActiveWeeklong() {
+    sessionStorage.removeItem('activeWeeklong');
+    let weeklongData = await API.get("/api/weeklong/active")
+      .then(function(response: any) {
+        if (response.status === 200) {
+          return response.data;
+        }
+        return false;
+      });
+    if (weeklongData) {
+      var activeWeeklong = new Weeklong(weeklongData);
+      sessionStorage.setItem("activeWeeklong", JSON.stringify(weeklongData));
+      this.setState({
+        activeWeeklong: activeWeeklong
+      });
+    }
+  }
+
+  /**
+   * Loads a logged in user if one exists
+   */
+  loadSessionUser() {
+    var userStr = sessionStorage.getItem('sessionUser');
+    if (userStr) {
+      var userJSON = JSON.parse(userStr);
+      var user = new User(userJSON);
+      this.setState({
+        sessionUser: user
+      });
+    }
+  }
+
+  /**
+   * Clears the session of a user
+   */
+  login(userData: any, password: string) {
+    sessionStorage.setItem("sessionUser", JSON.stringify(userData));
+    const token = Buffer.from(`${userData["username"]}:${password}`, 'utf8').toString('base64');
+    sessionStorage.setItem("sessionToken", JSON.stringify(token));
+    var user = new User(userData);
+    this.setState({
+      sessionUser: user
+    });
+  }
+
+  /**
+   * Clears the session of a user
+   */
+  logout() {
+    sessionStorage.removeItem('sessionUser');
+    sessionStorage.removeItem('sessionToken');
+    this.setState({
+      sessionUser: null
+    });
+  }
+
+  /**
+   * Render the application
+   */
   render() {
-    return(
+    var redirect;
+    if(sessionStorage.getItem('pageRedirect')){
+      let link = sessionStorage.getItem('pageRedirect');
+      redirect = <Redirect to={{ pathname: `${link}` }} />;
+      sessionStorage.removeItem('pageRedirect');
+    }
+    return (
       <IonApp>
-        <Navbar/>
-        <Footer/>
+        {redirect}
+        <Navbar
+          loginCallback={this.login}
+          logoutCallback={this.logout}
+          sessionUser={this.state.sessionUser}
+          activeWeeklong={this.state.activeWeeklong} />
+        <Footer />
       </IonApp>
     );
   }

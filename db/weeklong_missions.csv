@@ -1,0 +1,150 @@
+id,weeklong_id,day,campus,mission,time,location,location_link,description
+1,1,monday,on,"Late sign up, check in, bandanna retrieval","9am - 5pm","UMC indoors",,
+2,1,monday,off,Defense,"6pm - 7pm","Beach park","https://www.google.com/maps/place/Beach+Park/@40.0048439,-105.2777321,16.71z/data=!4m8!1m2!2m1!1sbeach+park!3m4!1s0x0:0x68c652cd71473e8f!8m2!3d40.0048652!4d-105.2767923",
+3,1,tuesday,on,Escort,"10am and 2pm","UMC Fountains -> Theatre -> Koi pond/Hale -> Old Main -> Norlin Fountains -> REC -> Ralphie",,
+4,1,tuesday,off,"Capture the flag","6pm - 7pm","Scott Carpenter park","https://www.google.com/maps/place/Scott+Carpenter+Park/@40.0116189,-105.2552645,140m/data=!3m1!1e3!4m5!3m4!1s0x876bedcf78916ba5:0x1d4e20b0486c7c12!8m2!3d40.011729!4d-105.2549038",
+5,1,wednesday,on,"Station controll","11am - 5pm","Norlin quad, Farrand field",,"To control a station: 
+Humans: Move bandanna above marked line
+Zombies: Move bandanna below marked line
+Flags will be checked hourly and the score will be tracked."
+6,1,wednesday,off,"Scavenger hunt","6pm - 7pm","Martin Park","https://www.google.com/maps/place/Martin+Park/@39.9889483,-105.2520229,17z/data=!3m1!4b1!4m12!1m6!3m5!1s0x876beda6c350f9cd:0xbfe19b6c4417032e!2sMartin+Park!8m2!3d39.9889442!4d-105.2498342!3m4!1s0x876beda6c350f9cd:0xbfe19b6c4417032e!8m2!3d39.9889442!4d-105.2498342",
+7,1,thursday,on,"Soccer defense","2pm - 3pm","Soccer field by Wolf Law",,
+8,1,thursday,off,Transport,"6pm - 7pm","Harlow Platts Park","https://www.google.com/maps/place/Harlow+Platts+Community+Park/@39.9732298,-105.2512539,16.22z/data=!4m5!3m4!1s0x876bed11894519ef:0xece9795e891ae36e!8m2!3d39.9746374!4d-105.2486266",
+9,1,friday,on,"Data entry","9am - 5pm","Rock with square hole","https://www.google.com/maps/@40.0079274,-105.2711151,3a,75y,35.01h,74.28t/data=!3m6!1e1!3m4!1sf2hKqkG6UyTgThoKv6XnOQ!2e0!7i13312!8i6656","Enter your username into the data log for identification during extraction."
+10,1,friday,off,"Retrieval and evacuation","6pm - 7pm",Chautauqua,"https://www.google.com/maps/place/Chautauqua+Park/@39.9992037,-105.2836883,17z/data=!3m1!4b1!4m5!3m4!1s0x876bec4712c4dfc1:0x761597124a9e2eab!8m2!3d39.9991996!4d-105.2814996",
+11,2,monday,on,NULL,NULL,NULL,NULL,"Late registration, last minute waiver hand in, trick or treat and sign sheet"
+12,2,monday,off,NULL,NULL,NULL,NULL,"Scavenger hunt for deely boppers* (Location - Will Vill fields)"
+13,2,tuesday,on,NULL,NULL,NULL,NULL,"Take pictures in front of designated buildings on campus in their halloween costumes with bandanas clearly visible email pictures to us"
+14,2,tuesday,off,NULL,NULL,NULL,NULL,"Have a mod be a “pumpkin person” and zombies have to collect pumpkins from around the park and bring them to the “pumpkin person” (Location - Beach Park)"
+15,2,wednesday,on,NULL,NULL,NULL,NULL,"Escort “newsperson” mission  from: C4C to: UMC fountains middle stops: circle patch of grass outside the engineering center, Ralphie Buffalo statue, Norlin fountains, Rock statue with the loop, UMC fountains. (Head north and loop around CHEM to the UMC.)"
+16,2,wednesday,off,NULL,NULL,NULL,NULL,"half-priced halloween candy defend the supply drop escort mission (Location - Boulder Creek Path; start under Folsom St bridge)"
+17,2,thursday,on,NULL,NULL,NULL,NULL,"riddle mission, use words on lawn signs around campus (different phrases on each sign with one word capitalized). Potential reward: vaccine? Email the final phrase to a proxy email. We will then email out vaccine codes to first 5 or 10."
+18,2,thursday,off,NULL,NULL,NULL,NULL,"(Deely bopper reward) Humans have to rotate around 3 spots, carrying (heavy) object (or two) to reset timers that last 5mins? And object has to remain in human hands for humans to win. If the object passes to and remains with zombies at any point during the mission, humans lose. Also if 2 or more timers get fucked also if even one timer gets to 12 minutes zombies win (Location - Martin Park)"
+19,2,friday,on,NULL,NULL,NULL,NULL,"Zombies must join hands in a giant circle around the patch of grass in the biking roundabout in front of the EC. If they surround the entire circle with unstunned zombies, they win, and get deely boppers for Chautauqua. If they cannot succeed at this within 45 minutes, humans win a shortened time for Chautauqua. Zombies may not enter the circle itself, but humans may."
+20,2,friday,off,NULL,NULL,NULL,NULL,"Per tradition, the off-campus mission takes place at Chautauqua park. Before starting the game, any remaining Deely Boppers are distributed to the surviving humans. During the mission, if a zombie kills a human who is carrying deely-boppers, then the zombie gets those boppers and becomes a Special Infected. In order to win, humans must defend the gazebo from the zombies for the full 45 minutes. Zombies win by having SPECIAL INFECTED touching both main pillars of the gazebo simultaneously for a eight-count, or by killing all the humans. In this way, the humans must defend the gazebo from the Special Infected for the entire duration of the game. Note that if the zombies win the on-campus mission that day, then the Special Infected will have a stun timer of only 1 minute.
+
+So, the humans and zombies arrive at the park. At 5:00, the zombies begin attacking the gazebo. If, at any point, at least two Special Infected enter the gazebo and are simultaneously touching the pillars for a full eight-count, then the humans lose and the weeklong ends."
+21,3,monday,on,NULL,NULL,NULL,NULL,"Between 10:00 and 4:00, humans must LINK[go here][https://goo.gl/maps/T3qu61iSeds], to the stone monument in the center of the little park,
+and sign their name to the list. By the time 4:00 rolls around, if 2/3 of the human population has not signed their name to the list, the zombies win. If there are enough signatures, then the humans win and receive the location of the first off-campus mission.
+If the humans win - they will receive a hint to the code which gives them the location of the off-campus mission
+If the zombies win - they will get that hint
+(This mission has essentially two purposes: It is easy, and can be accomplished by individuals without too much effort and in accordance with their schedule, while also giving them opportunities to see and interact with each other. It also reinforces the idea that humans are united in their goals.  At the same time, it also gives the OZs a much higher chance of finding humans to kill on that first day, since there will be high traffic through that one area. The humans will likely win the mission, but many of them will be tagged nonetheless.)"
+22,3,monday,off,NULL,NULL,NULL,NULL,"The first off-campus mission will be at Martin Park. This is where we will introduce the deely-bopper game element, and humans will likely win this mission. There will be a single bopper, located at the far end of the park away from the street/bus stop. Humans will have to defend this single, stationary area from 5:00 to 5:45. If a zombie is able to grab the deely bopper (not just touch it, but physically grab it) then that zombie becomes a Special Infected and the humans lose the mission.
+
+If the zombies win - Stun Timers for the next day will decrease by 1 minute."
+23,3,tuesday,on,NULL,NULL,NULL,NULL,"For day two, humans must escort an NPC around campus, taking photos at major locations to demonstrate that there's no real zombie threat. The NPC will spawn in front of the C4C, and humans must take a photo of him at each of the three locations:
+- Standing in the fountain of the UMC
+- With the buffalo statue of the stadium in the background
+- In front of Old Main
+
+The photos must contain at least three posed human players and NO ZOMBIES. Any photo with a zombie in it will be invalidated. Meanwhile, the zombies are trying to zombify the NPC. To zombify the NPC, at least one zombie must touch and maintain touch with the NPC for an out-loud count of five-mississippi. (the NPC, when initially touched, will freeze in horror.)
+
+If the humans win - they will receive a clue to the day's code, OR, the zombie stun timer will be increased by one minute for the next day.
+If the zombies win - they will receive a clue for the day's code, OR, the zombie stun timer will be decreased by one minute."
+24,3,tuesday,off,NULL,NULL,NULL,NULL,"The second off-campus mission will be at LINK[Beach park][https://goo.gl/maps/9L62BGE9eFB2], and will feature two deely boppers, placed on opposite ends (northeast and southwest) of the small square park. As before, the humans are attempting to protect both deely boppers for the entire hour between 5:00 and 5:45. If one of the deely-boppers is taken during the mission, the zombie who took it has his spawn time lowered to 30 seconds.
+
+If the humans are able to defend both points - The zombie stun timer is raised by one minute, and 10 vaccines will be distributed among the surviving human (maximum one per player.)
+For each bopper the zombies are able to recover, the zombie stun timer is lowered by one minute for the next day."
+25,3,wednesday,on,NULL,NULL,NULL,NULL,"Humans must collect twelve doodads (pictured below) which are planted across Norlin Quad.
+Humans will start at the stairs leading up to the front of Norlin.
+Zombies will start at the opposite end of Norlin, near the Hale science building. Humans have an hour to gather all twelve doodads, but if any of them leave the rectangle of Norlin quad, they may not re-join the mission.
+
+If humans win - they get a clue for that day's code, OR, they may raise the zombie stun timer by one minute.
+If Zombies win - they get a clue for that day's code, OR, they may lower the zombie stun timer by one minute."
+26,3,wednesday,off,NULL,NULL,NULL,NULL,"The third off-campus mission will be at LINK[Scott Carpenter park][https://www.google.com/maps/place/Scott+Carpenter+Park/@40.0116189,-105.2552645,140m/data=!3m1!1e3!4m5!3m4!1s0x876bedcf78916ba5:0x1d4e20b0486c7c12!8m2!3d40.011729!4d-105.2549038]. There will be three stationary deely-boppers to defend, one at the top of the hill to the Northwest (near the playground) one at the top of the hill to the Southwest, and one at the bottom of the hill to the East.
+As before, humans will attempt to defend these three points until 5:45. Each time a deely-bopper is successfully taken by a zombie, that zombie's stun timer decreases by 45 seconds.
+
+If the humans successfully defend all 3 deely boppers - the zombie stun timer is raised by one minute, and 10 vaccines are distributed among the surviving players (limit 1 each)
+For each deely-bopper the zombies steal, the zombie stun-timer is lowered by one minute for the following day."
+27,3,thursday,on,NULL,NULL,NULL,NULL,"For day four, humans will have to defend a certain number of zones of the soccer pitch near Smith dormitory. Humans will arrange themselves in the zones. If a zombie is able to pick up the cone in each of the zones, no humans may enter that zone, but they may leave it. In this way, as zombies overrun each zone, the humans flee and cannot return. A human who leaves the soccer pitch entirely is out of the game, but is not zombified.
+
+In order to win, humans must defend at least 1/3 of the zones of the soccer pitch for 20 minutes (or more/less depending upon player turnout). Zombie stun timer during this event is also based on player turnout.
+
+If the humans win - they can either get a clue for the day's code, OR they can increase the zombie stun timer by one minute for the next day.
+If the zombies win - they can either get a clue for that day's code, OR they can lower the zombie stun timer for one minute for the following day."
+28,3,thursday,off,NULL,NULL,NULL,NULL,"For day four, the humans must defend three deely boppers at Harlow Platts park. There will be two stationary deely boppers, and one which is being worn by an NPC. The NPC will circle the lake repeatedly for the 45 minutes. The other two deely boppers will be located at the Southwest and Northwest areas of the park (see map). If a zombie tags the NPC, that zombie gets the deely boppers and becomes a special infected.
+
+If the humans successfully defend all 3 deely boppers - the zombie stun timer is raised by one minute, and 20 vaccines are distributed among the surviving players (limit 1 each)
+For each deely-bopper the zombies steal, the zombie stun-timer is lowered by one minute for the following day."
+29,3,friday,on,NULL,NULL,NULL,NULL,"For the final on-campus mission, human players must make a human pyramid on Farrand field. Mods will mark out an area using the flag football cones near the center. The pyramid must be built within that area, must contain at least 10 players, and from the moment the 10th player is in the top spot, it must stand for a full 10 count (ten “mississippis”). Having achieved that, the humans win the mission, and are granted safe passage off of Farrand Field. If the pyramid is toppled, or is not built within the necessary time period, the zombies win.
+
+If the humans win - they increase the zombie stun timer by one minute for the final mission.
+If the zombies win - the final mission will have a stun timer of 3 minutes, not 5."
+30,3,friday,off,NULL,NULL,NULL,NULL,"Per tradition, the off-campus mission takes place at Chautauqua park. Before starting the game, any remaining Deely Boppers are distributed to the surviving humans. During the mission, if a zombie kills a human who is carrying deely-boppers, then the zombie gets those boppers and becomes a Special Infected. In order to win, humans must defend the gazebo from the zombies for the full 45 minutes. Zombies win by having SPECIAL INFECTED touching both main pillars of the gazebo simultaneously for a eight-count, or by killing all the humans. In this way, the humans must defend the gazebo from the Special Infected for the entire duration of the game. Note that if the zombies win the on-campus mission that day, then the Special Infected will have a stun timer of only 1 minute.
+
+So, the humans and zombies arrive at the park. At 5:00, the zombies begin attacking the gazebo. If, at any point, at least two Special Infected enter the gazebo and are simultaneously touching the pillars for a full eight-count, then the humans lose and the weeklong ends."
+31,4,monday,on,"Late sign up, check in, bandanna retrieval","9am - 5pm","UMC indoors",,
+32,4,monday,off,"Capture the flag","6pm - 7pm","Scott Carpenter park","https://www.google.com/maps/place/Scott+Carpenter+Park/@40.0116189,-105.2552645,140m/data=!3m1!1e3!4m5!3m4!1s0x876bedcf78916ba5:0x1d4e20b0486c7c12!8m2!3d40.011729!4d-105.2549038",
+33,4,tuesday,on,"Selfie scavenger hunt","9am - 5pm","Selfie locations",/images/selfie_locations_S19.png,
+34,4,tuesday,off,"Scavenger hunt and king of the hill","6pm - 7pm","Central park","https://www.google.com/maps/place/Central+Park/@40.0149835,-105.2780824,18z/data=!4m8!1m2!2m1!1scentral+park!3m4!1s0x0:0xfbc3400e4a4953f6!8m2!3d40.0155847!4d-105.2785274",
+35,4,wednesday,on,"Soccer defense",1:30pm,"Wolf Law soccer fields",,
+36,4,wednesday,off,"3 legged humans survival","6pm - 7pm","Beach park","https://www.google.com/maps/place/Beach+Park/@40.004847,-105.276902,19z/data=!4m5!3m4!1s0x876bec376bb59e5f:0x68c652cd71473e8f!8m2!3d40.0048653!4d-105.2767923",
+37,4,thursday,on,"Tower Control","9am - 5pm","Station locations",/images/control_tower_map.png,
+38,4,thursday,off,"Eggscort / Checkpoint","6pm - 7pm","Martin Park","https://www.google.com/maps/place/Martin+Park/@39.9889483,-105.2520229,17z/data=!3m1!4b1!4m12!1m6!3m5!1s0x876beda6c350f9cd:0xbfe19b6c4417032e!2sMartin+Park!8m2!3d39.9889442!4d-105.2498342!3m4!1s0x876beda6c350f9cd:0xbfe19b6c4417032e!8m2!3d39.9889442!4d-105.2498342",
+39,4,friday,on,"Data entry","9am - 5pm","Rock with square hole","https://www.google.com/maps/@40.0079274,-105.2711151,3a,75y,35.01h,74.28t/data=!3m6!1e1!3m4!1sf2hKqkG6UyTgThoKv6XnOQ!2e0!7i13312!8i6656","Enter your username into the data log for identification during extraction."
+40,4,friday,off,,,,,"LINK_NEW_TAB[The story continues at the Ragnarok Lock-in.][https://www.eventbrite.com/e/cu-hvz-ragnarok-tickets-60309888500]"
+41,5,monday,on,"Late sign up","9am - 5pm","UMC indoors",,
+42,5,monday,off,,,,,"Canceled due to weather"
+43,5,tuesday,on,"Supply Drops","9am - 5pm",,,"One of these has been poisoned
+Sign #10: 25 supplies
+Sign #12: 25 supplies
+Sign #15: 25 supplies
+Sign #23: 25 supplies
+Poisoned supply drops will reduce effectiveness of the next 3 supply drops used. After 3 unpoisoned supply drops have been collected the poison is cured.
+LINK_NEW_TAB[Sign Location Map][/images/signs-fall19.png]"
+44,5,tuesday,off,"Scavenger Hunt",5pm,"Central Park","https://www.google.com/maps/place/Central+Park/@40.0149835,-105.2780824,18z/data=!4m8!1m2!2m1!1scentral+park!3m4!1s0x0:0xfbc3400e4a4953f6!8m2!3d40.0155847!4d-105.2785274","Success: All humans alive at the end of the mission receive extra points
+Fail: Zombie stun timer reduced by 1 minute"
+45,5,wednesday,on,Selfies,"9am - 5pm","Selfie Picture Locations",/images/selfie-pics.jpg,"Total of 30 selfies must be submitted in order to complete the mission
+Mission failure: Zombie stun timer reduced by 1 minute
+Mission Rewards:
+1/4 correct selfies = 5 points
+2/4 correct selfies = 10 points
+3/4 correct selfies = 20 points
+4/4 correct selfies = 40 points
+Best voted selfie (with permission from player) will receive 10 bonus points.
+How to submit selfies:- All selfies must be submitted at the same time along with your username and player code.
+- Selfies must be submitted to the photo-submissions chat on discord by 5pm.
+- Player must be clearly visible and recognizable in picture. Group pictures are fine as long as we can identify the player submitting the photos, so circle yourself in one of the selfies so we know it's you.
+- Submissions that are missing the username and player code will not be counted"
+46,5,wednesday,off,Checkpoints,5pm,"Martin park","https://www.google.com/maps/place/Martin+Park/@39.9889483,-105.2520282,17z/data=!3m1!4b1!4m12!1m6!3m5!1s0x876beda6c350f9cd:0xbfe19b6c4417032e!2sMartin+Park!8m2!3d39.9889442!4d-105.2498342!3m4!1s0x876beda6c350f9cd:0xbfe19b6c4417032e!8m2!3d39.9889442!4d-105.2498342","Attending players will receive 20 bonus points for attending and will have their hunger fed.
+Mission failure: Zombie stun timer reduced by 1 minute"
+47,5,thursday,on,"Tower control","9am - 5pm","Tower locations",/images/control_tower_map.png,"- Towers are made of PVC and are leaned against trees
+- Towers will be checked every half an hour and updates will be posted on Discord
+- Stations will be checked every half hour and points recorded
+- Humans must move the bandana above the line- Zombies must move the bandana below the line
+- Humans must have more points than zombies to winMission failure: Zombie stun timer reduced by 1 minute"
+48,5,thursday,off,"Capture the Flag",5pm,"Scott Carpenter Park","https://www.google.com/maps/place/Scott+Carpenter+Park/@40.0117331,-105.2570978,17z/data=!3m1!4b1!4m5!3m4!1s0x876bedcf78916ba5:0x1d4e20b0486c7c12!8m2!3d40.011729!4d-105.2549038","Attending players will receive 20 bonus points for attending and will have their hunger fed.
+Mission failure: Zombie stun timer reduced by 1 minute"
+49,5,friday,on,Notebook,"9am - 5pm","Rock with square hole","https://www.google.com/maps/@40.0079274,-105.2711151,3a,75y,35.01h,74.28t/data=!3m6!1e1!3m4!1sf2hKqkG6UyTgThoKv6XnOQ!2e0!7i13312!8i6656","- Humans must write their username in the notebook
+- Players in the notebook will receive 50 points at the end of the day if they are still human
+- Username MUST be legible"
+50,5,friday,off,"Timed Defense",5pm,"Beach Park","https://www.google.com/maps/place/Beach+Park/@40.004847,-105.276902,19z/data=!4m5!3m4!1s0x876bec376bb59e5f:0x68c652cd71473e8f!8m2!3d40.0048653!4d-105.2767923","Attending players will receive 30 bonus points for attending"
+51,6,monday,on,"Late sign up","9am - 5pm","UMC indoors",,
+52,6,monday,off,"Shrinking Zone Control","5:30 pm","Beach Park","https://www.google.com/maps/place/Beach+Park/@40.004847,-105.276902,19z/data=!4m5!3m4!1s0x876bec376bb59e5f:0x68c652cd71473e8f!8m2!3d40.0048653!4d-105.2767923","All players present receive 10 points and +6 hours on their starve timer"
+53,6,tuesday,on,"Soccer Defense","1 pm","Kittredge Soccer Fields",,"All players present receive 10 points and +6 hours on their starve timer"
+54,6,tuesday,off,"Capture the flag","5 pm","Scott Carpenter Park","https://www.google.com/maps/place/Scott+Carpenter+Park/@40.0117331,-105.2570978,17z/data=!3m1!4b1!4m5!3m4!1s0x876bedcf78916ba5:0x1d4e20b0486c7c12!8m2!3d40.011729!4d-105.2549038","All players present receive 10 points and +6 hours on their starve timer"
+55,6,wednesday,on,Selfies,"9am - 5pm","Find them",,"Total of 16 selfies must be submitted in order to complete the mission
+Mission failure: Zombie stun timer reduced by 1 minute
+Mission Rewards:
+1/4 correct selfies = 5 points
+2/4 correct selfies = 10 points
+3/4 correct selfies = 20 points
+4/4 correct selfies = 40 points
+Best voted selfie (with permission from the player) will receive 10 bonus points.
+How to submit selfies:
+- All selfies must be submitted at the same time along with your username and player code through Discord photo-submissions channel.
+- Selfies must be submitted to the photo-submissions chat on discord by 5 pm.
+- Player must be clearly visible and recognizable in the picture. Group pictures are fine as long as we can identify the player submitting the photos, so circle yourself in one of the selfies so we know it's you.
+- Submissions that are missing the username and player code will not be counted
+IMAGE[/images/selfies-spring2020.jpg]"
+56,6,wednesday,off,"King of the Hill","5 pm","Central Park","https://www.google.com/maps/place/Central+Park/@40.0149835,-105.2780824,18z/data=!4m8!1m2!2m1!1scentral+park!3m4!1s0x0:0xfbc3400e4a4953f6!8m2!3d40.0155847!4d-105.2785274","All players present receive 10 points and +6 hours on their starve timer"
+57,6,thursday,on,"Tower defense","9am - 5pm","Tower locations",/images/control_tower_map.png,"- Towers are made of PVC and are leaned against trees
+- Towers will be checked every half an hour and updates will be posted on Discord
+- Stations will be checked every half hour and points recorded
+- Humans must move the bandana above the line- Zombies must move the bandana below the line
+- Humans must have more points than zombies to winMission failure: Zombie stun timer reduced by 1 minute"
+58,6,thursday,off,Egg-scort,"5:30 pm","Martin park","https://www.google.com/maps/place/Martin+Park/@39.9889483,-105.2520282,17z/data=!3m1!4b1!4m12!1m6!3m5!1s0x876beda6c350f9cd:0xbfe19b6c4417032e!2sMartin+Park!8m2!3d39.9889442!4d-105.2498342!3m4!1s0x876beda6c350f9cd:0xbfe19b6c4417032e!8m2!3d39.9889442!4d-105.2498342","All players present receive 10 points and +6 hours on their starve timer"
+59,6,friday,on,,,,,"Canceled
+Due to the rising risks of Covid-19 we have decided to cancel Friday's on and off-campus missions. Stay safe out there."
+60,6,friday,off,,,,,"Canceled
+Due to the rising risks of Covid-19 we have decided to cancel Friday's on and off-campus missions. Stay safe out there."

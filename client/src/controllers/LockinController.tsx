@@ -22,6 +22,8 @@ export default class LockinController {
         return [];
       });
     var lockin = new Lockin(lockinData);
+    console.log(lockinData);
+    console.log(lockin);
     return (
       <>
         <Helmet>

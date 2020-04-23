@@ -6,7 +6,7 @@ import "./Paginator.css";
  */
 interface PaginatorProps {
   perPage: number,
-  id: string,
+  id?: string,
   className?: string,
   reset?: boolean
 }
@@ -38,7 +38,12 @@ export default class Paginator extends React.Component<PaginatorProps, Paginator
    * Fires when component loads on page
    */
   componentDidMount() {
-    var tbody = document.getElementById(`${this.props.id}-tbody`);
+    var child: any = React.Children.only(this.props.children);
+    var id = "";
+    if(child){
+      id = child.props.id;
+    }
+    var tbody = document.getElementById(`${id}-tbody`);
     if (!tbody)
       return
     var trRows = tbody.getElementsByTagName("tr");
@@ -110,9 +115,9 @@ export default class Paginator extends React.Component<PaginatorProps, Paginator
     for (let i = 0; i < rows.length; ++i) {
       let element = (rows[i] as HTMLElement);
       if(i >= (perPage * (pageNum - 1)) && i < (perPage * pageNum)){
-        element.hidden = false;
+        element.style.display = "";
       }else{
-        element.hidden = true;
+        element.style.display = "none";
       }
     }
     this.setState({
@@ -125,25 +130,23 @@ export default class Paginator extends React.Component<PaginatorProps, Paginator
     var numPages = Math.ceil(this.state.tableRows.length / this.props.perPage);
     var keyIndex = 0;
     if (this.state.currentPage > 1)
-      pages.push(<li key={keyIndex++} className="paginater"><span onClick={this.previousPage} className="page_link page-link">«</span></li>);
+      pages.push(<li key={keyIndex++} className="paginater"><span onClick={this.previousPage}>«</span></li>);
     for (let i = 1; i < numPages + 1; ++i) {
       var active = "";
       if(this.state.currentPage === i)
         active = "active"
-      pages.push(<li key={keyIndex++} className="paginater"><span onClick={this.handlePageClick} className={`page_link page-link ${active}`}>{i}</span></li>);
+      pages.push(<li key={keyIndex++} className="paginater"><span onClick={this.handlePageClick} className={`${active}`}>{i}</span></li>);
     }
     if (this.state.currentPage < numPages)
-      pages.push(<li key={keyIndex++} className="paginater"><span onClick={this.nextPage} className="page_link page-link">»</span></li>);
+      pages.push(<li key={keyIndex++} className="paginater"><span onClick={this.nextPage}>»</span></li>);
     return (
       <>
         {this.props.children}
-        <div className="outer-div">
-          <div className="inner-div">
-            <ul className="pagination pagination-lg pager">
+          <div className="paginator">
+            <ul>
               {pages}
             </ul>
           </div>
-        </div>
       </>
     );
   }

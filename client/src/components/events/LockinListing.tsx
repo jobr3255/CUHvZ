@@ -42,7 +42,7 @@ export default class LockinListing extends EventListing<LockinListingProps> {
         <p>
           <EventDate
             startDate={lockin.getEventDate()}
-          /> | <a href={lockin.getWaiver()}>Waiver</a> {activeLinks}
+          /> | <a href={lockin.getWaiver()}  target="_blank" rel="noopener noreferrer">Waiver</a> {activeLinks}
         </p>
       </div>
     );

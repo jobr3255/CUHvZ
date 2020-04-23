@@ -6,6 +6,10 @@ ion-content{
   --ion-background-color: translucent;
 }
 
+.orange {
+  color: #ea7b00;
+}
+
 /* Weeklong stats page
 ––––––––––––––––––––––––––––––––––––––––––––––––––*/
 .stats-header {
@@ -17,6 +21,10 @@ ion-content{
   letter-spacing: 0.05rem;
   margin-bottom: 15px;
   text-decoration: none;
+}
+
+.players-table{
+  margin: auto;
 }
 
 /* Login page

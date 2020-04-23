@@ -1,5 +1,5 @@
 import React from 'react';
-import Player,{Deceased} from "../../models/Player";
+import Player, { Deceased } from "../../models/Player";
 import './PlayersTable.css';
 
 /**
@@ -44,13 +44,13 @@ export default class PlayersTable extends React.Component<PlayersTableProps, Pla
     var element = (e.target as HTMLElement);
     var sortID = element.id;
     var sortOrder = this.state.sortOrder;
-    if(this.state.sortID === sortID){
+    if (this.state.sortID === sortID) {
       sortOrder = -sortOrder;
-    }else{
+    } else {
       sortOrder = 1;
     }
     var players = this.state.players;
-    switch(sortID){
+    switch (sortID) {
       case "Username":
         players.sort((a: Player, b: Player) => (a.getUsername() > b.getUsername()) ? sortOrder : -sortOrder);
         break;
@@ -75,7 +75,7 @@ export default class PlayersTable extends React.Component<PlayersTableProps, Pla
       sortID: sortID,
       sortOrder: sortOrder
     });
-    if(this.props.rerenderCallback){
+    if (this.props.rerenderCallback) {
       console.log("trigger rerender");
       this.props.rerenderCallback();
     }
@@ -97,9 +97,9 @@ export default class PlayersTable extends React.Component<PlayersTableProps, Pla
       for (let header of this.props.headers) {
         var value: any;
         var userType = "";
-        switch(header){
+        switch (header) {
           case "Username":
-            if(player.getClearance() > 0)
+            if (player.getClearance() > 0)
               value = <>{player.getUsername()}<sub className="mod">M</sub></>;
             else
               value = player.getUsername();
@@ -110,12 +110,12 @@ export default class PlayersTable extends React.Component<PlayersTableProps, Pla
           case "Kills": value = player.getKills(); break;
           case "Type": value = player.getType(); break;
           case "Starved":
-            if(player instanceof Deceased)
+            if (player instanceof Deceased)
               value = (player as Deceased).getStarvedDate();
             break;
         }
         tmpRows.push(
-          <span key={keyIndex++} className={`table-cell ${header} ${userType}`} id={header} onClick={this.handleSort}>{value}</span>
+          <span key={keyIndex++} className={`table-cell ${header} ${userType}`} id={header}>{value}</span>
         );
       }
       playerRows.push(
@@ -138,7 +138,7 @@ export default class PlayersTable extends React.Component<PlayersTableProps, Pla
         </thead>
 
         <tbody className={this.props.className} id={`${this.props.id}-tbody`}>
-        {playerRows}
+          {playerRows}
         </tbody>
       </table>
     );

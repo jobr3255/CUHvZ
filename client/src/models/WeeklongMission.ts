@@ -17,7 +17,7 @@ export default class WeeklongMission {
     this.time = data["time"];
     this.location = data["location"];
     this.locationLink = data["locationLink"];
-    this.description = data["description"];
+    this.description = data["description"] || "";
   }
 
   /***************

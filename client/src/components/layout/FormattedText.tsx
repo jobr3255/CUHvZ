@@ -39,7 +39,7 @@ export default class FormattedText extends React.Component<FormattedTextProps, F
    * Fires when component loads on page
    */
   componentDidMount() {
-    var formattedText = this.formatData(this.props.text);
+    var formattedText = this.formatData(this.props.text) || "";
     this.setState({
       text: formattedText
     });

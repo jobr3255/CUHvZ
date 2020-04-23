@@ -41,7 +41,7 @@ export default class Database {
     var data = await this.query(queryText)
       .then(function(response: any) {
         if (res) {
-          res.status(200).json(response);
+          res.status(200).json(response[0]);
         } else {
           return response[0];
         }
@@ -114,5 +114,19 @@ export default class Database {
         }
       });
     return data;
+  }
+
+  public async isAuthorized(userID: string, authHeader: string): Promise<number> {
+    var authToken = authHeader || "";
+    authToken = authToken.replace("Basic", "").trim();
+    var data = await this.queryFetch(`select username,password from users where id=${userID}`, null);
+    if (data) {
+      const token = Buffer.from(`${data["username"]}:${data["password"]}`, 'utf8').toString('base64');
+      if (token === authToken) {
+        return 1;
+      }
+      return 0;
+    }
+    return -1;
   }
 }

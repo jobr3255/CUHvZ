@@ -2,6 +2,44 @@ var express = require("express");
 var router = express.Router();
 
 import Database from "../Database";
+import Token from "../Token";
+
+router.get("/weeklong/active", function(req: any, res: any) {
+  let db: Database = Database.getInstance();
+  var query = `select * from weeklongs A where A.state=2 or A.state=3`;
+  db.queryFetch(query, res);
+});
+
+router.post('/weeklong/join', async function(req: any, res: any) {
+  let db: Database = Database.getInstance();
+  var userID = req.body.userID;
+  var weeklongID = req.body.weeklongID;
+  var authHeader = req.headers.authorization;
+  if (await db.isAuthorized(userID, authHeader) > 0) {
+    var codes = await db.queryFetchAll(`select player_code from weeklong_players where weeklong_id=${weeklongID}`);
+    var playerCode = Token(5);
+    while(codes.indexOf(playerCode) >= 0){
+      playerCode = Token(5);
+    }
+    var playerData = {
+      user_id: userID,
+      weeklong_id: weeklongID,
+      player_code: playerCode
+    };
+    db.insert("weeklong_players", playerData, res);
+  } else {
+    res.status(401).send();
+  }
+});
+
+router.post('/weeklong/new', function(_req: any, _res: any) {
+});
+
+router.post('/weeklong/edit', function(_req: any, _res: any) {
+});
+
+router.post('/weeklong/logkill', function(_req: any, _res: any) {
+});
 
 router.get("/weeklong/:id", function(req: any, res: any) {
   let db: Database = Database.getInstance();
@@ -37,15 +75,6 @@ router.get("/weeklong/:id/:playerid", function(req: any, res: any) {
   var playerid = req.params.playerid;
   var query = `select A.*,B.username,B.clearance from weeklong_players A join users B on A.user_id=B.id where A.weeklong_id=${id} and B.id=${playerid}`;
   db.queryFetch(query, res);
-});
-
-router.post('/weeklong/new', function(_req: any, _res: any) {
-});
-
-router.post('/weeklong/edit', function(_req: any, _res: any) {
-});
-
-router.post('/weeklong/logkill', function(_req: any, _res: any) {
 });
 
 module.exports = router;

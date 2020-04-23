@@ -34,7 +34,7 @@ class LoginPage extends React.Component<any, LoginPageStates> {
           error: userLogin["error"]
         });
       }else{
-        this.props.login(userLogin);
+        this.props.login(userLogin, data["password"]);
       }
     }else{
       this.setState({
@@ -81,14 +81,3 @@ class LoginPage extends React.Component<any, LoginPageStates> {
 }
 
 export default withIonLifeCycle(LoginPage);
-// <Form onSubmit={this.handleSubmit} >
-//   <label>Username</label>
-//   <input
-//     placeholder="Username"
-//     name="username"></input>
-//     <div>
-//       <input
-//         name="password"></input>
-//     </div>
-//   <button type="submit">Log in</button>
-// </Form>

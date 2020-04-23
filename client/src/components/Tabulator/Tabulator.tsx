@@ -84,11 +84,7 @@ export default class Tabulator extends React.Component<TabulatorProps, Tabulator
           </span>
         );
         if(showContent){
-          tabContents = (
-            <div key={keyIndex}>
-              {tab.props.children}
-            </div>
-          );
+          tabContents = tab.props.children;
         }
       });
     }
@@ -97,7 +93,7 @@ export default class Tabulator extends React.Component<TabulatorProps, Tabulator
         <div style={{ margin: "auto", textAlign: "center" }}>
           {tabButtons}
         </div>
-        <div id="tab-container">
+        <div className="tab-container">
           {tabContents}
         </div>
       </>

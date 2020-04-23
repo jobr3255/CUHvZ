@@ -17,7 +17,7 @@ export default class Lockin {
     this.eventbrite = data["eventbrite"];
     this.blasterEventbrite = data["blaster_eventbrite"];
     this.state = data["state"];
-    this.details = data["details"];
+    this.details = data["details"] || "";
   }
 
   /***************

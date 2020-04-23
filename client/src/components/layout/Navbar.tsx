@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import Dropdown from "../Dropdown/Dropdown";
+import { BrowserRouter as Router, Switch, Route, Redirect, NavLink } from "react-router-dom";
 import './Navbar.css';
 import User from "../../models/User";
+import Weeklong from "../../models/Weeklong";
 
 import HomePage from '../../pages/HomePage';
 import RulesPage from '../../pages/RulesPage';
@@ -13,86 +13,47 @@ import ProfilePage from '../../pages/ProfilePage';
 import LockinPage from '../../pages/LockinPage';
 import WeeklongPage from '../../pages/WeeklongPage';
 import WeeklongStatsPage from '../../pages/WeeklongStatsPage';
+import AdminPage from '../../pages/AdminPage';
+
 import NotFound from '../errors/NotFound';
+import JoinWeeklong from '../events/JoinWeeklong';
 
 /**
- * Navbar state variables
+ * Navbar properties
  */
-interface NavbarStates {
-  sessionUser: User | null
+interface NavbarProps {
+  sessionUser: User | null,
+  activeWeeklong: Weeklong | null,
+  loginCallback: any,
+  logoutCallback: any
 }
 
 /**
  * Navbar component
  */
-export default class Navbar extends React.Component<any, NavbarStates> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      sessionUser: null
-    };
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
-  }
-
-  /**
-   * This fires before the componentDidMount method.
-   * Sets the currentPage and prevPage storageSession variables so that the Tabs in the Tabulator object will rerender to the last tab opened if the page is refreshed
-   */
-  UNSAFE_componentWillMount() {
-    var prevPage = sessionStorage.getItem('currentPage');
-    var currentPage = window.location.href;
-    sessionStorage.setItem("currentPage", currentPage);
-    if (prevPage)
-      sessionStorage.setItem("prevPage", prevPage);
-    this.loadSessionUser();
-  }
-
-  /**
-   * Loads a logged in user if one exists
-   */
-  loadSessionUser() {
-    var userStr = sessionStorage.getItem('sessionUser');
-    if (userStr) {
-      var userJSON = JSON.parse(userStr);
-      var user = new User(userJSON);
-      this.setState({
-        sessionUser: user
-      });
-    }
-  }
-
-  /**
-   * Clears the session of a user
-   */
-  login(userData: any) {
-    sessionStorage.setItem("sessionUser", JSON.stringify(userData));
-    var user = new User(userData);
-    this.setState({
-      sessionUser: user
-    });
-  }
-
-  /**
-   * Clears the session of a user
-   */
-  logout() {
-    sessionStorage.removeItem('sessionUser');
-    this.setState({
-      sessionUser: null
-    });
-  }
+export default class Navbar extends React.Component<NavbarProps, any> {
 
   render() {
-    var profileButton, logoutButton, loginButton, signupButton;
-    var profilePage;
-    if (this.state.sessionUser) {
-      profilePage = <ProfilePage user={this.state.sessionUser} />;
-      profileButton = <li><a id='profile_button' href='/profile'>Profile</a></li>
-      logoutButton = <li><button id='logout_button' onClick={this.logout}>Logout</button></li>
+    var profileButtons = [];
+    var userClearance = false;
+    var sessionUser = this.props.sessionUser;
+
+    var activeWeeklong = this.props.activeWeeklong;
+    var activeWeeklongLink;
+    if(activeWeeklong){
+      activeWeeklongLink = <li><NavLink exact className="nav-link" activeClassName="active-nav-link" to={`/weeklong/${activeWeeklong.getID()}`}>Weeklong</NavLink></li>;
+    }
+
+    if (sessionUser) {
+      if (sessionUser.getClearance() > 0) {
+        userClearance = true;
+        profileButtons.push(<li key={3}><NavLink exact className="nav-link" activeClassName="active-nav-link" to="/admin">Admin</NavLink></li>);
+      }
+      profileButtons.push(<li key={1}><NavLink exact className="nav-link" activeClassName="active-nav-link" to="/profile">Profile</NavLink></li>);
+      profileButtons.push(<li key={2}><button onClick={this.props.logoutCallback} className="nav-link">Logout</button></li>);
     } else {
-      loginButton = <li><a id='login_button' href='/login'>Login</a></li>;
-      signupButton = <li><a id='signup_button' href='/signup'>Sign Up</a></li>;
+      profileButtons.push(<li key={1}><NavLink exact className="nav-link" activeClassName="active-nav-link" to="/login">Login</NavLink></li>);
+      profileButtons.push(<li key={2}><NavLink exact className="nav-link" activeClassName="active-nav-link" to="/signup">Sign up</NavLink></li>);
     }
     return (
       <div>
@@ -107,9 +68,10 @@ export default class Navbar extends React.Component<any, NavbarStates> {
                   <div className="menu-bar"></div>
                 </span>
                 <ul className="main-menu">
-                  <li><a href="/">Home</a></li>
-                  <li><a href="/rules">Rules</a></li>
-                  <li><a href="/events">Events</a></li>
+                  <li><NavLink exact className="nav-link" activeClassName="active-nav-link" to="/">Home</NavLink></li>
+                  <li><NavLink exact className="nav-link" activeClassName="active-nav-link" to="/rules">Rules</NavLink></li>
+                  <li><NavLink exact className="nav-link" activeClassName="active-nav-link" to="/events">Events</NavLink></li>
+                  {activeWeeklongLink}
                 </ul>
               </span>
 
@@ -119,10 +81,7 @@ export default class Navbar extends React.Component<any, NavbarStates> {
                   <div className="profile-body"></div>
                 </div>
                 <ul className="profile-menu">
-                  {logoutButton}
-                  {profileButton}
-                  {signupButton}
-                  {loginButton}
+                  {profileButtons}
                 </ul>
               </span>
             </div>
@@ -132,12 +91,14 @@ export default class Navbar extends React.Component<any, NavbarStates> {
 
             <Route path="/rules" component={RulesPage} />
             <Route path="/events" component={EventsPage} />
-            <ConditionalRoute path="/signup" component={<SignUpPage login={this.login} />} rerouteOn={this.state.sessionUser} reroute="/profile" />
-            <ConditionalRoute path="/login" component={<LoginPage login={this.login} />} rerouteOn={this.state.sessionUser} reroute="/profile" />
-            <ConditionalRoute path="/profile" component={profilePage} rerouteOn={this.state.sessionUser == null} reroute="/login" />
+            <ConditionalRoute path="/signup" component={<SignUpPage login={this.props.loginCallback} />} rerouteOn={sessionUser} reroute="/profile" />
+            <ConditionalRoute path="/login" component={<LoginPage login={this.props.loginCallback} />} rerouteOn={sessionUser} reroute="/profile" />
+            <ConditionalRoute path="/profile" component={<ProfilePage user={sessionUser} />} rerouteOn={sessionUser == null} reroute="/login" />
+            <ConditionalRoute path="/admin" component={<AdminPage />} rerouteOn={!userClearance} reroute="/profile" />
 
             <Route path="/lockin/:id" component={LockinPage} />
             <Route path="/weeklong/:id/stats" component={WeeklongStatsPage} />
+            <Route path="/weeklong/:id/join" component={JoinWeeklong} />
             <Route path="/weeklong/:id" component={WeeklongPage} />
 
             <Route component={NotFound} />

@@ -2,6 +2,7 @@ import { withIonLifeCycle } from '@ionic/react';
 import React from 'react';
 import { Helmet } from "react-helmet";
 import User from "../models/User";
+import ProfileController from "../controllers/ProfileController"
 
 /**
  * ProfilePage properties
@@ -19,7 +20,11 @@ class ProfilePage extends React.Component<ProfilePageProps, any> {
    * Fires when component loads on page
    */
   async componentDidMount() {
-
+    var joinWeeklong = sessionStorage.getItem('joinWeeklong');
+    if(joinWeeklong){
+      sessionStorage.removeItem('joinWeeklong');
+      console.log("Join weeklong "+joinWeeklong);
+    }
   }
 
   render() {

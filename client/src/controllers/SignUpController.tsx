@@ -27,7 +27,6 @@ export default class SignUpController extends LoginController {
    *  Sends a post request to server
    */
   async createUser(data: any): Promise<any> {
-    console.log(data);
     let phone = data["phone"];
     if(!data["phone"])
       phone = "NULL";
@@ -41,7 +40,6 @@ export default class SignUpController extends LoginController {
     };
     let result = await API.post("/api/user/new", postData)
       .then(function(response: any) {
-        console.log(response);
         if (response.status === 200) {
           return response.data;
         }

@@ -7,6 +7,13 @@ import Form from "../components/Form/Form";
 /**
  * LoginPage state variables
  */
+interface SignUpPageProps {
+  login: any
+}
+
+/**
+ * LoginPage state variables
+ */
 interface SignUpPageStates {
   usernames: string[] | null,
   emails: string[] | null,
@@ -19,10 +26,11 @@ interface SignUpPageStates {
   nameError: string | null,
   password: string
 }
+
 /**
  * SignUpPage component
  */
-class SignUpPage extends React.Component<any, SignUpPageStates> {
+class SignUpPage extends React.Component<SignUpPageProps, SignUpPageStates> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -87,7 +95,7 @@ class SignUpPage extends React.Component<any, SignUpPageStates> {
             error: result["error"]
           });
         }else{
-          this.props.login(result);
+          this.props.login(result, data["password"]);
         }
       }else{
         this.setState({

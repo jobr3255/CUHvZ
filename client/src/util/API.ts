@@ -32,4 +32,21 @@ export default class API {
         });
     });
   }
+
+  static async securePost(url: string, data: any, token: string) {
+    return new Promise(function(resolve, reject) {
+      axios({
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'Authorization': `Basic ${token}` },
+        data: data,
+        url: url
+      })
+        .then(function(response) {
+          resolve(response);
+        })
+        .catch(function(error) {
+          reject(error);
+        });
+    });
+  }
 }

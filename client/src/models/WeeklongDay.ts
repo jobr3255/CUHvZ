@@ -6,7 +6,7 @@ export default class WeeklongDay {
   private offCampusMission: WeeklongMission | undefined
 
   constructor(description: string, onCamp?: WeeklongMission, offCamp?: WeeklongMission) {
-    this.description = description;
+    this.description = description || "";
     this.onCampusMission = onCamp;
     this.offCampusMission = offCamp;
   }

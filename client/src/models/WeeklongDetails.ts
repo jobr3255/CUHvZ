@@ -9,7 +9,7 @@ export default class WeeklongDetails {
   private friday: WeeklongDay;
 
   constructor(data: any) {
-    this.description = data["details"];
+    this.description = data["details"] || "";
     this.monday = new WeeklongDay(data["monday"]);
     this.tuesday = new WeeklongDay(data["tuesday"]);
     this.wednesday = new WeeklongDay(data["wednesday"]);

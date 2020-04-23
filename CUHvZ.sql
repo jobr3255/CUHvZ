@@ -48,7 +48,7 @@ ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `CUHvZ`.`user_details` (
   `id` INT NOT NULL,
-  `join_date` DATE NULL,
+  `join_date` DATETIME NULL,
   `activated` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_user_details`
@@ -960,7 +960,6 @@ INSERT INTO `user_details` (`id`, `join_date`, `activated`) VALUES
 (264, '2019-03-31 01:50:31', 0),
 (265, '2019-03-31 01:50:31', 1),
 (266, '2019-03-31 01:50:31', 0),
-(269, '2019-03-31 01:50:31', 0),
 (270, '2019-03-31 01:50:31', 0),
 (271, '2019-03-31 01:50:31', 1),
 (273, '2019-03-31 01:50:31', 1),
@@ -2039,9 +2038,9 @@ CREATE TABLE IF NOT EXISTS `CUHvZ`.`weeklong_players` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `weeklong_id` INT NOT NULL,
   `user_id` INT NOT NULL,
-  `player_code` VARCHAR(55) NOT NULL,
-  `type` ENUM('normal', 'oz', 'suicide','starved', 'inactive') NOT NULL DEFAULT 'normal',
-  `status` ENUM('human', 'zombie', 'deceased') NOT NULL,
+  `player_code` VARCHAR(45) NOT NULL,
+  `type` ENUM('normal', 'oz', 'suicide', 'starved', 'inactive') NOT NULL DEFAULT 'normal',
+  `status` ENUM('human', 'zombie', 'deceased') NOT NULL DEFAULT 'human',
   `poisoned` INT NOT NULL DEFAULT 0,
   `points` INT NOT NULL DEFAULT 0,
   `kills` INT NOT NULL DEFAULT 0,
@@ -2050,6 +2049,7 @@ CREATE TABLE IF NOT EXISTS `CUHvZ`.`weeklong_players` (
   INDEX `weeklong_idx` (`weeklong_id` ASC),
   UNIQUE INDEX `weeklong_player_code` (`player_code` ASC, `weeklong_id` ASC),
   INDEX `player_idx` (`user_id` ASC),
+  UNIQUE INDEX `weeklong_player` (`weeklong_id` ASC, `user_id` ASC),
   CONSTRAINT `fk_weeklong`
     FOREIGN KEY (`weeklong_id`)
     REFERENCES `CUHvZ`.`weeklongs` (`id`)

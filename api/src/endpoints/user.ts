@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var Password = require("node-php-password");
+import Token from "../Token";
 var nodemailer = require('nodemailer');
 
 import Database from "../Database";
@@ -22,7 +23,7 @@ function sendActivationEmail(email: string, activationCode: string) {
     html: body
   };
   let transporter = nodemailer.createTransport(EMAIL_CONFIG);
-  transporter.verify(function(error: any, success: any) {
+  transporter.verify(function(error: any, _success: any) {
     if (error) {
       logger.error(error);
       console.log(error);
@@ -49,8 +50,7 @@ router.post('/user/new', async function(req: any, res: any) {
     var userData = await db.queryFetch("select * from users where id=LAST_INSERT_ID()", null);
     var userEmail = userData["email"];
     var userID = userData["id"];
-    var activateCode = Password.hash(Math.random().toString(36), "PASSWORD_BCRYPT");
-    activateCode = activateCode.substr(8, activateCode.length).split("/").join("");
+    var activateCode = Token(20);
     var tokenData = {
       user_id: userID,
       token: activateCode,
@@ -67,25 +67,31 @@ router.post('/user/new', async function(req: any, res: any) {
 router.post('/user/resendactivation', async function(req: any, res: any) {
   let db: Database = Database.getInstance();
   var userID = req.body.userID;
-  var email = req.body.email;
-  var data = await db.queryFetch(`select * from users where id=${userID} and email="${email}"`, null);
-  if (!data) {
-    // Not found
+  var authHeader = req.headers.authorization;
+  var auth = await db.isAuthorized(userID, authHeader);
+  if (auth > 0) {
+    var data = await db.queryFetch(`select * from users where id=${userID}`, null);
+    if (!data) {
+      // Not found
+      res.status(404).send();
+    } else {
+      var userEmail = data["email"];
+      var userID = data["id"];
+      var activateCode = Token(20);
+      var tokenData = {
+        user_id: userID,
+        token: activateCode,
+        type: "activation"
+      };
+      if (await db.insert("tokens", tokenData, null)) {
+        sendActivationEmail(userEmail, activateCode);
+        res.status(200).send();
+      }
+    }
+  } else if (auth === -1) {
     res.status(404).send();
   } else {
-    var userEmail = data["email"];
-    var userID = data["id"];
-    var activateCode = Password.hash(Math.random().toString(36), "PASSWORD_BCRYPT");
-    activateCode = activateCode.substr(8, activateCode.length).split("/").join("");
-    var tokenData = {
-      user_id: userID,
-      token: activateCode,
-      type: "activation"
-    };
-    if(await db.insert("tokens", tokenData, null)){
-      sendActivationEmail(userEmail, activateCode);
-      res.status(200).send();
-    }
+    res.status(401).send();
   }
 });
 
@@ -94,10 +100,9 @@ router.post('/user/edit', function(_req: any, _res: any) {
 
 router.post('/user/login', async function(req: any, res: any) {
   let db: Database = Database.getInstance();
-  var username = req.body.username;
-  var email = req.body.email;
+  var user = req.body.user;
   var pass = req.body.password;
-  var data = await db.queryFetch(`select * from users where (username="${username}" OR email="${email}")`, null);
+  var data = await db.queryFetch(`select * from users where (username="${user}" OR email="${user}")`, null);
   // console.log(data);
   if (!data) {
     // Not found

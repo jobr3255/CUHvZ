@@ -1,3 +1,25 @@
-li.paginater {
-  float: left;
+.paginator {
+  margin: auto;
+  display: flex;
+}
+
+.paginator ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.paginator span {
+  text-decoration: none;
+  text-align: center;
+  margin: 5px;
+  padding: 10px;
+  display: inline-block;
+  color: white;
+  transition: 0.3s;
+}
+
+.paginator span:hover {
+  background-color: rgba(234, 123, 0, 0.4);
+  transition: 0.3s;
 }

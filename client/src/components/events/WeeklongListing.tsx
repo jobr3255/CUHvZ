@@ -17,29 +17,31 @@ export default class WeeklongListing extends EventListing<WeeklongListingProps> 
   render() {
     var weeklong = this.props.weeklong;
     var pageLink = "/weeklong/" + weeklong.getID();
-    // var activeLinks = null;
-    // if(lockin.getState() === 2){
-    //   var eventbriteLink = null;
-    //   if(lockin.getEventbrite()){
-    //     eventbriteLink = <>| <a href={lockin.getEventbrite()} target="_blank" rel="noopener noreferrer">Tickets</a></>;
-    //   }
-    //   var blasterEventbriteLink = null;
-    //   if(lockin.getBlasterEventbrite()){
-    //     blasterEventbriteLink = <>| <a href={lockin.getBlasterEventbrite()} target="_blank" rel="noopener noreferrer">Blaster Rental</a></>;
-    //   }
-    //   activeLinks = <>{eventbriteLink} {blasterEventbriteLink}</>;
-    // }
-    // <br/>
-    // <span>Wanna play in this event
-    //   <h3 style='margin: 0;'><a href='/profile.php?joinEvent=$weeklongID' >Join Now!</a>
-    // </h3></span>
-      // <br/>
-      // <span>Late to the game? <a href='/profile.php?joinEvent=$weeklongID' >Join Now!</a></span>
-    var titleLink = <a className="title-link" href={pageLink}>{weeklong.getTitle()}</a>;
+    var joinLink;
+    var activeWeeklongData = sessionStorage.getItem('activeWeeklong');
+    if (activeWeeklongData) {
+      var activeWeeklong = new Weeklong(JSON.parse(activeWeeklongData));
+      if (weeklong.getID() === activeWeeklong.getID()) {
+        var lateSignupDate = new Date(activeWeeklong.getStartDate());
+        var now = new Date();
+        lateSignupDate.setDate(lateSignupDate.getDate() + 1);
+        // Display join
+        if (now.getTime() < lateSignupDate.getTime()) {
+          joinLink = <>| <a href={`${pageLink}/join`} className="title-link orange">Join Now!</a></>;
+        }
+      }
+    }
+
+    var waiverLink;
+    if (weeklong.getWaiver()) {
+      waiverLink = <>| <a href={weeklong.getWaiver()} target="_blank" rel="noopener noreferrer">Waiver</a></>;
+    }
+
+    var titleLink = <><a className="title-link" href={pageLink}>{weeklong.getTitle()}</a> {joinLink}</>;
     var title;
-    if(this.props.titleSize){
+    if (this.props.titleSize) {
       title = this.getTitle(titleLink, this.props.titleSize);
-    }else{
+    } else {
       title = this.getTitle(titleLink, 4);
     }
     return (
@@ -49,7 +51,7 @@ export default class WeeklongListing extends EventListing<WeeklongListingProps> 
           <EventDate
             startDate={weeklong.getStartDate()}
             endDate={weeklong.getEndDate()}
-          /> | <a href={pageLink + "/stats"}>Player stats</a>
+          /> | <a href={pageLink + "/stats"}>Player stats</a> {waiverLink}
         </p>
       </div>
     );

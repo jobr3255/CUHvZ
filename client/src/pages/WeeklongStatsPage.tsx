@@ -57,7 +57,7 @@ class WeeklongStatsPage extends React.Component<any, WeeklongStatsPageStates> {
     var pageTitle = "Weeklong";
     var header;
     var tabulator;
-    var topPlayers;
+    var topPlayersTable;
     if (this.state.weeklong) {
       var weeklong: Weeklong = this.state.weeklong;
       var weeklongController = new WeeklongStatsController();
@@ -83,13 +83,18 @@ class WeeklongStatsPage extends React.Component<any, WeeklongStatsPageStates> {
           bP = 0;
         return (aP < bP) ? 1 : -1
       });
-      topPlayers = <PlayersTable id="top-players" className="color-players" players={[allPlayers[0], allPlayers[1], allPlayers[2]]} headers={["Username", "Points", "Hunger"]} />
+      var topPlayers = [];
+      for(let i=0; i < 3; i++){
+        if(allPlayers[i])
+          topPlayers.push(allPlayers[i]);
+      }
+      topPlayersTable = <PlayersTable id="top-players" className="color-players" players={topPlayers} headers={["Username", "Points", "Hunger"]} />
       allPlayers = weeklong.getPlayers().getAllPlayers();
       allPlayers.sort((a: Player, b: Player) => (a.getPoints() < b.getPoints()) ? 1 : -1);
       tabulator = (
         <Tabulator id="weeklong-stats">
           <Tab id="all-players" name={`All: ${allPlayers.length}`} default>
-            <Paginator id="all-players" perPage={15} reset={this.state.rerender}>
+            <Paginator perPage={15} reset={this.state.rerender}>
               <PlayersTable
                 id="all-players"
                 className="color-players"
@@ -142,7 +147,7 @@ class WeeklongStatsPage extends React.Component<any, WeeklongStatsPageStates> {
         </Helmet>
         <div className="content lightslide-box white">
           {header}
-          {topPlayers}
+          {topPlayersTable}
           {tabulator}
         </div>
       </div>

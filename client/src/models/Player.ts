@@ -37,8 +37,8 @@ export default class Player extends User{
     }else{
       timer = starveDate.getTime() - now.getTime();
     }
-    var minutes = Math.floor((timer / (1000 * 60)) % 60);
-    var hours = Math.floor((timer / (1000 * 60 * 60)) % 24);
+    var minutes = Math.abs(Math.floor((timer / (1000 * 60)) % 60));
+    var hours = Math.abs(Math.floor((timer / (1000 * 60 * 60)) % 24));
     var formatted = `${hours}:${minutes}`;
     if (minutes === 0)
       formatted = `${hours}:00`;
