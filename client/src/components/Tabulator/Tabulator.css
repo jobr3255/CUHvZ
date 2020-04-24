@@ -3,6 +3,15 @@
   flex-direction: column;
 }
 
+.tab-container > span {
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-buttons-container {
+  width: 100%;
+}
+
 /* Style the tab */
 .tab {
   overflow: hidden;
@@ -20,6 +29,12 @@
   transition: 0.3s;
   font-size: 17px;
   color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .tab button {
+    font-size: 10px;
+  }
 }
 
 /* Change background color of buttons on hover */
@@ -41,5 +56,14 @@
 }
 
 .small-tab {
-  padding: 0 10px 0 10px;
+  padding: 0 1vw 0 1vw;
+  line-height: 4vh;
+  height: auto;
+  min-height: 25px;
 }
+
+/* @media only screen and (max-width: 600px) {
+  .tab button {
+    font-size: 10px;
+  }
+} */

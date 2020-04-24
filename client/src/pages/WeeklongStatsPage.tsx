@@ -94,7 +94,7 @@ class WeeklongStatsPage extends React.Component<any, WeeklongStatsPageStates> {
       tabulator = (
         <Tabulator id="weeklong-stats">
           <Tab id="all-players" name={`All: ${allPlayers.length}`} default>
-            <Paginator perPage={15} reset={this.state.rerender}>
+            <Paginator id="all-players" perPage={15} reset={this.state.rerender}>
               <PlayersTable
                 id="all-players"
                 className="color-players"
@@ -116,6 +116,7 @@ class WeeklongStatsPage extends React.Component<any, WeeklongStatsPageStates> {
             <Paginator id="zombies" perPage={15} reset={this.state.rerender}>
               <PlayersTable
                 id="zombies"
+                className="zombie-table"
                 players={weeklong.getPlayers().getZombies()}
                 headers={["Username", "Type", "Kills", "Points", "Hunger"]}
                 rerenderCallback={this.rerenderPaginator} />
@@ -125,6 +126,7 @@ class WeeklongStatsPage extends React.Component<any, WeeklongStatsPageStates> {
             <Paginator id="deceased" perPage={15} reset={this.state.rerender}>
               <PlayersTable
                 id="deceased"
+                className="deceased-table"
                 players={weeklong.getPlayers().getDeceased()}
                 headers={["Username", "Kills", "Points", "Starved"]}
                 rerenderCallback={this.rerenderPaginator} />
@@ -147,7 +149,9 @@ class WeeklongStatsPage extends React.Component<any, WeeklongStatsPageStates> {
         </Helmet>
         <div className="content lightslide-box white">
           {header}
-          {topPlayersTable}
+          <div className="flex-container">
+            {topPlayersTable}
+          </div>
           {tabulator}
         </div>
       </div>

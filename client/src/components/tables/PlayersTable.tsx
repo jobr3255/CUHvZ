@@ -29,6 +29,7 @@ interface PlayersTableStates {
 export default class PlayersTable extends React.Component<PlayersTableProps, PlayersTableStates> {
   constructor(props: PlayersTableProps) {
     super(props);
+    console.log(props.players)
     this.state = {
       players: props.players,
       sortID: "",
@@ -127,7 +128,7 @@ export default class PlayersTable extends React.Component<PlayersTableProps, Pla
       );
     }
     return (
-      <table className="players-table">
+      <table className={`players-table ${this.props.className}`}>
 
         <thead>
           <tr>

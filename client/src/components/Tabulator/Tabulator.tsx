@@ -83,14 +83,20 @@ export default class Tabulator extends React.Component<TabulatorProps, Tabulator
             <button className={`tablink small-tab ${active}`} id={tabID} onClick={this.handleTabClick}>{tab.props.name}</button>
           </span>
         );
-        if(showContent){
-          tabContents = tab.props.children;
+        var display;
+        if(!showContent){
+          display = {display: "none"};
         }
+        tabContents.push(
+          <span key={keyIndex} style={display}>
+            {tab.props.children}
+          </span>
+        );
       });
     }
     return (
       <>
-        <div style={{ margin: "auto", textAlign: "center" }}>
+        <div className="tab-buttons-container" style={{ margin: "auto", textAlign: "center" }}>
           {tabButtons}
         </div>
         <div className="tab-container">

@@ -123,7 +123,7 @@ nav li:hover {
     display: inline-block;
   }
 
-  span ul {
+  nav span ul {
      position: absolute;
      top: 44px;
      flex-direction: column;

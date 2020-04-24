@@ -38,12 +38,13 @@ export default class Paginator extends React.Component<PaginatorProps, Paginator
    * Fires when component loads on page
    */
   componentDidMount() {
-    var child: any = React.Children.only(this.props.children);
-    var id = "";
-    if(child){
-      id = child.props.id;
-    }
-    var tbody = document.getElementById(`${id}-tbody`);
+    // var child: any = React.Children.only(this.props.children);
+    // var id = "";
+    // if(child){
+    //   id = child.props.id;
+    // }
+    // var tbody = document.getElementById(`${id}-tbody`);
+    var tbody = document.getElementById(`${this.props.id}-tbody`);
     if (!tbody)
       return
     var trRows = tbody.getElementsByTagName("tr");
@@ -63,7 +64,7 @@ export default class Paginator extends React.Component<PaginatorProps, Paginator
    */
   componentWillReceiveProps(props: PaginatorProps) {
     const { reset } = this.props;
-    console.log(`props.reset = ${props.reset} this.props.reset = ${this.props.reset}`);
+    // console.log(`props.reset = ${props.reset} this.props.reset = ${this.props.reset}`);
     if (props.reset !== reset) {
       this.navigateToPage(1);
     }

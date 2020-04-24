@@ -10,17 +10,27 @@ ion-content{
   color: #ea7b00;
 }
 
+.flex-container {
+  display: flex;
+}
+
 /* Weeklong stats page
 ––––––––––––––––––––––––––––––––––––––––––––––––––*/
 .stats-header {
   margin: 0;
   text-align: center;
-  font-size: 3vh;
+  font-size: 30px;
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   letter-spacing: 0.05rem;
   margin-bottom: 15px;
   text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .stats-header {
+    font-size: 20px;
+  }
 }
 
 .players-table{
