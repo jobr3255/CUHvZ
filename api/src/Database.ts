@@ -82,6 +82,9 @@ export default class Database {
     return data;
   }
 
+  /**
+   * Formats insert data so that NULL is passed to the database with no quotes to avoid errors
+   */
   private formatInsertValues(insertData: any): any {
     var values = Object.values(insertData);
     for (let i = 0; i < values.length; i++) {
@@ -92,10 +95,88 @@ export default class Database {
     return values.toString();
   }
 
+  /**
+   * Formats data to insert into the database
+   */
   public async insert(table: string, insertData: any, res?: any): Promise<any> {
     var keys = Object.keys(insertData).toString();
     var values = this.formatInsertValues(insertData);
     var query = `insert into ${table} (${keys}) values (${values})`;
+    var data = await this.query(query)
+      .then(async function(response: any) {
+        if (res) {
+          res.status(200).json(response);
+        } else {
+          return true;
+        }
+      })
+      .catch(function(error: any) {
+        console.log(error);
+        logger.error(error);
+        if (res) {
+          res.status(400).send(error);
+        } else {
+          return false;
+        }
+      });
+    return data;
+  }
+
+  /**
+   * Formats object data into an array with key=value strings for each key value pair in the object
+   */
+  private formatEqualsData(data: any): any {
+    var equalsData = [];
+    for (const [key, value] of Object.entries(data)) {
+      let tmpVal = value;
+      // Wrap in quotes if not NULL
+      if (tmpVal !== "NULL") {
+        tmpVal = `'${value}'`;
+      }
+      equalsData.push(`${key}=${tmpVal}`);
+
+    }
+    return equalsData;
+  }
+
+  private formatWhereData(data: any): any {
+    var equals = this.formatEqualsData(data);
+    if(equals.length === 1){
+      return equals[0];
+    }
+    return this.formatEqualsData(data).join(" AND ");
+  }
+
+  private formatUpdateData(data: any): any {
+    return this.formatEqualsData(data).join(",");
+  }
+
+  public async update(table: string, updateData: any, whereData: any, res?: any): Promise<any> {
+    var setData = this.formatUpdateData(updateData);
+    var where = this.formatWhereData(whereData);
+    var query = `update ${table} set ${setData} where (${where})`;
+    var data = await this.query(query)
+      .then(async function(response: any) {
+        if (res) {
+          res.status(200).json(response);
+        } else {
+          return true;
+        }
+      })
+      .catch(function(error: any) {
+        console.log(error);
+        logger.error(error);
+        if (res) {
+          res.status(400).send(error);
+        } else {
+          return false;
+        }
+      });
+    return data;
+  }
+
+  public async delete(table: string, id: number, res?: any): Promise<any> {
+    var query = `delete from ${table} where id=${id}`;
     var data = await this.query(query)
       .then(async function(response: any) {
         if (res) {

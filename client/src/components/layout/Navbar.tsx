@@ -14,6 +14,7 @@ import LockinPage from '../../pages/LockinPage';
 import WeeklongPage from '../../pages/WeeklongPage';
 import WeeklongStatsPage from '../../pages/WeeklongStatsPage';
 import AdminPage from '../../pages/AdminPage';
+import ActivationPage from '../../pages/ActivationPage';
 
 import NotFound from '../errors/NotFound';
 import JoinWeeklong from '../events/JoinWeeklong';
@@ -100,6 +101,8 @@ export default class Navbar extends React.Component<NavbarProps, any> {
             <Route path="/weeklong/:id/stats" component={WeeklongStatsPage} />
             <Route path="/weeklong/:id/join" component={JoinWeeklong} />
             <Route path="/weeklong/:id" component={WeeklongPage} />
+
+            <Route path="/activate/:activationToken" component={ActivationPage} />
 
             <Route component={NotFound} />
           </Switch>

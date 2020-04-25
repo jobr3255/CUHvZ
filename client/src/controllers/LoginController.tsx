@@ -21,11 +21,11 @@ export default class LoginController {
       })
       .catch(function(error: any) {
         if (error.response.status === 404) {
-          return {error: "Email/username not found"};
-        }else if (error.response.status === 401) {
-          return {error: "Password incorrect"};
-        }else{
-          return {error: "Error connecting to the server"};
+          return { error: "Email/username not found" };
+        } else if (error.response.status === 401) {
+          return { error: "Password incorrect" };
+        } else {
+          return { error: "Error connecting to the server" };
         }
       });
     return userData;

@@ -322,11 +322,11 @@ class SignUpPage extends React.Component<SignUpPageProps, SignUpPageStates> {
             <div className="row">
               <div className="six columns">
                 <label className="small">First Name</label>
-                <input type="text" name="firstName" className="form-control input-lg u-full-width" placeholder="First Name" autoComplete="name" required onChange={this.validateName} />
+                <input type="text" name="firstName" className="form-control input-lg u-full-width" placeholder="First Name" autoComplete="given-name" required onChange={this.validateName} />
               </div>
               <div className="six columns">
                 <label className="small">Last Name</label>
-                <input type="text" name="lastName" className="form-control input-lg u-full-width" placeholder="Last Name" autoComplete="name" required onChange={this.validateName} />
+                <input type="text" name="lastName" className="form-control input-lg u-full-width" placeholder="Last Name" autoComplete="family-name" required onChange={this.validateName} />
               </div>
             </div>
 

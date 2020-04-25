@@ -1,13 +1,12 @@
-import React from "react";
 import API from "../util/API";
 
 /**
- * Controller for the EventsPage
+ * Controller for the ProfilePage
  */
 export default class ProfileController {
 
   /**
-   * Calls API and returns WeeklongListing objects
+   * Calls API and returns Weeklong objects
    */
   async joinWeeklong(weeklongID: number): Promise<JSX.Element[]> {
     var postData = {

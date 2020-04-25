@@ -14,6 +14,20 @@ ion-content{
   display: flex;
 }
 
+/* Activate page
+––––––––––––––––––––––––––––––––––––––––––––––––––*/
+.activation-message {
+  font-weight: 600;
+}
+
+.activation-success {
+  color: mediumseagreen;
+}
+
+.activation-failed {
+  color: tomato;
+}
+
 /* Weeklong stats page
 ––––––––––––––––––––––––––––––––––––––––––––––––––*/
 .stats-header {

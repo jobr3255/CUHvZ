@@ -45,7 +45,7 @@ export default class SignUpController extends LoginController {
         }
       })
       .catch(function(error: any) {
-        return {error: "Error connecting to the server"};
+        return {error: "Server error"};
       });
     return result;
   }

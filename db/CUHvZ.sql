@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `CUHvZ`.`user_details` (
   CONSTRAINT `fk_user_details`
     FOREIGN KEY (`id`)
     REFERENCES `CUHvZ`.`users` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `CUHvZ`.`subscriptions` (
   CONSTRAINT `fk_user_subscriptions`
     FOREIGN KEY (`id`)
     REFERENCES `CUHvZ`.`users` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `CUHvZ`.`tokens` (
   `user_id` INT NOT NULL,
   `token` VARCHAR(255) NOT NULL,
   `type` VARCHAR(45) NOT NULL,
-  `experation` TIMESTAMP NULL,
+  `expiration` TIMESTAMP NULL,
   PRIMARY KEY (`id`),
   INDEX `user_idx` (`user_id` ASC),
   CONSTRAINT `fk_token_user_id`
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `CUHvZ`.`weeklong_details` (
   CONSTRAINT `fk_weeklong_details`
     FOREIGN KEY (`id`)
     REFERENCES `CUHvZ`.`weeklongs` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -380,6 +380,24 @@ CREATE TABLE IF NOT EXISTS `CUHvZ`.`time_offset` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `CUHvZ`.`used_tokens`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CUHvZ`.`used_tokens` ;
+
+CREATE TABLE IF NOT EXISTS `CUHvZ`.`used_tokens` (
+  `id` INT NOT NULL,
+  `user_id` INT NOT NULL,
+  `token` VARCHAR(255) NOT NULL,
+  `type` VARCHAR(45) NOT NULL,
+  `time_used` TIMESTAMP NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
 -- Data for table `CUHvZ`.`users`
@@ -2791,6 +2809,10 @@ INSERT INTO `CUHvZ`.`time_offset` (`id`, `offset`) VALUES (1, 0);
 
 COMMIT;
 
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
 USE `CUHvZ`;
 
 DELIMITER $$
@@ -2800,8 +2822,8 @@ DROP TRIGGER IF EXISTS `CUHvZ`.`users_AFTER_INSERT` $$
 USE `CUHvZ`$$
 CREATE DEFINER = CURRENT_USER TRIGGER `CUHvZ`.`users_AFTER_INSERT` AFTER INSERT ON `users` FOR EACH ROW
 BEGIN
-INSERT INTO user_details (id, join_date) VALUES (LAST_INSERT_ID(), DATE_ADD(NOW(), INTERVAL (select offset from time_offset where id=1) HOUR));
-INSERT INTO subscriptions (id) VALUES (LAST_INSERT_ID());
+INSERT INTO CUHvZ.user_details (id, join_date) VALUES (NEW.id, DATE_ADD(NOW(), INTERVAL (select offset from CUHvZ.time_offset where id=1) HOUR));
+INSERT INTO CUHvZ.subscriptions (id) VALUES (NEW.id);
 END$$
 
 
@@ -2813,6 +2835,15 @@ BEGIN
 delete from subscriptions where id=OLD.id;
 delete from user_details where id=OLD.id;
 delete from tokens where user_id=OLD.id;
+END$$
+
+
+USE `CUHvZ`$$
+DROP TRIGGER IF EXISTS `CUHvZ`.`tokens_AFTER_DELETE` $$
+USE `CUHvZ`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `CUHvZ`.`tokens_AFTER_DELETE` AFTER DELETE ON `tokens` FOR EACH ROW
+BEGIN
+INSERT INTO CUHvZ.used_tokens (id, user_id, token, type, time_used) VALUES (OLD.id, OLD.user_id, OLD.token, OLD.type, DATE_ADD(NOW(), INTERVAL (select offset from CUHvZ.time_offset where id=1) HOUR));
 END$$
 
 

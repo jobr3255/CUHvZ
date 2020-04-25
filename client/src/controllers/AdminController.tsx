@@ -1,6 +1,5 @@
 import React from "react";
 import API from "../util/API";
-import WeeklongListing from "../components/events/WeeklongListing"
 import Weeklong from "../models/Weeklong"
 
 /**
@@ -11,7 +10,7 @@ export default class AdminController {
   /**
    * Calls API and returns WeeklongListing objects
    */
-  async getWeeklongListings(): Promise<JSX.Element[]> {
+  async getWeeklongs(): Promise<Weeklong[]> {
     let weeklongData = await API.get("/api/weeklongs")
       .then(function(response: any) {
         if (response.status === 200) {
@@ -23,14 +22,6 @@ export default class AdminController {
     for (var data of weeklongData) {
       weeklongs.push(new Weeklong(data));
     }
-    var weeklongListings = [];
-    for (var weeklong of weeklongs) {
-      weeklongListings.push(
-        <WeeklongListing
-          key={ weeklong.getID() }
-          id = { weeklong.getID() }
-          weeklong = { weeklong } />);
-    }
-    return weeklongListings;
+    return weeklongs;
   }
 }

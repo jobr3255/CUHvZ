@@ -50,7 +50,7 @@ router.post('/user/new', async function(req: any, res: any) {
     var userData = await db.queryFetch("select * from users where id=LAST_INSERT_ID()", null);
     var userEmail = userData["email"];
     var userID = userData["id"];
-    var activateCode = Token(20);
+    var activateCode = Token(40);
     var tokenData = {
       user_id: userID,
       token: activateCode,
@@ -77,7 +77,7 @@ router.post('/user/resendactivation', async function(req: any, res: any) {
     } else {
       var userEmail = data["email"];
       var userID = data["id"];
-      var activateCode = Token(20);
+      var activateCode = Token(40);
       var tokenData = {
         user_id: userID,
         token: activateCode,
@@ -92,6 +92,46 @@ router.post('/user/resendactivation', async function(req: any, res: any) {
     res.status(404).send();
   } else {
     res.status(401).send();
+  }
+});
+
+router.post('/user/activate', async function(req: any, res: any) {
+  let db: Database = Database.getInstance();
+  var token = req.body.token;
+  var response = await db.queryFetch(`select * from tokens where token='${token}'`);
+  if (response) {
+    if (response["error"]) {
+      res.status(500).send();
+      return;
+    }
+    // Check expiration
+    if (response["expiration"]) {
+      var expiration = new Date(response["expiration"]);
+      var now = new Date();
+      if (now.getTime() > expiration.getTime()) {
+        res.status(403).send();
+        return;
+      }
+    }
+    // Check token is activation token
+    if (response["type"] !== "activation") {
+      res.status(400).send();
+      return;
+    }
+    // Check if tokens are equal
+    var activationToken = response["token"];
+    if (activationToken !== token) {
+      res.status(403).send();
+      return;
+    }
+    var userID = response["user_id"];
+    var result = await db.update("user_details", { activated: 1 }, { id: userID });
+    if (!result["error"]) {
+      db.delete("tokens", response["id"]);
+      res.status(200).send();
+    }
+  } else {
+    res.status(404).send();
   }
 });
 
