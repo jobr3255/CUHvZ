@@ -41,4 +41,16 @@ if [[ "$?" -ne 0 ]] ; then
   fi
 fi
 
+ionic -v > /dev/null 2>&1
+if [[ "$?" -ne 0 ]] ; then
+  echo -e $INFO 'Installing Ionic';
+  npm install -g @ionic/cli > /dev/null 2>&1
+  if [[ "$?" -ne 0 ]] ; then
+    echo -e $ERROR 'Failed to install Ionic';
+  else
+    systemctl enable mysql.service
+    echo -e $INFO $SUCCESS"Ionic installed" $RESET
+  fi
+fi
+
 echo -e $SUCCESS"Done" $RESET

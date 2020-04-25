@@ -139,6 +139,9 @@ export default class Database {
     return equalsData;
   }
 
+  /**
+   * Formats object data into a string for a where clause in mysql
+   */
   private formatWhereData(data: any): any {
     var equals = this.formatEqualsData(data);
     if(equals.length === 1){
@@ -147,10 +150,16 @@ export default class Database {
     return this.formatEqualsData(data).join(" AND ");
   }
 
+  /**
+   * Formats object data into a string of set values for an update query in mysql
+   */
   private formatUpdateData(data: any): any {
     return this.formatEqualsData(data).join(",");
   }
 
+  /**
+   * Formats data to update a table in the database
+   */
   public async update(table: string, updateData: any, whereData: any, res?: any): Promise<any> {
     var setData = this.formatUpdateData(updateData);
     var where = this.formatWhereData(whereData);
@@ -175,6 +184,9 @@ export default class Database {
     return data;
   }
 
+  /**
+   * Deletes a entry in the database
+   */
   public async delete(table: string, id: number, res?: any): Promise<any> {
     var query = `delete from ${table} where id=${id}`;
     var data = await this.query(query)
@@ -197,6 +209,10 @@ export default class Database {
     return data;
   }
 
+  /**
+   * Checks if a user is authorized to perform a query.
+   * Returns 0 is user is authorized
+   */
   public async isAuthorized(userID: string, authHeader: string): Promise<number> {
     var authToken = authHeader || "";
     authToken = authToken.replace("Basic", "").trim();
